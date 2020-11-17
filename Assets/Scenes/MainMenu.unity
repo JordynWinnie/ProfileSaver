@@ -324,10 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd35906fecc286644ac16062cabea0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profiles:
-  - {fileID: 11400000, guid: 1321cb376760776458d30c44354ae7e8, type: 2}
-  - {fileID: 11400000, guid: 04f25810045e2a8469189f30ec5a094f, type: 2}
-  - {fileID: 11400000, guid: 1804643e69eb188449b17937b164e7d8, type: 2}
+  profiles: []
   currentProfile: {fileID: 11400000, guid: 04f25810045e2a8469189f30ec5a094f, type: 2}
 --- !u!4 &176443691
 Transform:
