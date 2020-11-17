@@ -28,5 +28,6 @@ public class MainMenuController : MonoBehaviour
         profileImage.sprite = profile.profileIcon;
         profileName.text = profile.name;
         profileDescription.text = $"{profile.description}\nIncome: {profile.income}";
+        // bruh
     }
 }
