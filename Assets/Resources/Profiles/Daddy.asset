@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 987cf2eed6af13b41ba5e87b16121c44, type: 3}
   m_Name: Daddy
   m_EditorClassIdentifier: 
-  profileName: Daddy
+  profileName: Dad
   income: 10000
   dailyIncome: 0
   age: 40
