@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            AddTime(0.5f);
+            AddTime(24f);
             print(ReturnTimeString());
         }
     }
@@ -105,13 +105,16 @@ public class GameManager : MonoBehaviour
 
     public string ReturnTimeString()
     {
-        if (ReturnHour() < 12)
+        var isWeekend = ReturnDayNumber() % 7 == 0 || (ReturnDayNumber() + 1) % 7 == 0;
+        if (isWeekend)
         {
-            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} AM DAY {ReturnDayNumber()}";
+            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
+            $"DAY {ReturnDayNumber()} (Weekend)";
         }
         else
         {
-            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} PM DAY {ReturnDayNumber()}";
+            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
+            $"DAY {ReturnDayNumber()} (Weekday)";
         }
     }
 

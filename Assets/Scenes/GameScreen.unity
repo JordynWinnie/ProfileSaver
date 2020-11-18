@@ -2478,7 +2478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1299426583
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3213,6 +3213,7 @@ MonoBehaviour:
   decisionStringUI: {fileID: 741745397}
   decisionIcon: {fileID: 1240922761}
   choicesUI: {fileID: 1963817253}
+  situationPopup: {fileID: 1299426582}
 --- !u!114 &1848100430
 MonoBehaviour:
   m_ObjectHideFlags: 0
