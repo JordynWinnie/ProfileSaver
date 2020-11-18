@@ -1,23 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Profile[] profiles;
+    public bool isInDevelopment = true;
+    private Decision[] decisions;
     public static GameManager instance;
     public Profile currentProfile;
 
-    private float _health = 10f;
-    private float _happiness = 10f;
-    private float _money = 1000f;
+    private float _health = 50f;
+    private float _happiness = 50f;
 
     public float Health
     {
         get => _health;
         set
         {
-            if (value <= 10)
+            if (value <= 100)
             {
                 _health = value;
             }
@@ -29,20 +32,21 @@ public class GameManager : MonoBehaviour
         get => _happiness;
         set
         {
-            if (value <= 10)
+            if (value <= 100)
             {
                 _happiness = value;
             }
         }
     }
 
-    public float Money { get => _money; set => _money = value; }
+    public float Money { get; set; } = 1000f;
 
     private float timeInHours = 0f;
 
     private void Awake()
     {
         profiles = Resources.LoadAll<Profile>("Profiles");
+        decisions = Resources.LoadAll<Decision>("Decisions");
 
         if (instance == null)
         {
@@ -53,6 +57,15 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
+
+        if (currentProfile == null && !isInDevelopment)
+        {
+            SceneManager.LoadScene(1);
+        }
+        else
+        {
+            currentProfile = profiles.Where(x => x.profileName == "Student").First();
+        }
     }
 
     public Profile ReturnRandomProfile()
@@ -66,7 +79,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            AddTime(0.5f);
+            AddTime(24f);
             print(ReturnTimeString());
         }
     }
@@ -103,13 +116,21 @@ public class GameManager : MonoBehaviour
 
     public string ReturnTimeString()
     {
-        if (ReturnHour() < 12)
+        var isWeekend = ReturnDayNumber() % 7 == 0 || (ReturnDayNumber() + 1) % 7 == 0;
+        if (isWeekend)
         {
-            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} AM DAY {ReturnDayNumber()}";
+            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
+            $"DAY {ReturnDayNumber()} (Weekend)";
         }
         else
         {
-            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} PM DAY {ReturnDayNumber()}";
+            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
+            $"DAY {ReturnDayNumber()} (Weekday)";
         }
+    }
+
+    public Decision ReturnRandomDecision()
+    {
+        return decisions[Random.Range(0, decisions.Length)];
     }
 }
