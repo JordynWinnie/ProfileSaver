@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Profile[] profiles;
+    public bool isInDevelopment = true;
     private Decision[] decisions;
     public static GameManager instance;
     public Profile currentProfile;
-    
-    private float _health = 10f;
-    private float _happiness = 10f;
-    private float _money = 1000f;
+
+    private float _health = 50f;
+    private float _happiness = 50f;
 
     public float Health
     {
@@ -37,7 +39,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public float Money { get => _money; set => _money = value; }
+    public float Money { get; set; } = 1000f;
 
     private float timeInHours = 0f;
 
@@ -55,6 +57,15 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
+
+        if (currentProfile == null && !isInDevelopment)
+        {
+            SceneManager.LoadScene(1);
+        }
+        else
+        {
+            currentProfile = profiles.Where(x => x.profileName == "Student").First();
+        }
     }
 
     public Profile ReturnRandomProfile()

@@ -10,6 +10,8 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moneyUI;
     [SerializeField] private TextMeshProUGUI healthUI;
     [SerializeField] private TextMeshProUGUI happinessUI;
+    [SerializeField] private Image profileIcon;
+    [SerializeField] private TextMeshProUGUI profileName;
 
     [SerializeField] private TextMeshProUGUI decisionStringUI;
     [SerializeField] private Image decisionIcon;
@@ -23,6 +25,8 @@ public class DisplayInformation : MonoBehaviour
         moneyUI.text = "Money: $" + GameManager.instance.Money.ToString();
         healthUI.text = "Health: " + GameManager.instance.Health.ToString();
         happinessUI.text = "Happiness: " + GameManager.instance.Happiness.ToString();
+        profileIcon.sprite = GameManager.instance.currentProfile.profileIcon;
+        profileName.text = GameManager.instance.currentProfile.profileName;
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -39,7 +43,6 @@ public class DisplayInformation : MonoBehaviour
 
         decisionStringUI.text = decision.decisionString;
         decisionIcon.sprite = decision.decisionIcon;
-        
 
         for (int i = 0; i < children.Length; i++)
         {
@@ -52,9 +55,8 @@ public class DisplayInformation : MonoBehaviour
             children[i].onClick.AddListener(delegate
             {
                 ApplyChanges(choice.health, choice.happiness, choice.money, decision.decisionTime);
-            }); 
+            });
         }
-
     }
 
     public void ApplyChanges(float healthToChange, float happinessToChange, float moneyToChange, float timeToIncrease)

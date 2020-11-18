@@ -295,51 +295,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9097870650113966075, guid: aed0f5f6f186d6348b6a5605b4ccc128, type: 3}
   m_PrefabInstance: {fileID: 129753651}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &176443689
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 176443691}
-  - component: {fileID: 176443690}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &176443690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176443689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd35906fecc286644ac16062cabea0ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  profiles: []
-  currentProfile: {fileID: 11400000, guid: 04f25810045e2a8469189f30ec5a094f, type: 2}
---- !u!4 &176443691
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176443689}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &333161141
 GameObject:
   m_ObjectHideFlags: 0
