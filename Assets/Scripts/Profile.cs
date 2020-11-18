@@ -5,7 +5,7 @@ public class Profile : ScriptableObject
 {
     public string profileName;
     public double income;
-    public double dailyIncome;
+    public double maxIncome;
     public int age;
     public Sprite profileIcon;
 

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 987cf2eed6af13b41ba5e87b16121c44, type: 3}
-  m_Name: Student
+  m_Name: Yong Xian
   m_EditorClassIdentifier: 
-  profileName: Student
-  income: 200
-  maxIncome: 700
-  age: 14
-  profileIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  description: A student
+  profileName: yong Xian
+  income: 100
+  maxIncome: 100
+  age: 100
+  profileIcon: {fileID: 0}
+  description: 
