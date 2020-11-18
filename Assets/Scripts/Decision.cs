@@ -5,7 +5,9 @@ public class Decision : ScriptableObject
 {
     public string decisionTitle;
     public string decisionString;
+    public float decisionTime;
     public Sprite decisionIcon;
     public List<Choices> availableChoices;
-
+    public bool isGenericDecision;
+    public List<Profile> profilesGetDecision;
 }

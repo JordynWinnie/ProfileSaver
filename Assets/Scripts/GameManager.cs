@@ -5,9 +5,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Profile[] profiles;
+    private Decision[] decisions;
     public static GameManager instance;
     public Profile currentProfile;
-
+    
     private float _health = 10f;
     private float _happiness = 10f;
     private float _money = 1000f;
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
         get => _health;
         set
         {
-            if (value <= 10)
+            if (value <= 100)
             {
                 _health = value;
             }
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
         get => _happiness;
         set
         {
-            if (value <= 10)
+            if (value <= 100)
             {
                 _happiness = value;
             }
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         profiles = Resources.LoadAll<Profile>("Profiles");
+        decisions = Resources.LoadAll<Decision>("Decisions");
 
         if (instance == null)
         {
@@ -111,5 +113,10 @@ public class GameManager : MonoBehaviour
         {
             return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} PM DAY {ReturnDayNumber()}";
         }
+    }
+
+    public Decision ReturnRandomDecision()
+    {
+        return decisions[Random.Range(0, decisions.Length)];
     }
 }
