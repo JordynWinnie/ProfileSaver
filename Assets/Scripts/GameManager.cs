@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     private float _health = 50f;
     private float _happiness = 50f;
+    private string[] days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
     public float Health
     {
@@ -79,8 +80,14 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            AddTime(24f);
+            AddTime(2f);
             print(ReturnTimeString());
+            print(ReturnDayOfWeek());
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SetTime(23.5f);
         }
     }
 
@@ -91,6 +98,17 @@ public class GameManager : MonoBehaviour
     public float ReturnTime()
     {
         return timeInHours;
+    }
+
+    public void SetTime(float timeToSet)
+    {
+        if (timeToSet > 24)
+        {
+            Debug.LogWarning("Invalid time set: " + timeToSet);
+            return;
+        }
+        timeInHours = (ReturnDayNumber() - 1) * 24;
+        timeInHours += timeToSet;
     }
 
     public float AddTime(float timeToIncrease)
@@ -117,16 +135,15 @@ public class GameManager : MonoBehaviour
     public string ReturnTimeString()
     {
         var isWeekend = ReturnDayNumber() % 7 == 0 || (ReturnDayNumber() + 1) % 7 == 0;
-        if (isWeekend)
-        {
-            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
-            $"DAY {ReturnDayNumber()} (Weekend)";
-        }
-        else
-        {
-            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
-            $"DAY {ReturnDayNumber()} (Weekday)";
-        }
+
+        return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
+        $"DAY {ReturnDayNumber()} ({ReturnDayOfWeek()})";
+    }
+
+    public string ReturnDayOfWeek()
+    {
+        var dayTest = ReturnDayNumber() % 7;
+        return days[dayTest];
     }
 
     public Decision ReturnRandomDecision()
