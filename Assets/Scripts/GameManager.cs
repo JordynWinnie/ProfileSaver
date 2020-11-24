@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +12,11 @@ public class GameManager : MonoBehaviour
 
     private float _health = 50f;
     private float _happiness = 50f;
+    private float _energy = 50f;
+    private float _hunger = 50f;
     private string[] days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+
+    #region Variable Declaration
 
     public float Health
     {
@@ -43,6 +45,32 @@ public class GameManager : MonoBehaviour
     public float Money { get; set; } = 1000f;
 
     private float timeInHours = 0f;
+
+    public float Energy
+    {
+        get => _energy;
+        set
+        {
+            if (value <= 100)
+            {
+                _energy = value;
+            }
+        }
+    }
+
+    public float Hunger
+    {
+        get => _hunger;
+        set
+        {
+            if (value <= 10)
+            {
+                _hunger = value;
+            }
+        }
+    }
+
+    #endregion Variable Declaration
 
     private void Awake()
     {
@@ -75,7 +103,6 @@ public class GameManager : MonoBehaviour
         return currentProfile;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -89,10 +116,6 @@ public class GameManager : MonoBehaviour
         {
             SetTime(23.5f);
         }
-    }
-
-    private void Start()
-    {
     }
 
     public float ReturnTime()

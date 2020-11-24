@@ -6,6 +6,20 @@ using TMPro;
 
 public class DisplayInformation : MonoBehaviour
 {
+    public static DisplayInformation infoDisplayHelper;
+
+    private void Awake()
+    {
+        if (infoDisplayHelper == null)
+        {
+            infoDisplayHelper = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     [SerializeField] private TextMeshProUGUI timeUI;
     [SerializeField] private TextMeshProUGUI moneyUI;
     [SerializeField] private TextMeshProUGUI healthUI;
@@ -37,34 +51,38 @@ public class DisplayInformation : MonoBehaviour
     public void DisplayPopup()
     {
         situationPopup.SetActive(true);
-        var children = choicesUI.GetComponentsInChildren<Button>();
+        var children = choicesUI.GetComponentsInChildren<Button>(true);
         var decision = GameManager.instance.ReturnRandomDecision();
         var choices = decision.availableChoices;
 
         decisionStringUI.text = decision.decisionString;
         decisionIcon.sprite = decision.decisionIcon;
-
         for (int i = 0; i < children.Length; i++)
         {
+            children[i].gameObject.SetActive(false);
+        }
+        for (int i = 0; i < choices.Count; i++)
+        {
             var choice = choices[i];
-
+            children[i].gameObject.SetActive(true);
             children[i].onClick.RemoveAllListeners();
             children[i].GetComponentInChildren<TextMeshProUGUI>().text
                 = $"{choice.choiceName}\n{choice.health} health\n{choice.happiness} happiness\n${choice.money}";
 
             children[i].onClick.AddListener(delegate
             {
-                ApplyChanges(choice.health, choice.happiness, choice.money, decision.decisionTime);
+                ApplyChanges(choice.health, choice.happiness, choice.money, choice.timeTaken, choice.hunger);
             });
         }
     }
 
-    public void ApplyChanges(float healthToChange, float happinessToChange, float moneyToChange, float timeToIncrease)
+    public void ApplyChanges(float healthToChange, float happinessToChange, float moneyToChange, float timeToIncrease, float hungerToIncrease)
     {
         situationPopup.SetActive(false);
         GameManager.instance.Health += healthToChange;
         GameManager.instance.Happiness += happinessToChange;
         GameManager.instance.Money += moneyToChange;
         GameManager.instance.AddTime(timeToIncrease);
+        GameManager.instance.Hunger += hungerToIncrease;
     }
 }

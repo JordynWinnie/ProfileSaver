@@ -9,13 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f15673ec89fa8142858cd9b6ccc1995, type: 3}
-  m_Name: Afternoon
+  m_Script: {fileID: 11500000, guid: 81ddfb2ae04e34c67953688a363ddb2b, type: 3}
+  m_Name: Data
   m_EditorClassIdentifier: 
-  eventName: Generic Afternoon
-  timeForEvent: 12
-  isHouseUnlocked: 1
-  isWorkplaceUnlocked: 1
-  isSchoolUnlocked: 1
-  isSupermarketUnlocked: 1
-  isResturantUnlocked: 1
+  choiceName: Yes
+  happiness: 1
+  health: 1
+  money: 1
