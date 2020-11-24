@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-        if (instance.currentProfile == null)
+        if (instance.currentProfile == null && !isInDevelopment)
         {
             SceneManager.LoadScene(1);
         }
