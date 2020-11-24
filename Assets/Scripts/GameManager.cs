@@ -83,11 +83,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
 
-        if (currentProfile == null && !isInDevelopment)
+        if (instance.currentProfile == null)
         {
             SceneManager.LoadScene(1);
         }

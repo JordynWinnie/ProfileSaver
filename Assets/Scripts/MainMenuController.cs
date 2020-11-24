@@ -13,7 +13,7 @@ public class MainMenuController : MonoBehaviour
 
     public void StartNewGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     public void QuitGame()
@@ -24,7 +24,7 @@ public class MainMenuController : MonoBehaviour
     public void ShuffleProfile()
     {
         var profile = GameManager.instance.ReturnRandomProfile();
-
+        GameManager.instance.currentProfile = profile;
         profileImage.sprite = profile.profileIcon;
         profileName.text = profile.name;
         profileDescription.text = $"{profile.description}\nIncome: {profile.income}";
