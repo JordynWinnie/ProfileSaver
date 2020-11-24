@@ -71,12 +71,12 @@ public class DisplayInformation : MonoBehaviour
 
             children[i].onClick.AddListener(delegate
             {
-                ApplyChanges(choice.health, choice.happiness, choice.money, choice.timeTaken, choice.hunger);
+                ApplyChanges(choice.health, choice.happiness, choice.money, choice.timeTaken, choice.hunger, choice.energy);
             });
         }
     }
 
-    public void ApplyChanges(float healthToChange, float happinessToChange, float moneyToChange, float timeToIncrease, float hungerToIncrease)
+    public void ApplyChanges(float healthToChange, float happinessToChange, float moneyToChange, float timeToIncrease, float hungerToIncrease, float energyToIncrease)
     {
         situationPopup.SetActive(false);
         GameManager.instance.Health += healthToChange;
@@ -84,5 +84,6 @@ public class DisplayInformation : MonoBehaviour
         GameManager.instance.Money += moneyToChange;
         GameManager.instance.AddTime(timeToIncrease);
         GameManager.instance.Hunger += hungerToIncrease;
+        GameManager.instance.Energy += energyToIncrease;
     }
 }
