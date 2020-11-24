@@ -20,6 +20,7 @@ public class DisplayInformation : MonoBehaviour
         }
     }
 
+    [SerializeField] private GameObject choiceButton;
     [SerializeField] private TextMeshProUGUI timeUI;
     [SerializeField] private TextMeshProUGUI moneyUI;
     [SerializeField] private TextMeshProUGUI healthUI;
@@ -31,6 +32,9 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private Image decisionIcon;
     [SerializeField] private GameObject choicesUI;
     [SerializeField] private GameObject situationPopup;
+    [SerializeField] private GameObject placePopup;
+    [SerializeField] private TextMeshProUGUI placeName;
+    [SerializeField] private Image placeIcon;
 
     // Update is called once per frame
     private void Update()
@@ -44,11 +48,11 @@ public class DisplayInformation : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            DisplayPopup();
+            DisplayDecisionPopup();
         }
     }
 
-    public void DisplayPopup()
+    public void DisplayDecisionPopup()
     {
         situationPopup.SetActive(true);
         var children = choicesUI.GetComponentsInChildren<Button>(true);
@@ -85,5 +89,39 @@ public class DisplayInformation : MonoBehaviour
         GameManager.instance.AddTime(timeToIncrease);
         GameManager.instance.Hunger += hungerToIncrease;
         GameManager.instance.Energy += energyToIncrease;
+    }
+
+    public void CloseAllPopups()
+    {
+        foreach (var item in GameObject.FindGameObjectsWithTag("PopupUI"))
+        {
+            item.SetActive(false);
+        }
+    }
+
+    public void DisplayLocationPopup(LocationInformation locationInformation)
+    {
+        placePopup.SetActive(true);
+        print(locationInformation.locationName);
+        placeIcon.sprite = locationInformation.locationSprite;
+        placeName.text = locationInformation.locationName;
+        var layout = GetComponentInChildren<FlexibleLayoutGroup>();
+        foreach (Transform previousChoice in layout.transform)
+        {
+            Destroy(previousChoice.gameObject);
+        }
+        foreach (var choice in locationInformation.thingsToDo)
+        {
+            var button = Instantiate(choiceButton);
+
+            button.GetComponentInChildren<TextMeshProUGUI>().text = $"{choice.choiceName}\n{choice.health} health\n{choice.happiness} happiness\n${choice.money}";
+
+            button.GetComponent<Button>().onClick.AddListener(delegate
+            {
+                ApplyChanges(choice.health, choice.happiness, choice.money, choice.timeTaken, choice.hunger, choice.energy);
+            });
+
+            button.transform.parent = layout.transform;
+        }
     }
 }

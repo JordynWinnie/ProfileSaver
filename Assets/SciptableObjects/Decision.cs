@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Data", menuName = "Make New Decision/Decision", order = 2)]
+[CreateAssetMenu(fileName = "Data", menuName = "ProfileSaver Object/Decision", order = 2)]
 public class Decision : ScriptableObject
 {
     public string decisionTitle;
