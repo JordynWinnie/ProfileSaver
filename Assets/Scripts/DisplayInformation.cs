@@ -127,7 +127,7 @@ public class DisplayInformation : MonoBehaviour
                 ApplyChanges(choice.health, choice.happiness, choice.money, choice.timeTaken, choice.hunger, choice.energy);
             });
 
-            button.transform.parent = layout.transform;
+            button.transform.SetParent(layout.transform);
         }
     }
 }

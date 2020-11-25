@@ -38,8 +38,8 @@ public class FlexibleLayoutGroup : LayoutGroup
         float parentWidth = rectTransform.rect.width;
         float parentHeight = rectTransform.rect.height;
 
-        float cellWidth = (parentWidth / (float)columns) - (spacing.x / (float)columns * 2) - (padding.left / (float)columns) - (padding.right / (float)columns);
-        float cellHeight = (parentHeight / (float)rows) - (spacing.y / (float)rows * 2) - (padding.top / (float)rows) - (padding.bottom / (float)rows);
+        float cellWidth = (parentWidth / (float)columns) - (spacing.x / (float)columns * 2);
+        float cellHeight = (parentHeight / (float)rows) - (spacing.y / (float)rows * 2);
 
         cellSize.x = cellWidth;
         cellSize.y = cellHeight;
@@ -50,8 +50,8 @@ public class FlexibleLayoutGroup : LayoutGroup
 
             var item = rectChildren[i];
 
-            var xPos = (cellSize.x * colCount) + (spacing.x * colCount) + padding.left;
-            var yPos = (cellSize.y * rowCount) + (spacing.y * rowCount) + padding.top;
+            var xPos = (cellSize.x * colCount) + (spacing.x * colCount);
+            var yPos = (cellSize.y * rowCount) + (spacing.y * rowCount);
 
             SetChildAlongAxis(item, 0, xPos, cellSize.x);
             SetChildAlongAxis(item, 1, yPos, cellSize.y);
