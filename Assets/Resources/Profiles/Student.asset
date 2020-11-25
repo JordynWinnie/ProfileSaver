@@ -16,5 +16,7 @@ MonoBehaviour:
   income: 200
   maxIncome: 700
   age: 14
+  timeToWake: 7
+  timeToSleep: 23
   profileIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   description: A student
