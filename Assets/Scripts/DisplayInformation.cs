@@ -43,10 +43,10 @@ public class DisplayInformation : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        timeUI.text = "Time: " + GameManager.instance.ReturnTimeString();
-        moneyUI.text = "Money: $" + GameManager.instance.Money.ToString();
-        healthUI.text = "Health: " + GameManager.instance.Health.ToString();
-        happinessUI.text = "Happiness: " + GameManager.instance.Happiness.ToString();
+        timeUI.text = GameManager.instance.ReturnTimeString();
+        moneyUI.text = $"${GameManager.instance.Money}";
+        healthUI.text = $"{GameManager.instance.Health}/100";
+        happinessUI.text = $"{GameManager.instance.Happiness}/100";
         hungerUI.text = $"{GameManager.instance.Hunger}/10";
         energyUI.text = $"{GameManager.instance.Energy}/100";
         profileIcon.sprite = GameManager.instance.currentProfile.profileIcon;
