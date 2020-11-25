@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ddfb2ae04e34c67953688a363ddb2b, type: 3}
   m_Name: Data
   m_EditorClassIdentifier: 
-  choiceName: 
+  choiceName: hello
   happiness: 0
   health: 0
   money: 0
