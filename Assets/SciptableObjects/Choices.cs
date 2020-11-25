@@ -7,7 +7,11 @@ public class Choices : ScriptableObject
     public float happiness;
     public float health;
     public float money;
+
     public float hunger;
     public float energy;
     public float timeTaken;
+
+    public float minHungerRequired;
+    public float minEnergyRequired;
 }

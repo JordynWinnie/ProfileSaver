@@ -25,6 +25,10 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moneyUI;
     [SerializeField] private TextMeshProUGUI healthUI;
     [SerializeField] private TextMeshProUGUI happinessUI;
+
+    [SerializeField] private TextMeshProUGUI hungerUI;
+    [SerializeField] private TextMeshProUGUI energyUI;
+
     [SerializeField] private Image profileIcon;
     [SerializeField] private TextMeshProUGUI profileName;
 
@@ -43,6 +47,8 @@ public class DisplayInformation : MonoBehaviour
         moneyUI.text = "Money: $" + GameManager.instance.Money.ToString();
         healthUI.text = "Health: " + GameManager.instance.Health.ToString();
         happinessUI.text = "Happiness: " + GameManager.instance.Happiness.ToString();
+        hungerUI.text = $"{GameManager.instance.Hunger}/10";
+        energyUI.text = $"{GameManager.instance.Energy}/100";
         profileIcon.sprite = GameManager.instance.currentProfile.profileIcon;
         profileName.text = GameManager.instance.currentProfile.profileName;
 

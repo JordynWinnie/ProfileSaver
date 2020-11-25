@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     private float _health = 50f;
     private float _happiness = 50f;
     private float _energy = 50f;
-    private float _hunger = 50f;
+    private float _hunger = 10f;
     private string[] days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
     #region Variable Declaration
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public float Money { get; set; } = 1000f;
+    public float Money { get; set; } = 500f;
 
     private float timeInHours = 0f;
 
@@ -172,5 +172,25 @@ public class GameManager : MonoBehaviour
     public Decision ReturnRandomDecision()
     {
         return decisions[Random.Range(0, decisions.Length)];
+    }
+
+    public void SetUpValues(float health, float happiness, float money, float time, float hunger, float energy)
+    {
+        instance.Energy = energy;
+        instance.Health = health;
+        instance.Money = money;
+        instance.SetTime(time);
+        instance.Hunger = hunger;
+        instance.Happiness = happiness;
+    }
+
+    public void SetUpValues()
+    {
+        instance.Energy = 50f;
+        instance.Health = 50f;
+        instance.Money = instance.currentProfile.income;
+        instance.SetTime(instance.currentProfile.timeToWake);
+        instance.Hunger = 10f;
+        instance.Happiness = 50f;
     }
 }

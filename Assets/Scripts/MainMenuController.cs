@@ -13,6 +13,7 @@ public class MainMenuController : MonoBehaviour
 
     public void StartNewGame()
     {
+        GameManager.instance.SetUpValues();
         SceneManager.LoadScene(0);
     }
 
@@ -28,6 +29,5 @@ public class MainMenuController : MonoBehaviour
         profileImage.sprite = profile.profileIcon;
         profileName.text = profile.name;
         profileDescription.text = $"{profile.description}\nIncome: {profile.income}";
-        // bruh
     }
 }

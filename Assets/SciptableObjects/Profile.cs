@@ -5,9 +5,11 @@ using UnityEngine;
 public class Profile : ScriptableObject
 {
     public string profileName;
-    public double income;
-    public double maxIncome;
+    public float income;
+    public float maxIncome;
     public int age;
+    public float timeToWake;
+    public float timeToSleep;
     public Sprite profileIcon;
 
     public string description;
