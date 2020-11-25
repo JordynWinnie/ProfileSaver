@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            currentProfile = profiles.Where(x => x.profileName == "Student").First();
+            currentProfile = profiles.Where(x => x.profileName == "Bryan").First();
         }
     }
 
