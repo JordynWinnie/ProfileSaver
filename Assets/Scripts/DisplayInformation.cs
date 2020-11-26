@@ -120,11 +120,21 @@ public class DisplayInformation : MonoBehaviour
     {
         var time = GameManager.instance.ReturnTimePassedForDay();
         var currentProfile = GameManager.instance.currentProfile;
-        if (time > currentProfile.timeToSleep && !locationInformation.locationName.Equals("Home"))
+
+        if (time > currentProfile.timeToSleep)
         {
-            Debug.LogWarning("Too Tired");
-            return;
+            if (locationInformation.locationName.Equals("Home"))
+            {
+                return;
+            }
+            else
+            {
+                Debug.LogWarning("Too Tired");
+                return;
+            }
         }
+
+        //Detect Closing time:
         if (!(time >= locationInformation.openingTime && time <= locationInformation.closingTime) && !locationInformation.is24Hours)
         {
             Debug.LogWarning("Closed");

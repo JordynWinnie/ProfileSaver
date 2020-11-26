@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
         set { if (value <= 100) _happiness = value; }
     }
 
+    public float oldMoney { get; private set; }
+
     #endregion Variable Declaration
 
     private void Awake()
@@ -150,6 +152,7 @@ public class GameManager : MonoBehaviour
         instance.SetTime(time);
         instance.Hunger = hunger;
         instance.Happiness = happiness;
+        oldMoney = money;
     }
 
     public void SetUpValues()
@@ -160,5 +163,6 @@ public class GameManager : MonoBehaviour
         instance.SetTime(instance.currentProfile.timeToWake);
         instance.Hunger = 10f;
         instance.Happiness = 50f;
+        oldMoney = instance.Money;
     }
 }

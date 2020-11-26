@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09ff45a05a7e924aa2e2962b515e953, type: 3}
   m_Name: Supermarket
   m_EditorClassIdentifier: 
-  locationName: 
+  locationName: Supermarket
   openingTime: 0
   closingTime: 0
   locationSprite: {fileID: 21300000, guid: 269d6f8baa6d86d49a9a1342d04985b2, type: 3}
+  is24Hours: 1
   thingsToDo:
   - {fileID: 11400000, guid: 3e6236e3de077a9448e79518dc256b2b, type: 2}
   - {fileID: 11400000, guid: e2c3e2ffa65fb2243ad665b6625f7175, type: 2}
