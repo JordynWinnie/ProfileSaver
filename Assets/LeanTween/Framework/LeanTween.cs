@@ -139,9 +139,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 * @property {integer} punch
 */
 
-using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public enum TweenAction
 {

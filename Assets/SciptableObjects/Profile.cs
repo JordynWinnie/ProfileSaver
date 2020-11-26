@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ProfileSaver Object/Profile", order = 1)]
 public class Profile : ScriptableObject
