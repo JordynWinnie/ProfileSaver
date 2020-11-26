@@ -19,5 +19,6 @@ MonoBehaviour:
   availableChoices:
   - {fileID: 11400000, guid: a9232240dc28b4e10916e32cb2b2eaa1, type: 2}
   - {fileID: 11400000, guid: fcfa5692e1d2e428ea46f24b6028ba14, type: 2}
+  - {fileID: 11400000, guid: 522b46370f7297741818c8482ad71c2f, type: 2}
   isGenericDecision: 0
   profilesGetDecision: []

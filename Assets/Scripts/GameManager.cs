@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +12,11 @@ public class GameManager : MonoBehaviour
 
     private float _health = 50f;
     private float _happiness = 50f;
+    private float _energy = 50f;
+    private float _hunger = 10f;
+    private string[] days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+
+    #region Variable Declaration
 
     public float Health
     {
@@ -39,9 +42,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public float Money { get; set; } = 1000f;
+    public float Money { get; set; } = 500f;
 
     private float timeInHours = 0f;
+
+    public float Energy
+    {
+        get => _energy;
+        set
+        {
+            if (value <= 100)
+            {
+                _energy = value;
+            }
+        }
+    }
+
+    public float Hunger
+    {
+        get => _hunger;
+        set
+        {
+            if (value <= 10)
+            {
+                _hunger = value;
+            }
+        }
+    }
+
+    #endregion Variable Declaration
 
     private void Awake()
     {
@@ -54,17 +83,17 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
 
-        if (currentProfile == null && !isInDevelopment)
+        if (instance.currentProfile == null && !isInDevelopment)
         {
             SceneManager.LoadScene(1);
         }
         else
         {
-            currentProfile = profiles.Where(x => x.profileName == "Student").First();
+            currentProfile = profiles.Where(x => x.profileName == "Bryan").First();
         }
     }
 
@@ -74,23 +103,35 @@ public class GameManager : MonoBehaviour
         return currentProfile;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            AddTime(24f);
+            AddTime(2f);
             print(ReturnTimeString());
+            print(ReturnDayOfWeek());
         }
-    }
 
-    private void Start()
-    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SetTime(23.5f);
+        }
     }
 
     public float ReturnTime()
     {
         return timeInHours;
+    }
+
+    public void SetTime(float timeToSet)
+    {
+        if (timeToSet > 24)
+        {
+            Debug.LogWarning("Invalid time set: " + timeToSet);
+            return;
+        }
+        timeInHours = (ReturnDayNumber() - 1) * 24;
+        timeInHours += timeToSet;
     }
 
     public float AddTime(float timeToIncrease)
@@ -117,20 +158,39 @@ public class GameManager : MonoBehaviour
     public string ReturnTimeString()
     {
         var isWeekend = ReturnDayNumber() % 7 == 0 || (ReturnDayNumber() + 1) % 7 == 0;
-        if (isWeekend)
-        {
-            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
-            $"DAY {ReturnDayNumber()} (Weekend)";
-        }
-        else
-        {
-            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
-            $"DAY {ReturnDayNumber()} (Weekday)";
-        }
+
+        return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
+        $"DAY {ReturnDayNumber()} ({ReturnDayOfWeek()})";
+    }
+
+    public string ReturnDayOfWeek()
+    {
+        var dayTest = ReturnDayNumber() % 7;
+        return days[dayTest];
     }
 
     public Decision ReturnRandomDecision()
     {
         return decisions[Random.Range(0, decisions.Length)];
+    }
+
+    public void SetUpValues(float health, float happiness, float money, float time, float hunger, float energy)
+    {
+        instance.Energy = energy;
+        instance.Health = health;
+        instance.Money = money;
+        instance.SetTime(time);
+        instance.Hunger = hunger;
+        instance.Happiness = happiness;
+    }
+
+    public void SetUpValues()
+    {
+        instance.Energy = 50f;
+        instance.Health = 50f;
+        instance.Money = instance.currentProfile.income;
+        instance.SetTime(instance.currentProfile.timeToWake);
+        instance.Hunger = 10f;
+        instance.Happiness = 50f;
     }
 }
