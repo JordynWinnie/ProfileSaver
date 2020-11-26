@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Study
   m_EditorClassIdentifier: 
   choiceName: Study
-  happiness: -2
-  health: 0
-  money: 0
-  hunger: 2
+  happinessToAdd: 0
+  healthToAdd: 0
+  moneyToAdd: 0
+  hunger: -2
   energy: -10
   timeTaken: 2

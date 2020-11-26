@@ -93,7 +93,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            currentProfile = profiles.Where(x => x.profileName == "Bryan").First();
+            currentProfile = profiles.Where(x => x.profileName == "Student").First();
+            SetUpValues();
         }
     }
 
@@ -107,7 +108,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            AddTime(2f);
+            AddTime(2.5f);
             print(ReturnTimeString());
             print(ReturnDayOfWeek());
         }
@@ -148,6 +149,11 @@ public class GameManager : MonoBehaviour
     public int ReturnHour()
     {
         return (int)timeInHours % 24;
+    }
+
+    public float ReturnHourRaw()
+    {
+        return timeInHours % 24;
     }
 
     public float ReturnMinutes()

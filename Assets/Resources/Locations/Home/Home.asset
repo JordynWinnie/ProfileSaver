@@ -16,5 +16,6 @@ MonoBehaviour:
   openingTime: 0
   closingTime: 0
   locationSprite: {fileID: 21300000, guid: 3d462dfedc9d2b847b76006ba3d5089b, type: 3}
+  is24Hours: 1
   thingsToDo:
   - {fileID: 11400000, guid: 24600016ba7f2454ab4ddb6e5c823f1e, type: 2}
