@@ -116,17 +116,16 @@ public class DisplayInformation : MonoBehaviour
 
     public void DisplayLocationPopup(LocationInformation locationInformation)
     {
-        var time = GameManager.instance.ReturnHourRaw();
+        var time = GameManager.instance.ReturnTimePassedForDay();
         var currentProfile = GameManager.instance.currentProfile;
-        if (!(time >= locationInformation.openingTime && time <= locationInformation.closingTime) && !locationInformation.is24Hours)
-        {
-            Debug.LogWarning("Closed");
-            return;
-        }
-
         if (time > currentProfile.timeToSleep && !locationInformation.locationName.Equals("Home"))
         {
             Debug.LogWarning("Too Tired");
+            return;
+        }
+        if (!(time >= locationInformation.openingTime && time <= locationInformation.closingTime) && !locationInformation.is24Hours)
+        {
+            Debug.LogWarning("Closed");
             return;
         }
 
@@ -164,7 +163,7 @@ public class DisplayInformation : MonoBehaviour
         sb.AppendLine($"{choice.happinessToAdd} Happiness");
         sb.AppendLine($"{choice.hunger} Food Points");
 
-        sb.AppendLine(choice.moneyToAdd > 0 ? $"${Mathf.Abs(choice.moneyToAdd)}" : $"-${Mathf.Abs(choice.moneyToAdd)}");
+        sb.AppendLine(choice.moneyToAdd > 0 ? $"+${Mathf.Abs(choice.moneyToAdd)}" : $"-${Mathf.Abs(choice.moneyToAdd)}");
 
         return sb.ToString();
     }
