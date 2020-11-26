@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Text;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class DisplayInformation : MonoBehaviour
 {
     public static DisplayInformation infoDisplayHelper;
+    public LocationInformation currentOpenLocation = null;
 
     private void Awake()
     {
@@ -36,9 +36,10 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private Image decisionIcon;
     [SerializeField] private GameObject choicesUI;
     [SerializeField] private GameObject situationPopup;
-    [SerializeField] private GameObject placePopup;
+    [SerializeField] private RectTransform placePopup;
     [SerializeField] private TextMeshProUGUI placeName;
     [SerializeField] private Image placeIcon;
+    [SerializeField] private RectTransform blackFade;
 
     // Update is called once per frame
     private void Update()
@@ -76,29 +77,37 @@ public class DisplayInformation : MonoBehaviour
             var choice = choices[i];
             children[i].gameObject.SetActive(true);
             children[i].onClick.RemoveAllListeners();
-            children[i].GetComponentInChildren<TextMeshProUGUI>().text
-                = $"{choice.choiceName}\n{choice.health} health\n{choice.happiness} happiness\n${choice.money}";
+            children[i].GetComponentInChildren<TextMeshProUGUI>().text = FormatChoiceText(choice);
 
             children[i].onClick.AddListener(delegate
             {
-                ApplyChanges(choice.health, choice.happiness, choice.money, choice.timeTaken, choice.hunger, choice.energy);
+                ApplyChanges(choice);
             });
         }
     }
 
-    public void ApplyChanges(float healthToChange, float happinessToChange, float moneyToChange, float timeToIncrease, float hungerToIncrease, float energyToIncrease)
+    public void ApplyChanges(Choices choice)
     {
-        situationPopup.SetActive(false);
-        GameManager.instance.Health += healthToChange;
-        GameManager.instance.Happiness += happinessToChange;
-        GameManager.instance.Money += moneyToChange;
-        GameManager.instance.AddTime(timeToIncrease);
-        GameManager.instance.Hunger += hungerToIncrease;
-        GameManager.instance.Energy += energyToIncrease;
+        var currentHunger = GameManager.instance.Hunger;
+        var currentEnergy = GameManager.instance.Energy;
+        if (currentEnergy + choice.energy < 0 || currentHunger + choice.hunger < 0)
+        {
+            Debug.LogWarning("Too Hungry or tired");
+            return;
+        }
+        CloseAllPopups();
+        GameManager.instance.Health += choice.healthToAdd;
+        GameManager.instance.Happiness += choice.happinessToAdd;
+        GameManager.instance.Money += choice.moneyToAdd;
+        GameManager.instance.AddTime(choice.timeTaken);
+        GameManager.instance.Hunger += choice.hunger;
+        GameManager.instance.Energy += choice.energy;
     }
 
     public void CloseAllPopups()
     {
+        infoDisplayHelper.currentOpenLocation = null;
+        blackFade.gameObject.SetActive(false);
         foreach (var item in GameObject.FindGameObjectsWithTag("PopupUI"))
         {
             item.SetActive(false);
@@ -107,8 +116,34 @@ public class DisplayInformation : MonoBehaviour
 
     public void DisplayLocationPopup(LocationInformation locationInformation)
     {
-        placePopup.SetActive(true);
-        print(locationInformation.locationName);
+        var time = GameManager.instance.ReturnTimePassedForDay();
+        var currentProfile = GameManager.instance.currentProfile;
+
+        if (time > currentProfile.timeToSleep)
+        {
+            if (locationInformation.locationName.Equals("Home"))
+            {
+                return;
+            }
+            else
+            {
+                Debug.LogWarning("Too Tired");
+                return;
+            }
+        }
+
+        //Detect Closing time:
+        if (!(time >= locationInformation.openingTime && time <= locationInformation.closingTime) && !locationInformation.is24Hours)
+        {
+            Debug.LogWarning("Closed");
+            return;
+        }
+
+        infoDisplayHelper.currentOpenLocation = locationInformation;
+
+        placePopup.gameObject.SetActive(true);
+        blackFade.gameObject.SetActive(true);
+        LeanTween.scale(placePopup, new Vector2(1, 1), 0.25f).setFrom(new Vector2(0.5f, 0.5f)).setEase(LeanTweenType.easeInSine);
         placeIcon.sprite = locationInformation.locationSprite;
         placeName.text = locationInformation.locationName;
         var layout = GetComponentInChildren<FlexibleLayoutGroup>();
@@ -120,14 +155,29 @@ public class DisplayInformation : MonoBehaviour
         {
             var button = Instantiate(choiceButton);
 
-            button.GetComponentInChildren<TextMeshProUGUI>().text = $"{choice.choiceName}\n{choice.health} health\n{choice.happiness} happiness\n${choice.money}";
+            button.GetComponentInChildren<TextMeshProUGUI>().text = FormatChoiceText(choice);
 
             button.GetComponent<Button>().onClick.AddListener(delegate
             {
-                ApplyChanges(choice.health, choice.happiness, choice.money, choice.timeTaken, choice.hunger, choice.energy);
+                ApplyChanges(choice);
             });
 
             button.transform.SetParent(layout.transform);
         }
+    }
+
+    private string FormatChoiceText(Choices choice)
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine(choice.choiceName);
+        sb.AppendLine($"Takes {choice.timeTaken} hours");
+        sb.AppendLine($"{choice.healthToAdd} Health");
+        sb.AppendLine($"{choice.energy} Energy");
+        sb.AppendLine($"{choice.happinessToAdd} Happiness");
+        sb.AppendLine($"{choice.hunger} Food Points");
+
+        sb.AppendLine(choice.moneyToAdd > 0 ? $"+${Mathf.Abs(choice.moneyToAdd)}" : $"-${Mathf.Abs(choice.moneyToAdd)}");
+
+        return sb.ToString();
     }
 }

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Eat
   m_EditorClassIdentifier: 
   choiceName: Eat in School
-  happiness: 0
-  health: 0
-  money: 5
-  hunger: -2
+  happinessToAdd: 0
+  healthToAdd: 0
+  moneyToAdd: -5
+  hunger: 2
   energy: 20
   timeTaken: 0.5

@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // set the desired aspect ratio (the values in this example are
         // hard-coded for 16:9, but you could make them into public
@@ -47,6 +45,4 @@ public class CameraScript : MonoBehaviour
             camera.rect = rect;
         }
     }
-
-    
 }

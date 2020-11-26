@@ -18,57 +18,36 @@ public class GameManager : MonoBehaviour
 
     #region Variable Declaration
 
-    public float Health
-    {
-        get => _health;
-        set
-        {
-            if (value <= 100)
-            {
-                _health = value;
-            }
-        }
-    }
-
-    public float Happiness
-    {
-        get => _happiness;
-        set
-        {
-            if (value <= 100)
-            {
-                _happiness = value;
-            }
-        }
-    }
-
     public float Money { get; set; } = 500f;
 
     private float timeInHours = 0f;
+    public float timePassedForTheDay = 0f;
 
     public float Energy
     {
         get => _energy;
-        set
-        {
-            if (value <= 100)
-            {
-                _energy = value;
-            }
-        }
+        set { if (value <= 100) _energy = value; }
     }
 
     public float Hunger
     {
         get => _hunger;
-        set
-        {
-            if (value <= 10)
-            {
-                _hunger = value;
-            }
-        }
+        set { if (value <= 10) _hunger = value; }
     }
+
+    public float Health
+    {
+        get => _health;
+        set { if (value <= 100) _health = value; }
+    }
+
+    public float Happiness
+    {
+        get => _happiness;
+        set { if (value <= 100) _happiness = value; }
+    }
+
+    public float oldMoney { get; private set; }
 
     #endregion Variable Declaration
 
@@ -93,7 +72,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            currentProfile = profiles.Where(x => x.profileName == "Bryan").First();
+            currentProfile = profiles.Where(x => x.profileName == "Student").First();
+            SetUpValues();
         }
     }
 
@@ -107,7 +87,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            AddTime(2f);
+            AddTime(2.5f);
             print(ReturnTimeString());
             print(ReturnDayOfWeek());
         }
@@ -118,10 +98,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public float ReturnTime()
-    {
-        return timeInHours;
-    }
+    public float ReturnTime() => timeInHours;
 
     public void SetTime(float timeToSet)
     {
@@ -131,29 +108,29 @@ public class GameManager : MonoBehaviour
             return;
         }
         timeInHours = (ReturnDayNumber() - 1) * 24;
+        timePassedForTheDay = 0f;
         timeInHours += timeToSet;
+        timePassedForTheDay += timeToSet;
     }
+
+    public void ResetTimePassedForDay() => timePassedForTheDay = 0f;
+
+    public float ReturnTimePassedForDay() => timePassedForTheDay;
 
     public float AddTime(float timeToIncrease)
     {
         timeInHours += timeToIncrease;
+        timePassedForTheDay += timeToIncrease;
         return timeInHours;
     }
 
-    public int ReturnDayNumber()
-    {
-        return (int)timeInHours / 24 + 1;
-    }
+    public int ReturnDayNumber() => (int)timeInHours / 24 + 1;
 
-    public int ReturnHour()
-    {
-        return (int)timeInHours % 24;
-    }
+    public int ReturnHour() => (int)timeInHours % 24;
 
-    public float ReturnMinutes()
-    {
-        return (timeInHours % 24 % 1) * 60;
-    }
+    public float ReturnHourRaw() => timeInHours % 24;
+
+    public float ReturnMinutes() => (timeInHours % 24 % 1) * 60;
 
     public string ReturnTimeString()
     {
@@ -163,16 +140,9 @@ public class GameManager : MonoBehaviour
         $"DAY {ReturnDayNumber()} ({ReturnDayOfWeek()})";
     }
 
-    public string ReturnDayOfWeek()
-    {
-        var dayTest = ReturnDayNumber() % 7;
-        return days[dayTest];
-    }
+    public string ReturnDayOfWeek() => days[ReturnDayNumber() % 7];
 
-    public Decision ReturnRandomDecision()
-    {
-        return decisions[Random.Range(0, decisions.Length)];
-    }
+    public Decision ReturnRandomDecision() => decisions[Random.Range(0, decisions.Length)];
 
     public void SetUpValues(float health, float happiness, float money, float time, float hunger, float energy)
     {
@@ -182,6 +152,7 @@ public class GameManager : MonoBehaviour
         instance.SetTime(time);
         instance.Hunger = hunger;
         instance.Happiness = happiness;
+        oldMoney = money;
     }
 
     public void SetUpValues()
@@ -192,5 +163,6 @@ public class GameManager : MonoBehaviour
         instance.SetTime(instance.currentProfile.timeToWake);
         instance.Hunger = 10f;
         instance.Happiness = 50f;
+        oldMoney = instance.Money;
     }
 }

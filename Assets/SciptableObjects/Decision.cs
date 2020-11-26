@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ProfileSaver Object/Decision", order = 2)]
 public class Decision : ScriptableObject

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Work
   m_EditorClassIdentifier: 
   choiceName: Do your work
-  happiness: -5
-  health: -5
-  money: 300
-  hunger: 0
-  energy: 0
+  happinessToAdd: -5
+  healthToAdd: -5
+  moneyToAdd: 21
+  hunger: -3
+  energy: -20
   timeTaken: 3
