@@ -38,9 +38,10 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private Image decisionIcon;
     [SerializeField] private GameObject choicesUI;
     [SerializeField] private GameObject situationPopup;
-    [SerializeField] private GameObject placePopup;
+    [SerializeField] private RectTransform placePopup;
     [SerializeField] private TextMeshProUGUI placeName;
     [SerializeField] private Image placeIcon;
+    [SerializeField] private RectTransform blackFade;
 
     // Update is called once per frame
     private void Update()
@@ -108,6 +109,7 @@ public class DisplayInformation : MonoBehaviour
     public void CloseAllPopups()
     {
         infoDisplayHelper.currentOpenLocation = null;
+        blackFade.gameObject.SetActive(false);
         foreach (var item in GameObject.FindGameObjectsWithTag("PopupUI"))
         {
             item.SetActive(false);
@@ -130,7 +132,10 @@ public class DisplayInformation : MonoBehaviour
         }
 
         infoDisplayHelper.currentOpenLocation = locationInformation;
-        placePopup.SetActive(true);
+
+        placePopup.gameObject.SetActive(true);
+        blackFade.gameObject.SetActive(true);
+        LeanTween.scale(placePopup, new Vector2(1, 1), 0.25f).setFrom(new Vector2(0.5f, 0.5f)).setEase(LeanTweenType.easeInSine);
         placeIcon.sprite = locationInformation.locationSprite;
         placeName.text = locationInformation.locationName;
         var layout = GetComponentInChildren<FlexibleLayoutGroup>();
