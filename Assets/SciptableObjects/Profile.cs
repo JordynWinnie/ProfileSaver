@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ProfileSaver Object/Profile", order = 1)]
 public class Profile : ScriptableObject
@@ -12,4 +13,6 @@ public class Profile : ScriptableObject
     public Sprite profileIcon;
 
     public string description;
+
+    public List<Goal> goals;
 }

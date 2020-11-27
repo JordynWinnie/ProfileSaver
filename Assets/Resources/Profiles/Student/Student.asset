@@ -20,3 +20,8 @@ MonoBehaviour:
   timeToSleep: 22
   profileIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   description: A student
+  goals:
+  - {fileID: 11400000, guid: c5c6dfd16a6cec2498f2162f5788df0e, type: 2}
+  - {fileID: 11400000, guid: 901a48697256a084cb9e90392b973e4b, type: 2}
+  - {fileID: 11400000, guid: 4b6e38d20fe4a6640a3f7960afada7b4, type: 2}
+  - {fileID: 11400000, guid: f479541b65790494a94c02cc1cad9107, type: 2}

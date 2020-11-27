@@ -45,6 +45,9 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private TextMeshProUGUI daySummary;
     [SerializeField] private TextMeshProUGUI endOfDayMarker;
 
+    [SerializeField] private RectTransform goalsMenu;
+    [SerializeField] private TextMeshProUGUI goalText;
+
     // Update is called once per frame
     private void Update()
     {
@@ -239,5 +242,13 @@ public class DisplayInformation : MonoBehaviour
         }
 
         GameManager.instance.SetTimeRaw((dayToSet * 24) + profile.timeToWake, profile.timeToWake);
+    }
+
+    public void DisplayGoal()
+    {
+        CloseAllPopups();
+        goalsMenu.gameObject.SetActive(true);
+        blackFade.gameObject.SetActive(true);
+        goalText.text = GoalManager.instance.PrintGoals();
     }
 }
