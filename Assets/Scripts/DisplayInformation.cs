@@ -41,6 +41,10 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private Image placeIcon;
     [SerializeField] private RectTransform blackFade;
 
+    [SerializeField] private RectTransform endOfDaySummary;
+    [SerializeField] private TextMeshProUGUI daySummary;
+    [SerializeField] private TextMeshProUGUI endOfDayMarker;
+
     // Update is called once per frame
     private void Update()
     {
@@ -123,6 +127,7 @@ public class DisplayInformation : MonoBehaviour
         {
             if (locationInformation.locationName.Equals("Home"))
             {
+                EndDay(time);
                 return;
             }
             else
@@ -164,6 +169,37 @@ public class DisplayInformation : MonoBehaviour
 
             button.transform.SetParent(layout.transform);
         }
+
+        if (locationInformation.locationName.Equals("Home"))
+        {
+            var button = Instantiate(choiceButton);
+
+            button.GetComponentInChildren<TextMeshProUGUI>().text = "End the day";
+
+            button.GetComponent<Button>().onClick.AddListener(delegate
+            {
+                CloseAllPopups();
+                EndDay(time);
+            });
+
+            button.transform.SetParent(layout.transform);
+        }
+    }
+
+    private void EndDay(float time)
+    {
+        blackFade.gameObject.SetActive(true);
+        endOfDaySummary.gameObject.SetActive(true);
+        if (time < 24)
+        {
+            endOfDayMarker.text = $"End of Day {GameManager.instance.ReturnDayNumber()}";
+        }
+        else
+        {
+            endOfDayMarker.text = $"End of Day {GameManager.instance.ReturnDayNumber() - 1}";
+        }
+
+        daySummary.text = EndOfDaySummary();
     }
 
     private string FormatChoiceText(Choices choice)
@@ -179,5 +215,29 @@ public class DisplayInformation : MonoBehaviour
         sb.AppendLine(choice.moneyToAdd > 0 ? $"+${Mathf.Abs(choice.moneyToAdd)}" : $"-${Mathf.Abs(choice.moneyToAdd)}");
 
         return sb.ToString();
+    }
+
+    private string EndOfDaySummary()
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine($"Money Earned: {GameManager.instance.Money - GameManager.instance.oldMoney}");
+        sb.AppendLine($"Health Status: {GameManager.instance.Health}/100");
+        sb.AppendLine($"Happiness Status: {GameManager.instance.Happiness}/100");
+
+        return sb.ToString();
+    }
+
+    public void ContinueToNextDay()
+    {
+        var time = GameManager.instance.ReturnTimePassedForDay();
+        var dayToSet = GameManager.instance.ReturnDayNumber() - 1;
+        var profile = GameManager.instance.currentProfile;
+        CloseAllPopups();
+        if (time < 24)
+        {
+            dayToSet += 1;
+        }
+
+        GameManager.instance.SetTimeRaw((dayToSet * 24) + profile.timeToWake, profile.timeToWake);
     }
 }

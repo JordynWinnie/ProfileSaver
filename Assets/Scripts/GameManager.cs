@@ -96,6 +96,9 @@ public class GameManager : MonoBehaviour
         {
             SetTime(23.5f);
         }
+
+        print(timePassedForTheDay);
+        print(timeInHours);
     }
 
     public float ReturnTime() => timeInHours;
@@ -111,6 +114,12 @@ public class GameManager : MonoBehaviour
         timePassedForTheDay = 0f;
         timeInHours += timeToSet;
         timePassedForTheDay += timeToSet;
+    }
+
+    public void SetTimeRaw(float timeToSetInHours, float timePassedForDay)
+    {
+        timeInHours = timeToSetInHours;
+        timePassedForTheDay = timePassedForDay;
     }
 
     public void ResetTimePassedForDay() => timePassedForTheDay = 0f;
