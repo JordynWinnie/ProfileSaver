@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DisplayInformation : MonoBehaviour
@@ -246,8 +247,11 @@ public class DisplayInformation : MonoBehaviour
         {
             dayToSet += 1;
         }
-
         GameManager.instance.gameTime.SetTimeRaw((dayToSet * 24) + profile.timeToWake, profile.timeToWake);
+        if (dayToSet % 30 == 0)
+        {
+            SceneManager.LoadScene(2);
+        }
     }
 
     public void DisplayGoal()
