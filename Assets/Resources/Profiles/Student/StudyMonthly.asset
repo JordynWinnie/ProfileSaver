@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: StudyMonthly
   m_EditorClassIdentifier: 
   goalName: Study 120 hours in a month
+  statType: 1
   goalType: 1
-  trackingType: 0
   totalCommitment: 120
+  acceptAllTime: 1
+  onlyAcceptFromTime: 0
+  onlyAcceptToTime: 0
+  miscStatParams: 

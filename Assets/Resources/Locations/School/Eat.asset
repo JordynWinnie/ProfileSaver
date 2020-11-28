@@ -19,3 +19,5 @@ MonoBehaviour:
   hunger: 2
   energy: 20
   timeTaken: 0.5
+  statType: 4
+  progressionForStat: 1

@@ -14,14 +14,10 @@ public class GameManager : MonoBehaviour
     private float _happiness = 50f;
     private float _energy = 50f;
     private float _hunger = 10f;
-    private string[] days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
     #region Variable Declaration
 
     public float Money { get; set; } = 500f;
-
-    private float timeInHours = 0f;
-    public float timePassedForTheDay = 0f;
 
     public float Energy
     {
@@ -50,6 +46,65 @@ public class GameManager : MonoBehaviour
     public float oldMoney { get; private set; }
 
     #endregion Variable Declaration
+
+    public GameTime gameTime = new GameTime();
+
+    public class GameTime
+    {
+        private float timeInHours = 0f;
+        public float timePassedForTheDay = 0f;
+        private readonly string[] days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+
+        public float ReturnTime() => timeInHours;
+
+        public void SetTime(float timeToSet)
+        {
+            if (timeToSet > 24)
+            {
+                Debug.LogWarning("Invalid time set: " + timeToSet);
+                return;
+            }
+            timeInHours = (ReturnDayNumber() - 1) * 24;
+            timePassedForTheDay = 0f;
+            timeInHours += timeToSet;
+            timePassedForTheDay += timeToSet;
+        }
+
+        public void SetTimeRaw(float timeToSetInHours, float timePassedForDay)
+        {
+            timeInHours = timeToSetInHours;
+            timePassedForTheDay = timePassedForDay;
+        }
+
+        public void ResetTimePassedForDay() => timePassedForTheDay = 0f;
+
+        public float ReturnTimePassedForDay() => timePassedForTheDay;
+
+        public float AddTime(float timeToIncrease)
+        {
+            timeInHours += timeToIncrease;
+            timePassedForTheDay += timeToIncrease;
+            return timeInHours;
+        }
+
+        public int ReturnDayNumber() => (int)timeInHours / 24 + 1;
+
+        public int ReturnHour() => (int)timeInHours % 24;
+
+        public float ReturnHourRaw() => timeInHours % 24;
+
+        public float ReturnMinutes() => (timeInHours % 24 % 1) * 60;
+
+        public string ReturnTimeString()
+        {
+            var isWeekend = ReturnDayNumber() % 7 == 0 || (ReturnDayNumber() + 1) % 7 == 0;
+
+            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
+            $"DAY {ReturnDayNumber()} ({ReturnDayOfWeek()})";
+        }
+
+        public string ReturnDayOfWeek() => days[ReturnDayNumber() % 7];
+    }
 
     private void Awake()
     {
@@ -87,69 +142,16 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            AddTime(2.5f);
-            print(ReturnTimeString());
-            print(ReturnDayOfWeek());
+            gameTime.AddTime(2.5f);
+            print(gameTime.ReturnTimeString());
+            print(gameTime.ReturnDayOfWeek());
         }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            SetTime(23.5f);
+            gameTime.SetTime(23.5f);
         }
-
-        print(timePassedForTheDay);
-        print(timeInHours);
     }
-
-    public float ReturnTime() => timeInHours;
-
-    public void SetTime(float timeToSet)
-    {
-        if (timeToSet > 24)
-        {
-            Debug.LogWarning("Invalid time set: " + timeToSet);
-            return;
-        }
-        timeInHours = (ReturnDayNumber() - 1) * 24;
-        timePassedForTheDay = 0f;
-        timeInHours += timeToSet;
-        timePassedForTheDay += timeToSet;
-    }
-
-    public void SetTimeRaw(float timeToSetInHours, float timePassedForDay)
-    {
-        timeInHours = timeToSetInHours;
-        timePassedForTheDay = timePassedForDay;
-    }
-
-    public void ResetTimePassedForDay() => timePassedForTheDay = 0f;
-
-    public float ReturnTimePassedForDay() => timePassedForTheDay;
-
-    public float AddTime(float timeToIncrease)
-    {
-        timeInHours += timeToIncrease;
-        timePassedForTheDay += timeToIncrease;
-        return timeInHours;
-    }
-
-    public int ReturnDayNumber() => (int)timeInHours / 24 + 1;
-
-    public int ReturnHour() => (int)timeInHours % 24;
-
-    public float ReturnHourRaw() => timeInHours % 24;
-
-    public float ReturnMinutes() => (timeInHours % 24 % 1) * 60;
-
-    public string ReturnTimeString()
-    {
-        var isWeekend = ReturnDayNumber() % 7 == 0 || (ReturnDayNumber() + 1) % 7 == 0;
-
-        return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
-        $"DAY {ReturnDayNumber()} ({ReturnDayOfWeek()})";
-    }
-
-    public string ReturnDayOfWeek() => days[ReturnDayNumber() % 7];
 
     public Decision ReturnRandomDecision() => decisions[Random.Range(0, decisions.Length)];
 
@@ -158,7 +160,7 @@ public class GameManager : MonoBehaviour
         instance.Energy = energy;
         instance.Health = health;
         instance.Money = money;
-        instance.SetTime(time);
+        instance.gameTime.SetTime(time);
         instance.Hunger = hunger;
         instance.Happiness = happiness;
         oldMoney = money;
@@ -169,7 +171,7 @@ public class GameManager : MonoBehaviour
         instance.Energy = 50f;
         instance.Health = 50f;
         instance.Money = instance.currentProfile.income;
-        instance.SetTime(instance.currentProfile.timeToWake);
+        instance.gameTime.SetTime(instance.currentProfile.timeToWake);
         instance.Hunger = 10f;
         instance.Happiness = 50f;
         oldMoney = instance.Money;

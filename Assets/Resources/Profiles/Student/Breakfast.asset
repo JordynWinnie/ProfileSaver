@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35f600a59112d94497a3c528d52dd91, type: 3}
   m_Name: Breakfast
   m_EditorClassIdentifier: 
-  goalName: Breakfast
+  goalName: Take Breakfast from 7:00 - 11:00
+  statType: 4
   goalType: 0
-  trackingType: 2
   totalCommitment: 1
+  acceptAllTime: 0
+  onlyAcceptFromTime: 7
+  onlyAcceptToTime: 11
+  miscStatParams: 

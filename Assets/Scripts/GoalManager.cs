@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -8,9 +7,7 @@ public class GoalManager : MonoBehaviour
 {
     public static GoalManager instance;
 
-    public enum GoalType { Daily, Monthly }
-
-    public enum TrackingType { StudyTime, WorkTime, MealBreakfast, MealLunch, MealDinner }
+    public enum GoalLength { Daily, Monthly }
 
     public int ActionsTaken { get; set; }
     public float StudyTime { get; set; }
@@ -22,9 +19,12 @@ public class GoalManager : MonoBehaviour
     public int mealLunch { get; set; }
     public int mealDinner { get; set; }
 
+    [SerializeField] private List<Stat> trackedStatistics;
+
     // Start is called before the first frame update
     private void Awake()
     {
+        trackedStatistics = new List<Stat>();
         if (instance == null)
         {
             instance = this;
@@ -38,79 +38,72 @@ public class GoalManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            foreach (var item in trackedStatistics)
+            {
+                print($"{item.statType}: Visted: {item.placeVisited} - Time: {item.timeOfAction} - Day: {item.dayOfAction} - ActionContributes: {item.actionCount} - MiscParams: {item.miscStatParams}");
+            }
+        }
+    }
+
+    public Stat AddStat(Stat stat)
+    {
+        trackedStatistics.Add(stat);
+        return stat;
     }
 
     public string PrintGoals()
     {
-        var goal = GameManager.instance.currentProfile.goals;
+        var currentDay = GameManager.instance.gameTime.ReturnDayNumber();
+        var goalList = GameManager.instance.currentProfile.goals;
         var sb = new StringBuilder();
-        sb.AppendLine("Daily Goals:");
 
-        var dailyGoalList = goal.Where(x => x.goalType == GoalType.Daily);
+        var goalGroup = from x in goalList
+                        orderby x.goalType
+                        group x by x.goalType into y
+                        select y;
 
-        foreach (var dailyGoal in dailyGoalList)
+        foreach (var timing in goalGroup)
         {
-            var testVal = 0f;
-            switch (dailyGoal.trackingType)
+            sb.AppendLine($"{timing.Key} Goals:");
+
+            foreach (var goal in timing)
             {
-                case TrackingType.StudyTime:
-                    testVal = StudyTime;
-                    break;
+                var statList = trackedStatistics.Where(x => x.statType == goal.statType);
+                print("StatCount " + statList.Count());
+                if (!goal.miscStatParams.Equals(string.Empty))
+                {
+                    statList = statList.Where(x => x.miscStatParams == goal.miscStatParams);
+                }
+                switch (goal.goalType)
+                {
+                    case GoalLength.Daily:
+                        statList = statList.Where(x => x.dayOfAction == currentDay);
+                        if (!goal.acceptAllTime)
+                        {
+                            statList = statList.Where(x => x.timeOfAction >= goal.onlyAcceptFromTime && x.timeOfAction <= goal.onlyAcceptToTime);
+                        }
 
-                case TrackingType.WorkTime:
-                    testVal = WorkTime;
-                    break;
+                        break;
 
-                case TrackingType.MealBreakfast:
-                    testVal = mealBreakfast;
-                    break;
+                    case GoalLength.Monthly:
+                        statList = statList.Where(x => x.dayOfAction >= 1 && x.dayOfAction <= 30);
+                        if (!goal.acceptAllTime)
+                        {
+                            statList = statList.Where(x => x.timeOfAction >= goal.onlyAcceptFromTime && x.timeOfAction <= goal.onlyAcceptToTime);
+                        }
+                        break;
 
-                case TrackingType.MealLunch:
-                    testVal = mealLunch;
-                    break;
-
-                case TrackingType.MealDinner:
-                    testVal = mealDinner;
-                    break;
-
-                default:
-                    break;
+                    default:
+                        break;
+                }
+                foreach (var item in statList)
+                {
+                    print($"Item: {item.actionCount} - {item.statType}");
+                }
+                sb.AppendLine($"- {goal.goalName} {statList.Sum(x => x.actionCount)}/{goal.totalCommitment}");
             }
-            sb.AppendLine($"- {dailyGoal.goalName} ({testVal}/{dailyGoal.totalCommitment})");
-        }
-        sb.AppendLine();
-        var monthlyGoalList = goal.Where(x => x.goalType == GoalType.Monthly);
-
-        sb.AppendLine("Monthly Goals:");
-        foreach (var monthlyGoal in monthlyGoalList)
-        {
-            var testVal = 0f;
-            switch (monthlyGoal.trackingType)
-            {
-                case TrackingType.StudyTime:
-                    testVal = StudyTime;
-                    break;
-
-                case TrackingType.WorkTime:
-                    testVal = WorkTime;
-                    break;
-
-                case TrackingType.MealBreakfast:
-                    testVal = mealBreakfast;
-                    break;
-
-                case TrackingType.MealLunch:
-                    testVal = mealLunch;
-                    break;
-
-                case TrackingType.MealDinner:
-                    testVal = mealDinner;
-                    break;
-
-                default:
-                    break;
-            }
-            sb.AppendLine($"- {monthlyGoal.goalName} ({testVal}/{monthlyGoal.totalCommitment})");
         }
 
         return sb.ToString();

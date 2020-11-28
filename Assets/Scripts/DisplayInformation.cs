@@ -51,7 +51,7 @@ public class DisplayInformation : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        timeUI.text = GameManager.instance.ReturnTimeString();
+        timeUI.text = GameManager.instance.gameTime.ReturnTimeString();
         moneyUI.text = $"${GameManager.instance.Money}";
         healthUI.text = $"{GameManager.instance.Health}/100";
         happinessUI.text = $"{GameManager.instance.Happiness}/100";
@@ -97,6 +97,9 @@ public class DisplayInformation : MonoBehaviour
     {
         var currentHunger = GameManager.instance.Hunger;
         var currentEnergy = GameManager.instance.Energy;
+        var time = GameManager.instance.gameTime;
+        GoalManager.instance.AddStat(new Stat(choice.statType, time.ReturnDayNumber(), time.ReturnTimePassedForDay(), choice.progressionForStat, currentOpenLocation.locationName, choice.miscStatParams));
+
         if (currentEnergy + choice.energy < 0 || currentHunger + choice.hunger < 0)
         {
             Debug.LogWarning("Too Hungry or tired");
@@ -106,7 +109,7 @@ public class DisplayInformation : MonoBehaviour
         GameManager.instance.Health += choice.healthToAdd;
         GameManager.instance.Happiness += choice.happinessToAdd;
         GameManager.instance.Money += choice.moneyToAdd;
-        GameManager.instance.AddTime(choice.timeTaken);
+        GameManager.instance.gameTime.AddTime(choice.timeTaken);
         GameManager.instance.Hunger += choice.hunger;
         GameManager.instance.Energy += choice.energy;
     }
@@ -123,7 +126,7 @@ public class DisplayInformation : MonoBehaviour
 
     public void DisplayLocationPopup(LocationInformation locationInformation)
     {
-        var time = GameManager.instance.ReturnTimePassedForDay();
+        var time = GameManager.instance.gameTime.ReturnTimePassedForDay();
         var currentProfile = GameManager.instance.currentProfile;
 
         if (time > currentProfile.timeToSleep)
@@ -195,11 +198,11 @@ public class DisplayInformation : MonoBehaviour
         endOfDaySummary.gameObject.SetActive(true);
         if (time < 24)
         {
-            endOfDayMarker.text = $"End of Day {GameManager.instance.ReturnDayNumber()}";
+            endOfDayMarker.text = $"End of Day {GameManager.instance.gameTime.ReturnDayNumber()}";
         }
         else
         {
-            endOfDayMarker.text = $"End of Day {GameManager.instance.ReturnDayNumber() - 1}";
+            endOfDayMarker.text = $"End of Day {GameManager.instance.gameTime.ReturnDayNumber() - 1}";
         }
 
         daySummary.text = EndOfDaySummary();
@@ -232,8 +235,8 @@ public class DisplayInformation : MonoBehaviour
 
     public void ContinueToNextDay()
     {
-        var time = GameManager.instance.ReturnTimePassedForDay();
-        var dayToSet = GameManager.instance.ReturnDayNumber() - 1;
+        var time = GameManager.instance.gameTime.ReturnTimePassedForDay();
+        var dayToSet = GameManager.instance.gameTime.ReturnDayNumber() - 1;
         var profile = GameManager.instance.currentProfile;
         CloseAllPopups();
         if (time < 24)
@@ -241,7 +244,7 @@ public class DisplayInformation : MonoBehaviour
             dayToSet += 1;
         }
 
-        GameManager.instance.SetTimeRaw((dayToSet * 24) + profile.timeToWake, profile.timeToWake);
+        GameManager.instance.gameTime.SetTimeRaw((dayToSet * 24) + profile.timeToWake, profile.timeToWake);
     }
 
     public void DisplayGoal()
