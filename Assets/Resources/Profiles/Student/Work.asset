@@ -9,16 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81ddfb2ae04e34c67953688a363ddb2b, type: 3}
-  m_Name: BuyFruits
+  m_Script: {fileID: 11500000, guid: d35f600a59112d94497a3c528d52dd91, type: 3}
+  m_Name: Work
   m_EditorClassIdentifier: 
-  choiceName: Buy Fruits
-  happinessToAdd: 0
-  healthToAdd: 0
-  moneyToAdd: -20
-  hunger: 0
-  energy: 0
-  timeTaken: 0
-  statType: 5
-  progressionForStat: 1
-  miscStatParams: Fruits
+  goalName: 
+  statType: 0
+  goalType: 0
+  totalCommitment: 0
+  acceptAllTime: 1
+  onlyAcceptFromTime: 0
+  onlyAcceptToTime: 0
+  miscStatParams: 

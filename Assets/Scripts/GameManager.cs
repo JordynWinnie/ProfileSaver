@@ -142,9 +142,12 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            gameTime.AddTime(2.5f);
-            print(gameTime.ReturnTimeString());
-            print(gameTime.ReturnDayOfWeek());
+            gameTime.AddTime(23.5f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            gameTime.AddTime(0.5f);
         }
 
         if (Input.GetKeyDown(KeyCode.T))

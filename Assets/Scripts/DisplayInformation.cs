@@ -18,6 +18,8 @@ public class DisplayInformation : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        CloseAllPopups();
     }
 
     [SerializeField] private GameObject choiceButton;
@@ -127,6 +129,7 @@ public class DisplayInformation : MonoBehaviour
     public void DisplayLocationPopup(LocationInformation locationInformation)
     {
         var time = GameManager.instance.gameTime.ReturnTimePassedForDay();
+        var gameTime = GameManager.instance.gameTime;
         var currentProfile = GameManager.instance.currentProfile;
 
         if (time > currentProfile.timeToSleep)
@@ -151,7 +154,7 @@ public class DisplayInformation : MonoBehaviour
         }
 
         infoDisplayHelper.currentOpenLocation = locationInformation;
-
+        GoalManager.instance.AddStat(new Stat(Stat.StatType.PlaceVisit, gameTime.ReturnDayNumber(), gameTime.ReturnTimePassedForDay(), 1, locationInformation.locationName, locationInformation.locationName));
         placePopup.gameObject.SetActive(true);
         blackFade.gameObject.SetActive(true);
         LeanTween.scale(placePopup, new Vector2(1, 1), 0.25f).setFrom(new Vector2(0.5f, 0.5f)).setEase(LeanTweenType.easeInSine);

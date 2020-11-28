@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35f600a59112d94497a3c528d52dd91, type: 3}
   m_Name: Buy 20 Items
   m_EditorClassIdentifier: 
-  goalName: 
-  statType: 0
-  goalType: 0
-  totalCommitment: 0
-  acceptAllTime: 1
-  onlyAcceptFromTime: 0
-  onlyAcceptToTime: 0
-  miscStatParams: 
+  goalName: Buy 20 Fruits between 7:00 - 10:00
+  statType: 5
+  goalType: 1
+  totalCommitment: 20
+  acceptAllTime: 0
+  onlyAcceptFromTime: 7
+  onlyAcceptToTime: 10
+  miscStatParams: Fruits

@@ -20,6 +20,8 @@ public class GoalManager : MonoBehaviour
     public int mealDinner { get; set; }
 
     [SerializeField] private List<Stat> trackedStatistics;
+    private List<Goal> incompleteGoals = new List<Goal>();
+    private List<Goal> completeGoals = new List<Goal>();
 
     // Start is called before the first frame update
     private void Awake()
@@ -55,7 +57,9 @@ public class GoalManager : MonoBehaviour
 
     public string PrintGoals()
     {
-        var currentDay = GameManager.instance.gameTime.ReturnDayNumber();
+        completeGoals.Clear();
+        incompleteGoals.Clear();
+        var currentGameTime = GameManager.instance.gameTime;
         var goalList = GameManager.instance.currentProfile.goals;
         var sb = new StringBuilder();
 
@@ -67,11 +71,9 @@ public class GoalManager : MonoBehaviour
         foreach (var timing in goalGroup)
         {
             sb.AppendLine($"{timing.Key} Goals:");
-
             foreach (var goal in timing)
             {
                 var statList = trackedStatistics.Where(x => x.statType == goal.statType);
-                print("StatCount " + statList.Count());
                 if (!goal.miscStatParams.Equals(string.Empty))
                 {
                     statList = statList.Where(x => x.miscStatParams == goal.miscStatParams);
@@ -79,7 +81,7 @@ public class GoalManager : MonoBehaviour
                 switch (goal.goalType)
                 {
                     case GoalLength.Daily:
-                        statList = statList.Where(x => x.dayOfAction == currentDay);
+                        statList = statList.Where(x => x.dayOfAction == currentGameTime.ReturnDayNumber());
                         if (!goal.acceptAllTime)
                         {
                             statList = statList.Where(x => x.timeOfAction >= goal.onlyAcceptFromTime && x.timeOfAction <= goal.onlyAcceptToTime);
@@ -88,7 +90,10 @@ public class GoalManager : MonoBehaviour
                         break;
 
                     case GoalLength.Monthly:
-                        statList = statList.Where(x => x.dayOfAction >= 1 && x.dayOfAction <= 30);
+                        var monthNumber = (int)((currentGameTime.ReturnDayNumber() - 1) / 30) + 1;
+                        var monthEndDay = monthNumber * 30;
+                        var monthStartDay = monthEndDay - 29;
+                        statList = statList.Where(x => x.dayOfAction >= monthStartDay && x.dayOfAction <= monthEndDay);
                         if (!goal.acceptAllTime)
                         {
                             statList = statList.Where(x => x.timeOfAction >= goal.onlyAcceptFromTime && x.timeOfAction <= goal.onlyAcceptToTime);
@@ -98,14 +103,20 @@ public class GoalManager : MonoBehaviour
                     default:
                         break;
                 }
-                foreach (var item in statList)
+                var amountCompleted = statList.Sum(x => x.actionCount);
+                if (amountCompleted >= goal.totalCommitment)
                 {
-                    print($"Item: {item.actionCount} - {item.statType}");
+                    completeGoals.Add(goal);
+                    sb.AppendLine($"- {goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (COMPLETE)");
                 }
-                sb.AppendLine($"- {goal.goalName} {statList.Sum(x => x.actionCount)}/{goal.totalCommitment}");
+                else
+                {
+                    incompleteGoals.Add(goal);
+                    sb.AppendLine($"- {goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (INCOMPLETE)");
+                }
             }
+            sb.AppendLine();
         }
-
         return sb.ToString();
     }
 }

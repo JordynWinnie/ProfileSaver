@@ -1517,8 +1517,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2923,7 +2923,6 @@ MonoBehaviour:
   profiles: []
   isInDevelopment: 1
   currentProfile: {fileID: 0}
-  timePassedForTheDay: 0
 --- !u!4 &705386141
 Transform:
   m_ObjectHideFlags: 0
