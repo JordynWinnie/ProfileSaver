@@ -97,8 +97,6 @@ public class GameManager : MonoBehaviour
 
         public string ReturnTimeString()
         {
-            var isWeekend = ReturnDayNumber() % 7 == 0 || (ReturnDayNumber() + 1) % 7 == 0;
-
             return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
             $"DAY {ReturnDayNumber()} ({ReturnDayOfWeek()})";
         }
