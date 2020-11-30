@@ -241,6 +241,8 @@ public class DisplayInformation : MonoBehaviour
         sb.AppendLine($"Health Status: {GameManager.instance.Health}/100");
         sb.AppendLine($"Happiness Status: {GameManager.instance.Happiness}/100");
 
+        GameManager.instance.oldMoney = GameManager.instance.Money;
+
         return sb.ToString();
     }
 

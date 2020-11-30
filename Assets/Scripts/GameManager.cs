@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         set { if (value <= 100) _happiness = value; }
     }
 
-    public float oldMoney { get; private set; }
+    public float oldMoney { get; set; }
 
     #endregion Variable Declaration
 
