@@ -11,4 +11,5 @@ public class LocationInformation : ScriptableObject
     public bool is24Hours;
 
     public List<Choices> thingsToDo;
+    public List<Decision> situationPopups;
 }

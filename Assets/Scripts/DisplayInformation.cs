@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -65,18 +67,15 @@ public class DisplayInformation : MonoBehaviour
         profileIcon.sprite = GameManager.instance.currentProfile.profileIcon;
         profileName.text = GameManager.instance.currentProfile.profileName;
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            DisplayDecisionPopup();
-        }
+        
     }
 
-    public void DisplayDecisionPopup()
+    public void DisplayDecisionPopup(List<Decision> decisionList)
     {
         DisplayPopup(situationPopup);
-
+        var decision = decisionList[Random.Range(0, decisionList.Count)];
         var children = choicesUI.GetComponentsInChildren<Button>(true);
-        var decision = GameManager.instance.ReturnRandomDecision();
+       
         var choices = decision.availableChoices;
 
         decisionStringUI.text = decision.decisionString;
@@ -137,8 +136,20 @@ public class DisplayInformation : MonoBehaviour
 
     public void DisplayLocationPopup(LocationInformation locationInformation)
     {
-        var time = GameManager.instance.gameTime.ReturnTimePassedForDay();
         var gameTime = GameManager.instance.gameTime;
+        var timePassedForDay = gameTime.ReturnTimePassedForDay();
+        if (locationInformation.situationPopups.Where(x=> timePassedForDay >= x.startTimeToOccur 
+        && timePassedForDay <= x.endTimeToOccur).Any())
+        {
+            if (Random.Range(1, 10) == 1)
+            {
+                DisplayDecisionPopup(locationInformation.situationPopups);
+                return;
+            }
+        }
+        
+
+        var time = GameManager.instance.gameTime.ReturnTimePassedForDay();
         var currentProfile = GameManager.instance.currentProfile;
 
         if (time > currentProfile.timeToSleep)
