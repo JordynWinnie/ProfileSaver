@@ -66,8 +66,6 @@ public class DisplayInformation : MonoBehaviour
         energyUI.text = $"{GameManager.instance.Energy}/100";
         profileIcon.sprite = GameManager.instance.currentProfile.profileIcon;
         profileName.text = GameManager.instance.currentProfile.profileName;
-
-        
     }
 
     public void DisplayDecisionPopup(List<Decision> decisionList)
@@ -75,7 +73,7 @@ public class DisplayInformation : MonoBehaviour
         DisplayPopup(situationPopup);
         var decision = decisionList[Random.Range(0, decisionList.Count)];
         var children = choicesUI.GetComponentsInChildren<Button>(true);
-       
+
         var choices = decision.availableChoices;
 
         decisionStringUI.text = decision.decisionString;
@@ -90,7 +88,7 @@ public class DisplayInformation : MonoBehaviour
         {
             var button = Instantiate(choiceButton);
 
-            button.GetComponentInChildren<TextMeshProUGUI>().text = FormatChoiceText(choice);
+            button.GetComponentInChildren<ChoiceButton>().SetUpChoiceButton(choice);
 
             button.GetComponent<Button>().onClick.AddListener(delegate
             {
@@ -137,8 +135,8 @@ public class DisplayInformation : MonoBehaviour
     public void DisplayLocationPopup(LocationInformation locationInformation)
     {
         var gameTime = GameManager.instance.gameTime;
-        var timePassedForDay = gameTime.ReturnTimePassedForDay();
-        if (locationInformation.situationPopups.Where(x=> timePassedForDay >= x.startTimeToOccur 
+        var timePassedForDay = gameTime.ReturnTimePassedForDay();
+        if (locationInformation.situationPopups.Where(x => timePassedForDay >= x.startTimeToOccur
         && timePassedForDay <= x.endTimeToOccur).Any())
         {
             if (Random.Range(1, 10) == 1)
@@ -147,7 +145,6 @@ public class DisplayInformation : MonoBehaviour
                 return;
             }
         }
-        
 
         var time = GameManager.instance.gameTime.ReturnTimePassedForDay();
         var currentProfile = GameManager.instance.currentProfile;
@@ -188,7 +185,7 @@ public class DisplayInformation : MonoBehaviour
         {
             var button = Instantiate(choiceButton);
 
-            button.GetComponentInChildren<TextMeshProUGUI>().text = FormatChoiceText(choice);
+            button.GetComponentInChildren<ChoiceButton>().SetUpChoiceButton(choice);
 
             button.GetComponent<Button>().onClick.AddListener(delegate
             {
@@ -228,21 +225,6 @@ public class DisplayInformation : MonoBehaviour
         }
 
         daySummary.text = EndOfDaySummary();
-    }
-
-    private string FormatChoiceText(Choices choice)
-    {
-        var sb = new StringBuilder();
-        sb.AppendLine(choice.choiceName);
-        sb.AppendLine($"Takes {choice.timeTaken} hours");
-        sb.AppendLine($"{choice.healthToAdd} Health");
-        sb.AppendLine($"{choice.energy} Energy");
-        sb.AppendLine($"{choice.happinessToAdd} Happiness");
-        sb.AppendLine($"{choice.hunger} Food Points");
-
-        sb.AppendLine(choice.moneyToAdd > 0 ? $"+${Mathf.Abs(choice.moneyToAdd)}" : $"-${Mathf.Abs(choice.moneyToAdd)}");
-
-        return sb.ToString();
     }
 
     private string EndOfDaySummary()
