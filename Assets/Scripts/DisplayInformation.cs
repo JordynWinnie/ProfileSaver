@@ -38,7 +38,8 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private TextMeshProUGUI decisionStringUI;
     [SerializeField] private Image decisionIcon;
     [SerializeField] private GameObject choicesUI;
-    [SerializeField] private GameObject situationPopup;
+
+    [SerializeField] private RectTransform situationPopup;
     [SerializeField] private RectTransform placePopup;
     [SerializeField] private TextMeshProUGUI placeName;
     [SerializeField] private Image placeIcon;
@@ -50,6 +51,7 @@ public class DisplayInformation : MonoBehaviour
 
     [SerializeField] private RectTransform goalsMenu;
     [SerializeField] private TextMeshProUGUI goalText;
+    [SerializeField] private Button goalsButton;
 
     // Update is called once per frame
     private void Update()
@@ -71,28 +73,32 @@ public class DisplayInformation : MonoBehaviour
 
     public void DisplayDecisionPopup()
     {
-        situationPopup.SetActive(true);
+        DisplayPopup(situationPopup);
+
         var children = choicesUI.GetComponentsInChildren<Button>(true);
         var decision = GameManager.instance.ReturnRandomDecision();
         var choices = decision.availableChoices;
 
         decisionStringUI.text = decision.decisionString;
         decisionIcon.sprite = decision.decisionIcon;
-        for (int i = 0; i < children.Length; i++)
-        {
-            children[i].gameObject.SetActive(false);
-        }
-        for (int i = 0; i < choices.Count; i++)
-        {
-            var choice = choices[i];
-            children[i].gameObject.SetActive(true);
-            children[i].onClick.RemoveAllListeners();
-            children[i].GetComponentInChildren<TextMeshProUGUI>().text = FormatChoiceText(choice);
 
-            children[i].onClick.AddListener(delegate
+        var layout = GetComponentInChildren<FlexibleLayoutGroup>();
+        foreach (Transform previousChoice in layout.transform)
+        {
+            Destroy(previousChoice.gameObject);
+        }
+        foreach (var choice in decision.availableChoices)
+        {
+            var button = Instantiate(choiceButton);
+
+            button.GetComponentInChildren<TextMeshProUGUI>().text = FormatChoiceText(choice);
+
+            button.GetComponent<Button>().onClick.AddListener(delegate
             {
                 ApplyChanges(choice);
             });
+
+            button.transform.SetParent(layout.transform);
         }
     }
 
@@ -101,7 +107,8 @@ public class DisplayInformation : MonoBehaviour
         var currentHunger = GameManager.instance.Hunger;
         var currentEnergy = GameManager.instance.Energy;
         var time = GameManager.instance.gameTime;
-        GoalManager.instance.AddStat(new Stat(choice.statType, time.ReturnDayNumber(), time.ReturnTimePassedForDay(), choice.progressionForStat, currentOpenLocation.locationName, choice.miscStatParams));
+        var currLocation = currentOpenLocation == null ? string.Empty : currentOpenLocation.locationName;
+        GoalManager.instance.AddStat(new Stat(choice.statType, time.ReturnDayNumber(), time.ReturnTimePassedForDay(), choice.progressionForStat, currLocation, choice.miscStatParams));
 
         if (currentEnergy + choice.energy < 0 || currentHunger + choice.hunger < 0)
         {
@@ -121,6 +128,7 @@ public class DisplayInformation : MonoBehaviour
     {
         infoDisplayHelper.currentOpenLocation = null;
         blackFade.gameObject.SetActive(false);
+        goalsButton.gameObject.SetActive(true);
         foreach (var item in GameObject.FindGameObjectsWithTag("PopupUI"))
         {
             item.SetActive(false);
@@ -156,8 +164,7 @@ public class DisplayInformation : MonoBehaviour
 
         infoDisplayHelper.currentOpenLocation = locationInformation;
         GoalManager.instance.AddStat(new Stat(Stat.StatType.PlaceVisit, gameTime.ReturnDayNumber(), gameTime.ReturnTimePassedForDay(), 1, locationInformation.locationName, locationInformation.locationName));
-        placePopup.gameObject.SetActive(true);
-        blackFade.gameObject.SetActive(true);
+        DisplayPopup(placePopup);
         LeanTween.scale(placePopup, new Vector2(1, 1), 0.25f).setFrom(new Vector2(0.5f, 0.5f)).setEase(LeanTweenType.easeInSine);
         placeIcon.sprite = locationInformation.locationSprite;
         placeName.text = locationInformation.locationName;
@@ -260,5 +267,13 @@ public class DisplayInformation : MonoBehaviour
         goalsMenu.gameObject.SetActive(true);
         blackFade.gameObject.SetActive(true);
         goalText.text = GoalManager.instance.PrintGoals();
+    }
+
+    public void DisplayPopup(RectTransform popup)
+    {
+        CloseAllPopups();
+        popup.gameObject.SetActive(true);
+        blackFade.gameObject.SetActive(true);
+        goalsButton.gameObject.SetActive(false);
     }
 }
