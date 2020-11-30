@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     }
 
     public float oldMoney { get; set; }
+    public float startMoneyOfMonth { get; set; }
 
     #endregion Variable Declaration
 
@@ -156,7 +157,7 @@ public class GameManager : MonoBehaviour
 
     public Decision ReturnRandomDecision() => decisions[Random.Range(0, decisions.Length)];
 
-    public void SetUpValues(float health, float happiness, float money, float time, float hunger, float energy)
+    public void SetUpValues(float health, float happiness, float money, float time, float hunger, float energy, float startMoney)
     {
         instance.Energy = energy;
         instance.Health = health;
@@ -165,6 +166,7 @@ public class GameManager : MonoBehaviour
         instance.Hunger = hunger;
         instance.Happiness = happiness;
         oldMoney = money;
+        startMoneyOfMonth = startMoney;
     }
 
     public void SetUpValues()
@@ -176,5 +178,6 @@ public class GameManager : MonoBehaviour
         instance.Hunger = 10f;
         instance.Happiness = 50f;
         oldMoney = instance.Money;
+        startMoneyOfMonth = instance.Money;
     }
 }
