@@ -113,6 +113,8 @@ public class DisplayInformation : MonoBehaviour
             return;
         }
 
+        AlertDialog.instance.ShowAlert(choice, AlertDialog.AlertLength.Length_Long);
+
         GoalManager.instance.AddStat(new Stat(choice.statType, time.ReturnDayNumber(), time.ReturnTimePassedForDay(), choice.progressionForStat, currLocation, choice.miscStatParams));
         CloseAllPopups();
         GameManager.instance.Health += choice.healthToAdd;

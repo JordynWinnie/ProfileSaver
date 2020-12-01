@@ -22,25 +22,25 @@ public class GameManager : MonoBehaviour
     public float Energy
     {
         get => _energy;
-        set { if (value <= 100) _energy = value; }
+        set { if (value >= 100) _energy = 100; else _energy = value; }
     }
 
     public float Hunger
     {
         get => _hunger;
-        set { if (value <= 10) _hunger = value; }
+        set { if (value >= 10) _hunger = 10; else _hunger = value; }
     }
 
     public float Health
     {
         get => _health;
-        set { if (value <= 100) _health = value; }
+        set { if (value >= 100) _health = 100; else _health = value; }
     }
 
     public float Happiness
     {
         get => _happiness;
-        set { if (value <= 100) _happiness = value; }
+        set { if (value >= 100) _happiness = value; else _happiness = value; }
     }
 
     public float oldMoney { get; set; }
@@ -139,11 +139,6 @@ public class GameManager : MonoBehaviour
 
         
     }
-
-    private void Start() {
-        AlertDialog.instance.ShowAlert("Hello", AlertDialog.AlertLength.Length_Short);
-    }
-
     public Profile ReturnRandomProfile()
     {
         currentProfile = profiles[Random.Range(0, profiles.Length)];
