@@ -2465,7 +2465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profiles: []
-  isInDevelopment: 1
+  isInDevelopment: 0
   currentProfile: {fileID: 0}
 --- !u!4 &705386141
 Transform:
