@@ -10,11 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 987cf2eed6af13b41ba5e87b16121c44, type: 3}
-  m_Name: Bryan
+  m_Name: Student 2
   m_EditorClassIdentifier: 
-  profileName: Bryan
-  income: 1000
-  maxIncome: 2000
-  age: 18
+  profileName: Barbara
+  income: 400
+  maxIncome: 900
+  age: 17
+  timeToWake: 0
+  timeToSleep: 0
   profileIcon: {fileID: 21300000, guid: 711161a3ceb91dd4d8463b4369593fa4, type: 3}
-  description: He is Bryan
+  description: You are playing as a female student who works part time on weekends.
+    On average, you work about 6 hours per day. You are a very social person who
+    likes to hang out with your friends to go shopping for new items. You also frequently
+    have meals outside as well.
+  goals: []
