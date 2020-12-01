@@ -17,8 +17,10 @@ MonoBehaviour:
   closingTime: 0
   locationSprite: {fileID: 21300000, guid: 269d6f8baa6d86d49a9a1342d04985b2, type: 3}
   is24Hours: 1
+  locationBackground: {fileID: 21300000, guid: fb1a39bc21d69d941881ab54495e5676, type: 3}
   thingsToDo:
   - {fileID: 11400000, guid: 3e6236e3de077a9448e79518dc256b2b, type: 2}
   - {fileID: 11400000, guid: e2c3e2ffa65fb2243ad665b6625f7175, type: 2}
   - {fileID: 11400000, guid: dfcf84d0e9e2c8046b40466756dd768d, type: 2}
   - {fileID: 11400000, guid: febf83a4a21fa3d4385bef2020295568, type: 2}
+  situationPopups: []

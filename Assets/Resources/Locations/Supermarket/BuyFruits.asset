@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: BuyFruits
   m_EditorClassIdentifier: 
   choiceName: Buy Fruits
-  happiness: 5
-  health: 0
-  money: -20
+  happinessToAdd: 0
+  healthToAdd: 0
+  moneyToAdd: -20
   hunger: 0
   energy: 0
   timeTaken: 0
+  statType: 5
+  progressionForStat: 1
+  miscStatParams: Fruits

@@ -10,4 +10,7 @@ public class Decision : ScriptableObject
     public List<Choices> availableChoices;
     public bool isGenericDecision;
     public List<Profile> profilesGetDecision;
+
+    public float startTimeToOccur;
+    public float endTimeToOccur;
 }

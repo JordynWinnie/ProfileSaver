@@ -14,4 +14,8 @@ public class Choices : ScriptableObject
     public float hunger;
     public float energy;
     public float timeTaken;
+    public Stat.StatType statType;
+    public float progressionForStat;
+
+    public string miscStatParams;
 }

@@ -9,12 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 987cf2eed6af13b41ba5e87b16121c44, type: 3}
-  m_Name: Bryan
+  m_Script: {fileID: 11500000, guid: d35f600a59112d94497a3c528d52dd91, type: 3}
+  m_Name: Lunch
   m_EditorClassIdentifier: 
-  profileName: Bryan
-  income: 1000
-  maxIncome: 2000
-  age: 18
-  profileIcon: {fileID: 21300000, guid: 711161a3ceb91dd4d8463b4369593fa4, type: 3}
-  description: He is Bryan
+  goalName: Take Lunch from 11:00 - 15:00
+  statType: 4
+  goalType: 0
+  totalCommitment: 1
+  acceptAllTime: 0
+  onlyAcceptFromTime: 11
+  onlyAcceptToTime: 15
+  miscStatParams: 

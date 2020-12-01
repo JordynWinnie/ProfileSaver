@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: FallenIllChoice2
   m_EditorClassIdentifier: 
   choiceName: Do not see a doctor
-  happiness: -10
-  health: -10
-  money: 0
+  happinessToAdd: 0
+  healthToAdd: -10
+  moneyToAdd: 0
+  hunger: 0
+  energy: 0
+  timeTaken: 0
+  statType: 0
+  progressionForStat: 0
+  miscStatParams: 

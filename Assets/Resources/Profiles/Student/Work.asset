@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35f600a59112d94497a3c528d52dd91, type: 3}
+  m_Name: Work
+  m_EditorClassIdentifier: 
+  goalName: Work 20 Hours this Month
+  statType: 2
+  goalType: 1
+  totalCommitment: 20
+  acceptAllTime: 1
+  onlyAcceptFromTime: 0
+  onlyAcceptToTime: 0
+  miscStatParams: 
