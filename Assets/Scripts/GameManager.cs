@@ -88,18 +88,25 @@ public class GameManager : MonoBehaviour
             return timeInHours;
         }
 
+        public int ReturnDayNumber(float time) => (int)time / 24 + 1;
         public int ReturnDayNumber() => (int)timeInHours / 24 + 1;
 
+        public int ReturnHour(float time) => (int)time % 24;
         public int ReturnHour() => (int)timeInHours % 24;
 
         public float ReturnHourRaw() => timeInHours % 24;
 
+        public float ReturnMinutes(float time) => (time % 24 % 1) * 60;
         public float ReturnMinutes() => (timeInHours % 24 % 1) * 60;
 
         public string ReturnTimeString()
         {
             return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
             $"DAY {ReturnDayNumber()} ({ReturnDayOfWeek()})";
+        }
+
+        public string CalculateTimeString(float time){
+            return $"{ReturnHour(time).ToString().PadLeft(2, '0')}:{ReturnMinutes(time).ToString().PadLeft(2, '0')}";
         }
 
         public string ReturnDayOfWeek() => days[ReturnDayNumber() % 7];
@@ -129,6 +136,12 @@ public class GameManager : MonoBehaviour
             currentProfile = profiles.Where(x => x.profileName == "Student").First();
             SetUpValues();
         }
+
+        
+    }
+
+    private void Start() {
+        AlertDialog.instance.ShowAlert("Hello", AlertDialog.AlertLength.Length_Short);
     }
 
     public Profile ReturnRandomProfile()

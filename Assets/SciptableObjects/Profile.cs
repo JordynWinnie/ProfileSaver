@@ -15,4 +15,5 @@ public class Profile : ScriptableObject
     public string description;
 
     public List<Goal> goals;
+    
 }

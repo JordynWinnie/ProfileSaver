@@ -105,13 +105,15 @@ public class DisplayInformation : MonoBehaviour
         var currentEnergy = GameManager.instance.Energy;
         var time = GameManager.instance.gameTime;
         var currLocation = currentOpenLocation == null ? string.Empty : currentOpenLocation.locationName;
-        GoalManager.instance.AddStat(new Stat(choice.statType, time.ReturnDayNumber(), time.ReturnTimePassedForDay(), choice.progressionForStat, currLocation, choice.miscStatParams));
+        
 
         if (currentEnergy + choice.energy < 0 || currentHunger + choice.hunger < 0)
         {
-            Debug.LogWarning("Too Hungry or tired");
+            AlertDialog.instance.ShowAlert("You're too hungry or tired", AlertDialog.AlertLength.Length_Normal);
             return;
         }
+
+        GoalManager.instance.AddStat(new Stat(choice.statType, time.ReturnDayNumber(), time.ReturnTimePassedForDay(), choice.progressionForStat, currLocation, choice.miscStatParams));
         CloseAllPopups();
         GameManager.instance.Health += choice.healthToAdd;
         GameManager.instance.Happiness += choice.happinessToAdd;
@@ -139,7 +141,7 @@ public class DisplayInformation : MonoBehaviour
         if (locationInformation.situationPopups.Where(x => timePassedForDay >= x.startTimeToOccur
         && timePassedForDay <= x.endTimeToOccur).Any())
         {
-            if (Random.Range(1, 10) == 1)
+            if (Random.Range(1, 5) == 1)
             {
                 DisplayDecisionPopup(locationInformation.situationPopups);
                 return;
@@ -158,7 +160,7 @@ public class DisplayInformation : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Too Tired");
+                AlertDialog.instance.ShowAlert($"You're out beyond your bed time ({gameTime.CalculateTimeString(currentProfile.timeToSleep)}), return home to sleep", AlertDialog.AlertLength.Length_Long);
                 return;
             }
         }
@@ -166,7 +168,7 @@ public class DisplayInformation : MonoBehaviour
         //Detect Closing time:
         if (!(time >= locationInformation.openingTime && time <= locationInformation.closingTime) && !locationInformation.is24Hours)
         {
-            Debug.LogWarning("Closed");
+            AlertDialog.instance.ShowAlert($"{locationInformation.locationName} is closed. Opening Hours: {gameTime.CalculateTimeString(locationInformation.openingTime)} - {gameTime.CalculateTimeString(locationInformation.closingTime)}", AlertDialog.AlertLength.Length_Long);
             return;
         }
 
