@@ -9,6 +9,7 @@ public class LocationInformation : ScriptableObject
     public float closingTime;
     public Sprite locationSprite;
     public bool is24Hours;
+    public Sprite locationBackground;
 
     public List<Choices> thingsToDo;
     public List<Decision> situationPopups;

@@ -18,7 +18,7 @@ MonoBehaviour:
   age: 14
   timeToWake: 6.5
   timeToSleep: 22
-  profileIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  profileIcon: {fileID: 21300000, guid: 711161a3ceb91dd4d8463b4369593fa4, type: 3}
   description: You are playing as a student who works part time every Sunday. As
     a gaming addict, you work about 8 hours on average to satisfy your gaming needs.
     You are also a reclusive person who avoids hanging out with some of your friends,

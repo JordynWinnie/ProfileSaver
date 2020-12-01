@@ -67,15 +67,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.67654794, g: 0.5090335, b: 0.8773585, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7702f14c818938745b07461e31d8f93a, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -376,7 +376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4506640511793530375, guid: 0ec0d91ab0438d340800adb66eb48076, type: 3}
       propertyPath: m_fontSize
-      value: 32.3
+      value: 28.4
       objectReference: {fileID: 0}
     - target: {fileID: 5149699432356699207, guid: 0ec0d91ab0438d340800adb66eb48076, type: 3}
       propertyPath: m_Sprite
@@ -594,7 +594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4506640511793530375, guid: 0ec0d91ab0438d340800adb66eb48076, type: 3}
       propertyPath: m_fontSize
-      value: 29.65
+      value: 28.4
       objectReference: {fileID: 0}
     - target: {fileID: 5149699432356699207, guid: 0ec0d91ab0438d340800adb66eb48076, type: 3}
       propertyPath: m_Sprite

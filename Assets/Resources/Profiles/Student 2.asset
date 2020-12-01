@@ -16,8 +16,8 @@ MonoBehaviour:
   income: 400
   maxIncome: 900
   age: 17
-  timeToWake: 0
-  timeToSleep: 0
+  timeToWake: 7.5
+  timeToSleep: 21.5
   profileIcon: {fileID: 21300000, guid: 711161a3ceb91dd4d8463b4369593fa4, type: 3}
   description: You are playing as a female student who works part time on weekends.
     On average, you work about 6 hours per day. You are a very social person who

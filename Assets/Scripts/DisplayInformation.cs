@@ -44,7 +44,7 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private RectTransform situationPopup;
     [SerializeField] private RectTransform placePopup;
     [SerializeField] private TextMeshProUGUI placeName;
-    [SerializeField] private Image placeIcon;
+    [SerializeField] private Image backgroundOfPlace;
     [SerializeField] private RectTransform blackFade;
 
     [SerializeField] private RectTransform endOfDaySummary;
@@ -105,7 +105,6 @@ public class DisplayInformation : MonoBehaviour
         var currentEnergy = GameManager.instance.Energy;
         var time = GameManager.instance.gameTime;
         var currLocation = currentOpenLocation == null ? string.Empty : currentOpenLocation.locationName;
-        
 
         if (currentEnergy + choice.energy < 0 || currentHunger + choice.hunger < 0)
         {
@@ -178,8 +177,9 @@ public class DisplayInformation : MonoBehaviour
         GoalManager.instance.AddStat(new Stat(Stat.StatType.PlaceVisit, gameTime.ReturnDayNumber(), gameTime.ReturnTimePassedForDay(), 1, locationInformation.locationName, locationInformation.locationName));
         DisplayPopup(placePopup);
         LeanTween.scale(placePopup, new Vector2(1, 1), 0.25f).setFrom(new Vector2(0.5f, 0.5f)).setEase(LeanTweenType.easeInSine);
-        placeIcon.sprite = locationInformation.locationSprite;
+
         placeName.text = locationInformation.locationName;
+        backgroundOfPlace.sprite = locationInformation.locationBackground;
         var layout = GetComponentInChildren<FlexibleLayoutGroup>();
         foreach (Transform previousChoice in layout.transform)
         {

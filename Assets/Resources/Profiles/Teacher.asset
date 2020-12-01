@@ -16,8 +16,8 @@ MonoBehaviour:
   income: 3000
   maxIncome: 5000
   age: 47
-  timeToWake: 0
-  timeToSleep: 0
+  timeToWake: 7
+  timeToSleep: 23
   profileIcon: {fileID: 21300000, guid: a5f9852510f0d2e46a9cd9ec4dfcc5ac, type: 3}
   description: You are playing as a full time male teacher who works 8-10 hours each
     day. You live with your wife and 2 daughters Sally and Mandy. You also love to
