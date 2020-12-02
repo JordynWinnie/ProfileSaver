@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     public float Happiness
     {
         get => _happiness;
-        set { if (value >= 100) _happiness = value; else _happiness = value; }
+        set { if (value >= 100) _happiness = value; else if (value < 0) _happiness = 0; else _happiness = value; }
     }
 
     public float oldMoney { get; set; }

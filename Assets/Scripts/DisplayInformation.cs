@@ -150,7 +150,7 @@ public class DisplayInformation : MonoBehaviour
 
         if (currentEnergy + choice.energy < 0 || currentHunger + choice.hunger < 0)
         {
-            AlertDialog.instance.ShowAlert("You're too hungry or tired", AlertDialog.AlertLength.Length_Normal);
+            AlertDialog.instance.ShowAlert("You're too hungry or tired", AlertDialog.AlertLength.Length_Short);
             return;
         }
 
@@ -214,7 +214,7 @@ public class DisplayInformation : MonoBehaviour
             location.ShowAvatar(true);
             currentLocation = location;
 
-            AlertDialog.instance.ShowAlert($"You travelled to {location.locationInformation.locationName}. 30mins Passed -5 Energy -1 Hunger", AlertDialog.AlertLength.Length_Long);
+            AlertDialog.instance.ShowAlert($"You travelled to {location.locationInformation.locationName}. 30mins Passed -5 Energy -1 Hunger", AlertDialog.AlertLength.Length_Short);
             GameManager.instance.gameTime.AddTime(0.5f);
             GameManager.instance.Energy -= 5;
             GameManager.instance.Hunger -= 1;
@@ -234,7 +234,7 @@ public class DisplayInformation : MonoBehaviour
         //Detect Closing time:
         if (!(time >= locationInformation.openingTime && time <= locationInformation.closingTime) && !locationInformation.is24Hours)
         {
-            AlertDialog.instance.ShowAlert($"{locationInformation.locationName} is closed. Opening Hours: {gameTime.CalculateTimeString(locationInformation.openingTime)} - {gameTime.CalculateTimeString(locationInformation.closingTime)}", AlertDialog.AlertLength.Length_Long);
+            AlertDialog.instance.ShowAlert($"{locationInformation.locationName} is closed. Opening Hours: {gameTime.CalculateTimeString(locationInformation.openingTime)} - {gameTime.CalculateTimeString(locationInformation.closingTime)}", AlertDialog.AlertLength.Length_Normal);
             return;
         }
 

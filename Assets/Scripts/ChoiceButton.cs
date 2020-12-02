@@ -15,6 +15,4 @@ public class ChoiceButton : MonoBehaviour
         children[5].text = HelperFunctions.ReturnSign(choices.moneyToAdd) + "$" + Mathf.Abs(choices.moneyToAdd);
         children[6].text = HelperFunctions.ReturnSign(choices.hunger) + Mathf.Abs(choices.hunger);
     }
-
-    
 }
