@@ -105,7 +105,7 @@ public class AlertDialog : MonoBehaviour
                 textUI.text = currAlr.textToDisplay;
                 isShowing = true;
                 currentAlert.gameObject.transform.localScale = Vector3.one;
-                LeanTween.alpha(currentAlert, 1f, 1f).setFrom(0f).setEase(LeanTweenType.linear).setOnComplete(new System.Action(delegate { DismissAlert(currAlr.alertLength); }));
+                LeanTween.alpha(currentAlert, 1f, 0.25f).setFrom(0f).setEase(LeanTweenType.linear).setOnComplete(new System.Action(delegate { DismissAlert(currAlr.alertLength); }));
                 yield return new WaitUntil(() => isShowing == false);
             }
         }

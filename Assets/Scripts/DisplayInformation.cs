@@ -62,7 +62,6 @@ public class DisplayInformation : MonoBehaviour
 
     [SerializeField] private List<Sprite> happinessStates;
     [SerializeField] private List<Sprite> energyStates;
-    
 
     // Update is called once per frame
     private void Update()
@@ -102,16 +101,11 @@ public class DisplayInformation : MonoBehaviour
             energyIcon.sprite = energyStates[0];
         }
         currentLocation.ShowAvatar(true);
-
-    }
-
-    private void Start()
-    {
-        
     }
 
     public void DisplayDecisionPopup(List<Decision> decisionList)
     {
+        TimerScript.timerController.Pause(true);
         DisplayPopup(situationPopup);
         var decision = decisionList[Random.Range(0, decisionList.Count)];
         var children = choicesUI.GetComponentsInChildren<Button>(true);
@@ -158,6 +152,7 @@ public class DisplayInformation : MonoBehaviour
 
         GoalManager.instance.AddStat(new Stat(choice.statType, time.ReturnDayNumber(), time.ReturnTimePassedForDay(), choice.progressionForStat, currLocation, choice.miscStatParams));
         CloseAllPopups();
+        TimerScript.timerController.ResetTime();
         GameManager.instance.Health += choice.healthToAdd;
         GameManager.instance.Happiness += choice.happinessToAdd;
         GameManager.instance.Money += choice.moneyToAdd;
@@ -175,8 +170,8 @@ public class DisplayInformation : MonoBehaviour
         {
             item.SetActive(false);
         }
+        TimerScript.timerController.Pause(false);
     }
-
 
     public void ResetAvatarLocation()
     {
@@ -188,6 +183,7 @@ public class DisplayInformation : MonoBehaviour
 
     public void DisplayLocationPopup(Location location)
     {
+        TimerScript.timerController.Pause(true);
         var locationInformation = location.locationInformation;
         var gameTime = GameManager.instance.gameTime;
         var timePassedForDay = gameTime.ReturnTimePassedForDay();
@@ -282,6 +278,8 @@ public class DisplayInformation : MonoBehaviour
 
     private void EndDay(float time)
     {
+        TimerScript.timerController.Pause(false);
+        TimerScript.timerController.ResetTime();
         blackFade.gameObject.SetActive(true);
         endOfDaySummary.gameObject.SetActive(true);
         if (time < 24)
@@ -333,6 +331,7 @@ public class DisplayInformation : MonoBehaviour
         goalsMenu.gameObject.SetActive(true);
         blackFade.gameObject.SetActive(true);
         goalText.text = GoalManager.instance.PrintGoals();
+        TimerScript.timerController.Pause(true);
     }
 
     public void DisplayPopup(RectTransform popup)
@@ -341,5 +340,6 @@ public class DisplayInformation : MonoBehaviour
         popup.gameObject.SetActive(true);
         blackFade.gameObject.SetActive(true);
         goalsButton.gameObject.SetActive(false);
+        TimerScript.timerController.Pause(true);
     }
 }
