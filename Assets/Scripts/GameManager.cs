@@ -22,13 +22,13 @@ public class GameManager : MonoBehaviour
     public float Energy
     {
         get => _energy;
-        set { if (value >= 100) _energy = 100; else if (value < 0) _energy = 0; else _energy = value; }
+        set { if (value >= 100) _energy = 100; else if (value <= 0) _energy = 0; else _energy = value; }
     }
 
     public float Hunger
     {
         get => _hunger;
-        set { if (value >= 10) _hunger = 10; else if (value < 0) _hunger = 0; else _hunger = value; }
+        set { if (value >= 10) _hunger = 10; else if (value <= 0) _hunger = 0; else _hunger = value; }
     }
 
     public float Health
@@ -89,14 +89,17 @@ public class GameManager : MonoBehaviour
         }
 
         public int ReturnDayNumber(float time) => (int)time / 24 + 1;
+
         public int ReturnDayNumber() => (int)timeInHours / 24 + 1;
 
         public int ReturnHour(float time) => (int)time % 24;
+
         public int ReturnHour() => (int)timeInHours % 24;
 
         public float ReturnHourRaw() => timeInHours % 24;
 
         public float ReturnMinutes(float time) => (time % 24 % 1) * 60;
+
         public float ReturnMinutes() => (timeInHours % 24 % 1) * 60;
 
         public string ReturnTimeString()
@@ -105,7 +108,8 @@ public class GameManager : MonoBehaviour
             $"DAY {ReturnDayNumber()} ({ReturnDayOfWeek()})";
         }
 
-        public string CalculateTimeString(float time){
+        public string CalculateTimeString(float time)
+        {
             return $"{ReturnHour(time).ToString().PadLeft(2, '0')}:{ReturnMinutes(time).ToString().PadLeft(2, '0')}";
         }
 
@@ -136,9 +140,8 @@ public class GameManager : MonoBehaviour
             currentProfile = profiles.Where(x => x.profileName == "Student").First();
             SetUpValues();
         }
-
-        
     }
+
     public Profile ReturnRandomProfile()
     {
         currentProfile = profiles[Random.Range(0, profiles.Length)];
@@ -179,13 +182,45 @@ public class GameManager : MonoBehaviour
 
     public void SetUpValues()
     {
-        instance.Energy = 50f;
-        instance.Health = 50f;
+        instance.Energy = 75f;
+        instance.Health = 75f;
         instance.Money = instance.currentProfile.income;
         instance.gameTime.SetTime(instance.currentProfile.timeToWake);
         instance.Hunger = 10f;
         instance.Happiness = 50f;
         oldMoney = instance.Money;
         startMoneyOfMonth = instance.Money;
+    }
+
+    public void StatCheck()
+    {
+        if (instance.Hunger <= 2)
+        {
+            AlertDialog.instance.ShowAlert("You got really hungry. -5 Happiness -2 Health", AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
+            instance.Happiness -= 5;
+            instance.Health -= 2;
+        }
+
+        if (instance.Energy <= 20)
+        {
+            AlertDialog.instance.ShowAlert("You got really tired. -5 Happiness -2 Health", AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
+            instance.Happiness -= 5;
+            instance.Health -= 2;
+        }
+
+        if (instance.Happiness <= 15)
+        {
+            AlertDialog.instance.ShowAlert("You are very sad. -2 Health", AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
+            instance.Health -= 2;
+        }
+
+        if (instance.Health <= 10)
+        {
+            AlertDialog.instance.ShowAlert("Warning, your health is in critical condition", AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.Warning);
+        }
+        else if (instance.Health <= 25)
+        {
+            AlertDialog.instance.ShowAlert("Warning, your health is in bad condition", AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.CriticalError);
+        }
     }
 }

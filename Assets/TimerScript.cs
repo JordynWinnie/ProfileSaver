@@ -8,7 +8,7 @@ using System;
 public class TimerScript : MonoBehaviour
 {
     private Image timerBar;
-    public float maxTime = 60f;
+    public float maxTime = 5f;
     private float timeLeft = 0f;
     private TextMeshProUGUI secondsTime;
     public bool isPaused = false;
@@ -49,10 +49,12 @@ public class TimerScript : MonoBehaviour
         }
         else
         {
-            AlertDialog.instance.ShowAlert("You decided to do nothing. -5 Energy -1 Hunger", AlertDialog.AlertLength.Length_Normal);
+            AlertDialog.instance.ShowAlert("You decided to do nothing. 30mins passed -5 Energy -1 Hunger", AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
             GameManager.instance.Energy -= 5;
             GameManager.instance.Hunger -= 1;
-            timeLeft = 60f;
+            GameManager.instance.gameTime.AddTime(0.5f);
+            GameManager.instance.StatCheck();
+            timeLeft = maxTime;
         }
     }
 

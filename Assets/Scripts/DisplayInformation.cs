@@ -103,6 +103,34 @@ public class DisplayInformation : MonoBehaviour
         currentLocation.ShowAvatar(true);
     }
 
+    public void ApplyChanges(Choices choice)
+    {
+        var currentHunger = GameManager.instance.Hunger;
+        var currentEnergy = GameManager.instance.Energy;
+        var time = GameManager.instance.gameTime;
+        var currLocation = currentOpenLocation == null ? string.Empty : currentOpenLocation.locationName;
+
+        if (currentEnergy + choice.energy < 0 || currentHunger + choice.hunger < 0)
+        {
+            AlertDialog.instance.ShowAlert("You're too hungry or tired", AlertDialog.AlertLength.Length_Short, AlertDialog.AlertType.CriticalError);
+            return;
+        }
+
+        AlertDialog.instance.ShowAlert(choice, AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.Message);
+
+        GoalManager.instance.AddStat(new Stat(choice.statType, time.ReturnDayNumber(), time.ReturnTimePassedForDay(), choice.progressionForStat, currLocation, choice.miscStatParams));
+        CloseAllPopups();
+        TimerScript.timerController.ResetTime();
+        GameManager.instance.Health += choice.healthToAdd;
+        GameManager.instance.Happiness += choice.happinessToAdd;
+        GameManager.instance.Money += choice.moneyToAdd;
+        GameManager.instance.gameTime.AddTime(choice.timeTaken);
+        GameManager.instance.Hunger += choice.hunger;
+        GameManager.instance.Energy += choice.energy;
+
+        GameManager.instance.StatCheck();
+    }
+
     public void DisplayDecisionPopup(List<Decision> decisionList)
     {
         TimerScript.timerController.Pause(true);
@@ -135,32 +163,6 @@ public class DisplayInformation : MonoBehaviour
         }
     }
 
-    public void ApplyChanges(Choices choice)
-    {
-        var currentHunger = GameManager.instance.Hunger;
-        var currentEnergy = GameManager.instance.Energy;
-        var time = GameManager.instance.gameTime;
-        var currLocation = currentOpenLocation == null ? string.Empty : currentOpenLocation.locationName;
-
-        if (currentEnergy + choice.energy < 0 || currentHunger + choice.hunger < 0)
-        {
-            AlertDialog.instance.ShowAlert("You're too hungry or tired", AlertDialog.AlertLength.Length_Short);
-            return;
-        }
-
-        AlertDialog.instance.ShowAlert(choice, AlertDialog.AlertLength.Length_Long);
-
-        GoalManager.instance.AddStat(new Stat(choice.statType, time.ReturnDayNumber(), time.ReturnTimePassedForDay(), choice.progressionForStat, currLocation, choice.miscStatParams));
-        CloseAllPopups();
-        TimerScript.timerController.ResetTime();
-        GameManager.instance.Health += choice.healthToAdd;
-        GameManager.instance.Happiness += choice.happinessToAdd;
-        GameManager.instance.Money += choice.moneyToAdd;
-        GameManager.instance.gameTime.AddTime(choice.timeTaken);
-        GameManager.instance.Hunger += choice.hunger;
-        GameManager.instance.Energy += choice.energy;
-    }
-
     public void CloseAllPopups()
     {
         infoDisplayHelper.currentOpenLocation = null;
@@ -183,7 +185,6 @@ public class DisplayInformation : MonoBehaviour
 
     public void DisplayLocationPopup(Location location)
     {
-        TimerScript.timerController.Pause(true);
         var locationInformation = location.locationInformation;
         var gameTime = GameManager.instance.gameTime;
         var timePassedForDay = gameTime.ReturnTimePassedForDay();
@@ -199,7 +200,7 @@ public class DisplayInformation : MonoBehaviour
             }
             else
             {
-                AlertDialog.instance.ShowAlert($"You're out beyond your bed time ({gameTime.CalculateTimeString(currentProfile.timeToSleep)}), return home to sleep", AlertDialog.AlertLength.Length_Long);
+                AlertDialog.instance.ShowAlert($"You're out beyond your bed time ({gameTime.CalculateTimeString(currentProfile.timeToSleep)}), return home to sleep", AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.CriticalError);
                 return;
             }
         }
@@ -210,10 +211,11 @@ public class DisplayInformation : MonoBehaviour
             location.ShowAvatar(true);
             currentLocation = location;
 
-            AlertDialog.instance.ShowAlert($"You travelled to {location.locationInformation.locationName}. 30mins Passed -5 Energy -1 Hunger", AlertDialog.AlertLength.Length_Short);
+            AlertDialog.instance.ShowAlert($"You travelled to {location.locationInformation.locationName}. 30mins Passed -5 Energy -1 Hunger", AlertDialog.AlertLength.Length_Short, AlertDialog.AlertType.Warning);
             GameManager.instance.gameTime.AddTime(0.5f);
             GameManager.instance.Energy -= 5;
             GameManager.instance.Hunger -= 1;
+            GameManager.instance.StatCheck();
 
             if (locationInformation.situationPopups.Where(x => timePassedForDay >= x.startTimeToOccur
         && timePassedForDay <= x.endTimeToOccur).Any())
@@ -230,7 +232,8 @@ public class DisplayInformation : MonoBehaviour
         //Detect Closing time:
         if (!(time >= locationInformation.openingTime && time <= locationInformation.closingTime) && !locationInformation.is24Hours)
         {
-            AlertDialog.instance.ShowAlert($"{locationInformation.locationName} is closed. Opening Hours: {gameTime.CalculateTimeString(locationInformation.openingTime)} - {gameTime.CalculateTimeString(locationInformation.closingTime)}", AlertDialog.AlertLength.Length_Normal);
+            AlertDialog.instance.ShowAlert($"{locationInformation.locationName} is closed. Opening Hours: {gameTime.CalculateTimeString(locationInformation.openingTime)} - {gameTime.CalculateTimeString(locationInformation.closingTime)}"
+                , AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.Warning);
             return;
         }
 
@@ -278,7 +281,7 @@ public class DisplayInformation : MonoBehaviour
 
     private void EndDay(float time)
     {
-        TimerScript.timerController.Pause(false);
+        TimerScript.timerController.Pause(true);
         TimerScript.timerController.ResetTime();
         blackFade.gameObject.SetActive(true);
         endOfDaySummary.gameObject.SetActive(true);
