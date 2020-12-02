@@ -242,6 +242,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Workplace
       objectReference: {fileID: 0}
+    - target: {fileID: 9147201828628703348, guid: 4e255ab73ae990b47b3d4198a7acd127, type: 3}
+      propertyPath: m_Name
+      value: Avatar
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e255ab73ae990b47b3d4198a7acd127, type: 3}
 --- !u!1 &21468113
@@ -2269,7 +2273,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6caf98291d7bb45419f8c719d5d0c079, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2576,7 +2580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profiles: []
-  isInDevelopment: 0
+  isInDevelopment: 1
   currentProfile: {fileID: 0}
 --- !u!4 &705386141
 Transform:
@@ -3973,6 +3977,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4892920299209608048, guid: 0783cad2eff1c4923ae354c42d20a921, type: 3}
   m_PrefabInstance: {fileID: 564435399}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1180224939 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3357791487263908306, guid: 4e255ab73ae990b47b3d4198a7acd127, type: 3}
+  m_PrefabInstance: {fileID: 607490162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9320142bc8f3c24f8b18c29b4880923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1219245635
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5302,7 +5317,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b6084bf9eb69631449eb8c3ab3bbb365, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5442,11 +5457,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentOpenLocation: {fileID: 0}
+  currentLocation: {fileID: 1180224939}
+  locationList: []
   choiceButton: {fileID: 4833226209716481582, guid: 0783cad2eff1c4923ae354c42d20a921, type: 3}
   timeUI: {fileID: 2041378489}
   moneyUI: {fileID: 2114416576}
   healthUI: {fileID: 286891788}
   happinessUI: {fileID: 1260255140}
+  energyIcon: {fileID: 1845264422}
+  happinessIcon: {fileID: 607710572}
   hungerUI: {fileID: 402480192}
   energyUI: {fileID: 958093944}
   profileIcon: {fileID: 568257513}
@@ -5465,6 +5484,14 @@ MonoBehaviour:
   goalsMenu: {fileID: 400676085}
   goalText: {fileID: 225013462}
   goalsButton: {fileID: 1526897218}
+  happinessStates:
+  - {fileID: 21300000, guid: 26c5d31887e9be44db3512eb8425a1da, type: 3}
+  - {fileID: 21300000, guid: ffa15f1ddc4503a48a15df767b569622, type: 3}
+  - {fileID: 21300000, guid: 867844dad5b597848beb08493ecc199d, type: 3}
+  energyStates:
+  - {fileID: 21300000, guid: 18adc611b4b8f7345bf89aef7efd1793, type: 3}
+  - {fileID: 21300000, guid: 64329abc44bc81b4aa91d42c3e58e105, type: 3}
+  - {fileID: 21300000, guid: f4dadfc5df4ced5489fa750d47b489cb, type: 3}
 --- !u!1 &1910151098
 GameObject:
   m_ObjectHideFlags: 0

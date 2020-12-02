@@ -9,6 +9,7 @@ public class AlertDialog : MonoBehaviour
     public static AlertDialog instance;
     private RectTransform currentAlert;
     private Text textUI;
+    private Queue<string> alertQueue;
 
     public enum AlertLength { Length_Short = 1, Length_Normal = 2, Length_Long = 4 }
 
@@ -62,6 +63,7 @@ public class AlertDialog : MonoBehaviour
         }
 
         textUI.text = sb.ToString();
+        alertQueue.Enqueue(sb.ToString());
         LeanTween.alpha(currentAlert, 1f, 1f).setFrom(0f).setEase(LeanTweenType.linear).setOnComplete(new System.Action(delegate {DismissAlert(alertLength);}));
     }
 
@@ -71,5 +73,10 @@ public class AlertDialog : MonoBehaviour
 
     private void HideAlert(){
         currentAlert.gameObject.SetActive(false);
+    }
+
+    public void Enqueue(string alertInformation)
+    {
+        
     }
 }

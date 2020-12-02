@@ -22,19 +22,19 @@ public class GameManager : MonoBehaviour
     public float Energy
     {
         get => _energy;
-        set { if (value >= 100) _energy = 100; else _energy = value; }
+        set { if (value >= 100) _energy = 100; else if (value < 0) _energy = 0; else _energy = value; }
     }
 
     public float Hunger
     {
         get => _hunger;
-        set { if (value >= 10) _hunger = 10; else _hunger = value; }
+        set { if (value >= 10) _hunger = 10; else if (value < 0) _hunger = 0; else _hunger = value; }
     }
 
     public float Health
     {
         get => _health;
-        set { if (value >= 100) _health = 100; else _health = value; }
+        set { if (value >= 100) _health = 100; else if (value < 0) _health = 0; else _health = value; }
     }
 
     public float Happiness
