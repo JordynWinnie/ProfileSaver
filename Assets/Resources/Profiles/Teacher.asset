@@ -22,4 +22,9 @@ MonoBehaviour:
   description: You are playing as a full time male teacher who works 8-10 hours each
     day. You live with your wife and 2 daughters Sally and Mandy. You also love to
     cook for the family whenever you have time.
-  goals: []
+  goals:
+  - {fileID: 11400000, guid: 7c72f7ea737fc2942a33cb5322795f04, type: 2}
+  - {fileID: 11400000, guid: 62471fd8b9fedac47b86a0841981a389, type: 2}
+  - {fileID: 11400000, guid: e170367be0ee9034895eeb1930e22391, type: 2}
+  - {fileID: 11400000, guid: 76d0534eb04d46745a2fc2eab4d60ae4, type: 2}
+  - {fileID: 11400000, guid: 901a48697256a084cb9e90392b973e4b, type: 2}
