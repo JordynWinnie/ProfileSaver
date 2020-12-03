@@ -16,8 +16,8 @@ MonoBehaviour:
   decisionString: 'Your friends invite you to go to the canteen to eat '
   decisionIcon: {fileID: 0}
   availableChoices:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 324565c8291e74744b463ce90ef8d7bf, type: 2}
+  - {fileID: 11400000, guid: 4fb81f57c18b12d48a5bc0c19bba6e15, type: 2}
   isGenericDecision: 0
   profilesGetDecision: []
   startTimeToOccur: 12
