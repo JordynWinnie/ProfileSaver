@@ -216,6 +216,19 @@ public class DisplayInformation : MonoBehaviour
             GameManager.instance.Energy -= 5;
             GameManager.instance.Hunger -= 1;
             GameManager.instance.StatCheck();
+            var queryForLocationPopup = currentProfile.situationsForProfile.Where(x => timePassedForDay >= x.startTimeToOccur
+            && timePassedForDay <= x.endTimeToOccur
+            && x.locationForDecision.locationName.Equals(locationInformation.locationName));
+
+            if (queryForLocationPopup.Any())
+            {
+                if (Random.Range(1, 5) == 1)
+                {
+                    DisplayDecisionPopup(queryForLocationPopup.ToList());
+                    return;
+                }
+                return;
+            }
 
             if (locationInformation.situationPopups.Where(x => timePassedForDay >= x.startTimeToOccur
         && timePassedForDay <= x.endTimeToOccur).Any())
