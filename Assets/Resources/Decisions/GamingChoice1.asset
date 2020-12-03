@@ -17,8 +17,8 @@ MonoBehaviour:
   healthToAdd: -5
   moneyToAdd: 0
   hunger: -3
-  energy: 5
-  timeTaken: 0
+  energy: -5
+  timeTaken: 3
   statType: 0
   progressionForStat: 0
   miscStatParams: 

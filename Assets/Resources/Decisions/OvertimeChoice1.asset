@@ -15,10 +15,10 @@ MonoBehaviour:
   choiceName: Work overtime for 3 hours
   happinessToAdd: -10
   healthToAdd: -20
-  moneyToAdd: 600
+  moneyToAdd: 30
   hunger: -4
   energy: -35
   timeTaken: 3
-  statType: 0
-  progressionForStat: 0
+  statType: 2
+  progressionForStat: 3
   miscStatParams: 

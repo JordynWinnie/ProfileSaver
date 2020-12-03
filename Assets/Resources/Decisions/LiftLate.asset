@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: LiftLate
   m_EditorClassIdentifier: 
   decisionTitle: Lift is full
-  decisionString: The lift is full you are going to be late,
+  decisionString: The lift is full you are going to be late
   decisionIcon: {fileID: 0}
   availableChoices:
   - {fileID: 11400000, guid: 3648e3065721ea148a4a1943c645f263, type: 2}
   - {fileID: 11400000, guid: 29a29362463571b46a4daca05950102d, type: 2}
   isGenericDecision: 0
-  profilesGetDecision: []
   startTimeToOccur: 7
-  endTimeToOccur: 8
+  endTimeToOccur: 9
+  locationForDecision: {fileID: 11400000, guid: 6b4d1b7c74aa5ad41ad9e5a69d53938f, type: 2}

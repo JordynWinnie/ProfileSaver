@@ -9,8 +9,8 @@ public class Decision : ScriptableObject
     public Sprite decisionIcon;
     public List<Choices> availableChoices;
     public bool isGenericDecision;
-    public List<Profile> profilesGetDecision;
 
     public float startTimeToOccur;
     public float endTimeToOccur;
+    public LocationInformation locationForDecision;
 }

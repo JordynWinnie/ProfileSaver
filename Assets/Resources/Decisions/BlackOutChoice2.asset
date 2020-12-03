@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ddfb2ae04e34c67953688a363ddb2b, type: 3}
   m_Name: BlackOutChoice2
   m_EditorClassIdentifier: 
-  choiceName: wait for the power to come back
+  choiceName: Wait for the power to come back
   happinessToAdd: -10
   healthToAdd: 0
   moneyToAdd: 0

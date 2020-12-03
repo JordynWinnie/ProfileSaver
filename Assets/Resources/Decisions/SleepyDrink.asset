@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisionTitle: Sleepy, get a drink?
   decisionString: 'You feel sleepy, buy some coffee/tea? '
-  decisionIcon: {fileID: 0}
+  decisionIcon: {fileID: 21300000, guid: aeee39b094782a14ba2239e98445d42c, type: 3}
   availableChoices:
   - {fileID: 11400000, guid: 02821072753371b4497366809ad9d34d, type: 2}
   - {fileID: 11400000, guid: 407f4e909ef4fc24997262ad8a9c9e99, type: 2}
   isGenericDecision: 0
-  profilesGetDecision: []
   startTimeToOccur: 9
   endTimeToOccur: 22
+  locationForDecision: {fileID: 11400000, guid: 6b4d1b7c74aa5ad41ad9e5a69d53938f, type: 2}

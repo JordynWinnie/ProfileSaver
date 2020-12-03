@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisionTitle: Beggar
   decisionString: ' You see a beggar in front of the supermarket '
-  decisionIcon: {fileID: 0}
+  decisionIcon: {fileID: 21300000, guid: 711161a3ceb91dd4d8463b4369593fa4, type: 3}
   availableChoices:
   - {fileID: 11400000, guid: dcadc930dc2d7a44d9dc42b001b438bc, type: 2}
   - {fileID: 11400000, guid: 8fd3c81d095611b48950d61d9586ceb2, type: 2}
   isGenericDecision: 0
-  profilesGetDecision: []
   startTimeToOccur: 12
   endTimeToOccur: 21
+  locationForDecision: {fileID: 11400000, guid: 51381dfb2fc69924eaf784a5f2f3c382, type: 2}

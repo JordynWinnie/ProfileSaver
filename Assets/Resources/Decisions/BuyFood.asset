@@ -19,6 +19,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 30296f929285dd14eb9c18e91529743a, type: 2}
   - {fileID: 11400000, guid: 71e9b1ce6b917454ea647d3d852e77fb, type: 2}
   isGenericDecision: 0
-  profilesGetDecision: []
   startTimeToOccur: 12
   endTimeToOccur: 21
+  locationForDecision: {fileID: 11400000, guid: 51381dfb2fc69924eaf784a5f2f3c382, type: 2}

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ddfb2ae04e34c67953688a363ddb2b, type: 3}
   m_Name: GamingChoice2
   m_EditorClassIdentifier: 
-  choiceName: Study instead
+  choiceName: Study instead (Adds 2 hours of study time)
   happinessToAdd: -5
   healthToAdd: 0
   moneyToAdd: 0
   hunger: -2
-  energy: 0
-  timeTaken: 1
-  statType: 0
-  progressionForStat: 0
+  energy: -20
+  timeTaken: 2
+  statType: 1
+  progressionForStat: 2
   miscStatParams: 

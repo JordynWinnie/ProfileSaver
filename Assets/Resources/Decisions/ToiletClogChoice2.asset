@@ -15,7 +15,7 @@ MonoBehaviour:
   choiceName: Call a repairman
   happinessToAdd: 5
   healthToAdd: 0
-  moneyToAdd: -200
+  moneyToAdd: -50
   hunger: -1
   energy: -5
   timeTaken: 1
