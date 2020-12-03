@@ -19,6 +19,6 @@ MonoBehaviour:
   hunger: -2
   energy: -10
   timeTaken: 0
-  statType: 0
-  progressionForStat: 0
+  statType: 4
+  progressionForStat: 1
   miscStatParams: 
