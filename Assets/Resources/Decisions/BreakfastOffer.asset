@@ -16,8 +16,8 @@ MonoBehaviour:
   decisionString: 'The restaurant has a special breakfast meal offer, try it out? '
   decisionIcon: {fileID: 0}
   availableChoices:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 2a4cff5e6139e224883ad995635cc29f, type: 2}
+  - {fileID: 11400000, guid: 20e34a419b498fd40918e4e08967adc1, type: 2}
   isGenericDecision: 0
   profilesGetDecision: []
   startTimeToOccur: 8

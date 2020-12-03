@@ -20,3 +20,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3211d2ec258134ffe80f260879153cec, type: 2}
   isGenericDecision: 1
   profilesGetDecision: []
+  startTimeToOccur: 0
+  endTimeToOccur: 23
