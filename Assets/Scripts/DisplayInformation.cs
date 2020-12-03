@@ -227,7 +227,6 @@ public class DisplayInformation : MonoBehaviour
                     DisplayDecisionPopup(queryForLocationPopup.ToList());
                     return;
                 }
-                return;
             }
 
             if (locationInformation.situationPopups.Where(x => timePassedForDay >= x.startTimeToOccur
@@ -289,6 +288,37 @@ public class DisplayInformation : MonoBehaviour
             });
 
             button.transform.SetParent(layout.transform);
+        }
+
+        if (locationInformation.locationName.Equals("School"))
+        {
+            foreach (var thingsToDo in currentProfile.schoolChoices)
+            {
+                var button = Instantiate(choiceButton, layout.transform);
+
+                button.GetComponentInChildren<ChoiceButton>().SetUpChoiceButton(thingsToDo);
+
+                button.GetComponent<Button>().onClick.AddListener(delegate
+                {
+                    ApplyChanges(thingsToDo);
+                });
+            }
+        }
+
+        if (locationInformation.locationName.Equals("Workplace"))
+        {
+            print("Workplace Called");
+            foreach (var thingsToDo in currentProfile.workplaceChoices)
+            {
+                var button = Instantiate(choiceButton, layout.transform);
+
+                button.GetComponentInChildren<ChoiceButton>().SetUpChoiceButton(thingsToDo);
+
+                button.GetComponent<Button>().onClick.AddListener(delegate
+                {
+                    ApplyChanges(thingsToDo);
+                });
+            }
         }
     }
 

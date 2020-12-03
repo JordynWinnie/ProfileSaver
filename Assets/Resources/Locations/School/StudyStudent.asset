@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81ddfb2ae04e34c67953688a363ddb2b, type: 3}
-  m_Name: Study
+  m_Name: StudyStudent
   m_EditorClassIdentifier: 
   choiceName: Study
   happinessToAdd: 0
@@ -21,3 +21,4 @@ MonoBehaviour:
   timeTaken: 2
   statType: 1
   progressionForStat: 2
+  miscStatParams: 

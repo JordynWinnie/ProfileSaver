@@ -31,8 +31,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 76d0534eb04d46745a2fc2eab4d60ae4, type: 2}
   - {fileID: 11400000, guid: 01f2a4e5aca7c5f499060ce0f35cd407, type: 2}
   - {fileID: 11400000, guid: 7c72f7ea737fc2942a33cb5322795f04, type: 2}
-  schoolChoices: []
-  workplaceChoices: []
+  schoolChoices:
+  - {fileID: 11400000, guid: 10702d3cf1381474fa1f251df0edf76f, type: 2}
+  workplaceChoices:
+  - {fileID: 11400000, guid: 4dad755dad894264398e53433b26f23b, type: 2}
   situationsForProfile:
   - {fileID: 11400000, guid: 2f8eb391997270241b9255de56d7be79, type: 2}
   - {fileID: 11400000, guid: 18cbd5a5ec50e594c8e1ea06dcd5e70f, type: 2}

@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Sleep
   m_EditorClassIdentifier: 
   choiceName: Nap
-  happiness: 10
-  health: 10
-  money: 0
-  hunger: 0
+  happinessToAdd: 0
+  healthToAdd: 0
+  moneyToAdd: 0
+  hunger: -1
   energy: 10
-  timeTaken: 2
+  timeTaken: 1
+  statType: 0
+  progressionForStat: 0
+  miscStatParams: 

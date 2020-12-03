@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81ddfb2ae04e34c67953688a363ddb2b, type: 3}
-  m_Name: Work
+  m_Name: WorkStudent
   m_EditorClassIdentifier: 
-  choiceName: Do your work
+  choiceName: Work Part Time (7/hr)
   happinessToAdd: -5
   healthToAdd: -5
   moneyToAdd: 21
