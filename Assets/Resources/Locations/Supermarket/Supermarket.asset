@@ -23,4 +23,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e2c3e2ffa65fb2243ad665b6625f7175, type: 2}
   - {fileID: 11400000, guid: dfcf84d0e9e2c8046b40466756dd768d, type: 2}
   - {fileID: 11400000, guid: febf83a4a21fa3d4385bef2020295568, type: 2}
-  situationPopups: []
+  situationPopups:
+  - {fileID: 11400000, guid: 2f8eb391997270241b9255de56d7be79, type: 2}
+  - {fileID: 11400000, guid: 7d4667ec178ed6d429c1c32cb53174a0, type: 2}
+  - {fileID: 11400000, guid: 71739699980d9ab429b74fd2555e1b43, type: 2}

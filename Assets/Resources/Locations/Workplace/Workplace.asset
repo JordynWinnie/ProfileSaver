@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09ff45a05a7e924aa2e2962b515e953, type: 3}
   m_Name: Workplace
   m_EditorClassIdentifier: 
-  locationName: Work
+  locationName: Workplace
   openingTime: 7
   closingTime: 23
   locationSprite: {fileID: 21300000, guid: dad2480aa1a92734e9fc755fca0e9d63, type: 3}
   is24Hours: 0
   locationBackground: {fileID: 21300000, guid: 804e2f637b7e01f47a0546dc3ebf8b51, type: 3}
-  thingsToDo:
-  - {fileID: 11400000, guid: 4dad755dad894264398e53433b26f23b, type: 2}
-  - {fileID: 11400000, guid: 7a93592e6e54e482786a87b0fa5908a1, type: 2}
-  situationPopups: []
+  thingsToDo: []
+  situationPopups:
+  - {fileID: 11400000, guid: 3ed5074c730a8374b8c736fbc5352f19, type: 2}
+  - {fileID: 11400000, guid: a13029a2b86970c47b235a9d2d4e772a, type: 2}
+  - {fileID: 11400000, guid: dbc7dd2f94f8ebc43a473434832913ac, type: 2}

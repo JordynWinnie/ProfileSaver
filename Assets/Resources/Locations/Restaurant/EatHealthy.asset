@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: EatHealthy
   m_EditorClassIdentifier: 
   choiceName: Eat Healthy
-  happiness: -5
-  health: 10
-  money: -20
+  happinessToAdd: 5
+  healthToAdd: 5
+  moneyToAdd: -20
   hunger: 5
-  energy: 0
-  timeTaken: 0
+  energy: 30
+  timeTaken: 1
+  statType: 4
+  progressionForStat: 1
+  miscStatParams: 

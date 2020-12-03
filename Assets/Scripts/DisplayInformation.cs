@@ -10,6 +10,8 @@ public class DisplayInformation : MonoBehaviour
 {
     public static DisplayInformation infoDisplayHelper;
     public LocationInformation currentOpenLocation = null;
+    public Location currentLocation = null;
+    public List<Location> locationList;
 
     private void Awake()
     {
@@ -30,6 +32,9 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moneyUI;
     [SerializeField] private TextMeshProUGUI healthUI;
     [SerializeField] private TextMeshProUGUI happinessUI;
+
+    [SerializeField] private Image energyIcon;
+    [SerializeField] private Image happinessIcon;
 
     [SerializeField] private TextMeshProUGUI hungerUI;
     [SerializeField] private TextMeshProUGUI energyUI;
@@ -55,6 +60,9 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private TextMeshProUGUI goalText;
     [SerializeField] private Button goalsButton;
 
+    [SerializeField] private List<Sprite> happinessStates;
+    [SerializeField] private List<Sprite> energyStates;
+
     // Update is called once per frame
     private void Update()
     {
@@ -66,10 +74,66 @@ public class DisplayInformation : MonoBehaviour
         energyUI.text = $"{GameManager.instance.Energy}/100";
         profileIcon.sprite = GameManager.instance.currentProfile.profileIcon;
         profileName.text = GameManager.instance.currentProfile.profileName;
+
+        if (GameManager.instance.Happiness <= 30)
+        {
+            happinessIcon.sprite = happinessStates[2];
+        }
+        else if (GameManager.instance.Happiness >= 31 && GameManager.instance.Happiness <= 70)
+        {
+            happinessIcon.sprite = happinessStates[1];
+        }
+        else
+        {
+            happinessIcon.sprite = happinessStates[0];
+        }
+
+        if (GameManager.instance.Energy <= 30)
+        {
+            energyIcon.sprite = energyStates[2];
+        }
+        else if (GameManager.instance.Energy >= 31 && GameManager.instance.Energy <= 70)
+        {
+            energyIcon.sprite = energyStates[1];
+        }
+        else
+        {
+            energyIcon.sprite = energyStates[0];
+        }
+        currentLocation.ShowAvatar(true);
+    }
+
+    public void ApplyChanges(Choices choice)
+    {
+        var currentHunger = GameManager.instance.Hunger;
+        var currentEnergy = GameManager.instance.Energy;
+        var time = GameManager.instance.gameTime;
+        var currLocation = currentOpenLocation == null ? string.Empty : currentOpenLocation.locationName;
+
+        if (currentEnergy + choice.energy < 0 || currentHunger + choice.hunger < 0)
+        {
+            AlertDialog.instance.ShowAlert("You're too hungry or tired", AlertDialog.AlertLength.Length_Short, AlertDialog.AlertType.CriticalError);
+            return;
+        }
+
+        AlertDialog.instance.ShowAlert(choice, AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.Message);
+
+        GoalManager.instance.AddStat(new Stat(choice.statType, time.ReturnDayNumber(), time.ReturnTimePassedForDay(), choice.progressionForStat, currLocation, choice.miscStatParams));
+        CloseAllPopups();
+        TimerScript.timerController.ResetTime();
+        GameManager.instance.Health += choice.healthToAdd;
+        GameManager.instance.Happiness += choice.happinessToAdd;
+        GameManager.instance.Money += choice.moneyToAdd;
+        GameManager.instance.gameTime.AddTime(choice.timeTaken);
+        GameManager.instance.Hunger += choice.hunger;
+        GameManager.instance.Energy += choice.energy;
+
+        GameManager.instance.StatCheck();
     }
 
     public void DisplayDecisionPopup(List<Decision> decisionList)
     {
+        TimerScript.timerController.Pause(true);
         DisplayPopup(situationPopup);
         var decision = decisionList[Random.Range(0, decisionList.Count)];
         var children = choicesUI.GetComponentsInChildren<Button>(true);
@@ -99,31 +163,6 @@ public class DisplayInformation : MonoBehaviour
         }
     }
 
-    public void ApplyChanges(Choices choice)
-    {
-        var currentHunger = GameManager.instance.Hunger;
-        var currentEnergy = GameManager.instance.Energy;
-        var time = GameManager.instance.gameTime;
-        var currLocation = currentOpenLocation == null ? string.Empty : currentOpenLocation.locationName;
-
-        if (currentEnergy + choice.energy < 0 || currentHunger + choice.hunger < 0)
-        {
-            AlertDialog.instance.ShowAlert("You're too hungry or tired", AlertDialog.AlertLength.Length_Normal);
-            return;
-        }
-
-        AlertDialog.instance.ShowAlert(choice, AlertDialog.AlertLength.Length_Long);
-
-        GoalManager.instance.AddStat(new Stat(choice.statType, time.ReturnDayNumber(), time.ReturnTimePassedForDay(), choice.progressionForStat, currLocation, choice.miscStatParams));
-        CloseAllPopups();
-        GameManager.instance.Health += choice.healthToAdd;
-        GameManager.instance.Happiness += choice.happinessToAdd;
-        GameManager.instance.Money += choice.moneyToAdd;
-        GameManager.instance.gameTime.AddTime(choice.timeTaken);
-        GameManager.instance.Hunger += choice.hunger;
-        GameManager.instance.Energy += choice.energy;
-    }
-
     public void CloseAllPopups()
     {
         infoDisplayHelper.currentOpenLocation = null;
@@ -133,25 +172,25 @@ public class DisplayInformation : MonoBehaviour
         {
             item.SetActive(false);
         }
+        TimerScript.timerController.Pause(false);
     }
 
-    public void DisplayLocationPopup(LocationInformation locationInformation)
+    public void ResetAvatarLocation()
     {
+        foreach (var location in locationList)
+        {
+            location.ShowAvatar(false);
+        }
+    }
+
+    public void DisplayLocationPopup(Location location)
+    {
+        var locationInformation = location.locationInformation;
         var gameTime = GameManager.instance.gameTime;
         var timePassedForDay = gameTime.ReturnTimePassedForDay();
-        if (locationInformation.situationPopups.Where(x => timePassedForDay >= x.startTimeToOccur
-        && timePassedForDay <= x.endTimeToOccur).Any())
-        {
-            if (Random.Range(1, 5) == 1)
-            {
-                DisplayDecisionPopup(locationInformation.situationPopups);
-                return;
-            }
-        }
 
         var time = GameManager.instance.gameTime.ReturnTimePassedForDay();
         var currentProfile = GameManager.instance.currentProfile;
-
         if (time > currentProfile.timeToSleep)
         {
             if (locationInformation.locationName.Equals("Home"))
@@ -161,15 +200,52 @@ public class DisplayInformation : MonoBehaviour
             }
             else
             {
-                AlertDialog.instance.ShowAlert($"You're out beyond your bed time ({gameTime.CalculateTimeString(currentProfile.timeToSleep)}), return home to sleep", AlertDialog.AlertLength.Length_Long);
+                AlertDialog.instance.ShowAlert($"You're out beyond your bed time ({gameTime.CalculateTimeString(currentProfile.timeToSleep)}), return home to sleep", AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.CriticalError);
                 return;
             }
+        }
+
+        if (!location.locationInformation.locationName.Equals(currentLocation.locationInformation.locationName))
+        {
+            ResetAvatarLocation();
+            location.ShowAvatar(true);
+            currentLocation = location;
+
+            AlertDialog.instance.ShowAlert($"You travelled to {location.locationInformation.locationName}. 30mins Passed -5 Energy -1 Hunger", AlertDialog.AlertLength.Length_Short, AlertDialog.AlertType.Warning);
+            GameManager.instance.gameTime.AddTime(0.5f);
+            GameManager.instance.Energy -= 5;
+            GameManager.instance.Hunger -= 1;
+            GameManager.instance.StatCheck();
+            var queryForLocationPopup = currentProfile.situationsForProfile.Where(x => timePassedForDay >= x.startTimeToOccur
+            && timePassedForDay <= x.endTimeToOccur
+            && x.locationForDecision.locationName.Equals(locationInformation.locationName));
+
+            if (queryForLocationPopup.Any())
+            {
+                if (Random.Range(1, 5) == 1)
+                {
+                    DisplayDecisionPopup(queryForLocationPopup.ToList());
+                    return;
+                }
+            }
+
+            if (locationInformation.situationPopups.Where(x => timePassedForDay >= x.startTimeToOccur
+        && timePassedForDay <= x.endTimeToOccur).Any())
+            {
+                if (Random.Range(1, 5) == 1)
+                {
+                    DisplayDecisionPopup(locationInformation.situationPopups);
+                    return;
+                }
+            }
+            return;
         }
 
         //Detect Closing time:
         if (!(time >= locationInformation.openingTime && time <= locationInformation.closingTime) && !locationInformation.is24Hours)
         {
-            AlertDialog.instance.ShowAlert($"{locationInformation.locationName} is closed. Opening Hours: {gameTime.CalculateTimeString(locationInformation.openingTime)} - {gameTime.CalculateTimeString(locationInformation.closingTime)}", AlertDialog.AlertLength.Length_Long);
+            AlertDialog.instance.ShowAlert($"{locationInformation.locationName} is closed. Opening Hours: {gameTime.CalculateTimeString(locationInformation.openingTime)} - {gameTime.CalculateTimeString(locationInformation.closingTime)}"
+                , AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.Warning);
             return;
         }
 
@@ -213,10 +289,43 @@ public class DisplayInformation : MonoBehaviour
 
             button.transform.SetParent(layout.transform);
         }
+
+        if (locationInformation.locationName.Equals("School"))
+        {
+            foreach (var thingsToDo in currentProfile.schoolChoices)
+            {
+                var button = Instantiate(choiceButton, layout.transform);
+
+                button.GetComponentInChildren<ChoiceButton>().SetUpChoiceButton(thingsToDo);
+
+                button.GetComponent<Button>().onClick.AddListener(delegate
+                {
+                    ApplyChanges(thingsToDo);
+                });
+            }
+        }
+
+        if (locationInformation.locationName.Equals("Workplace"))
+        {
+            print("Workplace Called");
+            foreach (var thingsToDo in currentProfile.workplaceChoices)
+            {
+                var button = Instantiate(choiceButton, layout.transform);
+
+                button.GetComponentInChildren<ChoiceButton>().SetUpChoiceButton(thingsToDo);
+
+                button.GetComponent<Button>().onClick.AddListener(delegate
+                {
+                    ApplyChanges(thingsToDo);
+                });
+            }
+        }
     }
 
     private void EndDay(float time)
     {
+        TimerScript.timerController.Pause(true);
+        TimerScript.timerController.ResetTime();
         blackFade.gameObject.SetActive(true);
         endOfDaySummary.gameObject.SetActive(true);
         if (time < 24)
@@ -229,6 +338,8 @@ public class DisplayInformation : MonoBehaviour
         }
 
         daySummary.text = EndOfDaySummary();
+        ResetAvatarLocation();
+        currentLocation = locationList.Where(x => x.locationInformation.locationName == "Home").First();
     }
 
     private string EndOfDaySummary()
@@ -266,6 +377,7 @@ public class DisplayInformation : MonoBehaviour
         goalsMenu.gameObject.SetActive(true);
         blackFade.gameObject.SetActive(true);
         goalText.text = GoalManager.instance.PrintGoals();
+        TimerScript.timerController.Pause(true);
     }
 
     public void DisplayPopup(RectTransform popup)
@@ -274,5 +386,6 @@ public class DisplayInformation : MonoBehaviour
         popup.gameObject.SetActive(true);
         blackFade.gameObject.SetActive(true);
         goalsButton.gameObject.SetActive(false);
+        TimerScript.timerController.Pause(true);
     }
 }

@@ -15,5 +15,8 @@ public class Profile : ScriptableObject
     public string description;
 
     public List<Goal> goals;
-    
+    public List<Choices> schoolChoices;
+    public List<Choices> workplaceChoices;
+
+    public List<Decision> situationsForProfile;
 }

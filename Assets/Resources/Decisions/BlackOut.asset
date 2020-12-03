@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50dbe2ba3e1dc47d6b6bf850dda1ff59, type: 3}
+  m_Name: BlackOut
+  m_EditorClassIdentifier: 
+  decisionTitle: BlackOut
+  decisionString: A blackout happens to your house
+  decisionIcon: {fileID: 21300000, guid: 80546813329f09e46923286ac1b3c2c4, type: 3}
+  availableChoices:
+  - {fileID: 11400000, guid: e2d5ba55886cace4e8be41ed9660e003, type: 2}
+  - {fileID: 11400000, guid: 9460986288049834f8897dfdf7e63dbd, type: 2}
+  isGenericDecision: 0
+  startTimeToOccur: 19
+  endTimeToOccur: 23.5
+  locationForDecision: {fileID: 11400000, guid: f064d8e6b71a4fd48a672539c68ffb94, type: 2}

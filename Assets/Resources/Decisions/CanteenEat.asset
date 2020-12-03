@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50dbe2ba3e1dc47d6b6bf850dda1ff59, type: 3}
+  m_Name: CanteenEat
+  m_EditorClassIdentifier: 
+  decisionTitle: Eat lunch in the canteen
+  decisionString: 'Your friends invite you to go to the canteen to eat '
+  decisionIcon: {fileID: 0}
+  availableChoices:
+  - {fileID: 11400000, guid: 324565c8291e74744b463ce90ef8d7bf, type: 2}
+  - {fileID: 11400000, guid: 4fb81f57c18b12d48a5bc0c19bba6e15, type: 2}
+  isGenericDecision: 0
+  startTimeToOccur: 12
+  endTimeToOccur: 14
+  locationForDecision: {fileID: 11400000, guid: 6b4b3f881cce79f45b3f91b68fd5f27f, type: 2}

@@ -31,3 +31,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 76d0534eb04d46745a2fc2eab4d60ae4, type: 2}
   - {fileID: 11400000, guid: 01f2a4e5aca7c5f499060ce0f35cd407, type: 2}
   - {fileID: 11400000, guid: 7c72f7ea737fc2942a33cb5322795f04, type: 2}
+  schoolChoices:
+  - {fileID: 11400000, guid: 10702d3cf1381474fa1f251df0edf76f, type: 2}
+  workplaceChoices:
+  - {fileID: 11400000, guid: 4dad755dad894264398e53433b26f23b, type: 2}
+  situationsForProfile:
+  - {fileID: 11400000, guid: 2f8eb391997270241b9255de56d7be79, type: 2}
+  - {fileID: 11400000, guid: 18cbd5a5ec50e594c8e1ea06dcd5e70f, type: 2}
+  - {fileID: 11400000, guid: d83aa835a9981514984ade7427ca3b19, type: 2}
+  - {fileID: 11400000, guid: 7d4667ec178ed6d429c1c32cb53174a0, type: 2}
+  - {fileID: 11400000, guid: 88b4f9d8bf51e6a48848cdab04944699, type: 2}
+  - {fileID: 11400000, guid: 80845d39cb3e145428504cf9c15b4f15, type: 2}
+  - {fileID: 11400000, guid: 945ef27a5205e374e91c31e0ad32e089, type: 2}
+  - {fileID: 11400000, guid: cf34da69290c2487cbe08010191b9b94, type: 2}
+  - {fileID: 11400000, guid: 186c3791cb8756943813e606cc20029f, type: 2}
+  - {fileID: 11400000, guid: a13029a2b86970c47b235a9d2d4e772a, type: 2}
+  - {fileID: 11400000, guid: 3ed5074c730a8374b8c736fbc5352f19, type: 2}
+  - {fileID: 11400000, guid: 7cac20c8798fdfc4f8976359caade198, type: 2}
+  - {fileID: 11400000, guid: 71739699980d9ab429b74fd2555e1b43, type: 2}
+  - {fileID: 11400000, guid: dbc7dd2f94f8ebc43a473434832913ac, type: 2}
+  - {fileID: 11400000, guid: dd664893c56ace4438ee5c694662f486, type: 2}
+  - {fileID: 11400000, guid: 32031d94ca08d7a4083997e36b734073, type: 2}
+  - {fileID: 11400000, guid: 3087cd53157d7422681ac2d8f491410f, type: 2}

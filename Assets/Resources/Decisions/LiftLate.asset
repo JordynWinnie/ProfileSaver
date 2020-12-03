@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50dbe2ba3e1dc47d6b6bf850dda1ff59, type: 3}
+  m_Name: LiftLate
+  m_EditorClassIdentifier: 
+  decisionTitle: Lift is full
+  decisionString: The lift is full you are going to be late
+  decisionIcon: {fileID: 0}
+  availableChoices:
+  - {fileID: 11400000, guid: 3648e3065721ea148a4a1943c645f263, type: 2}
+  - {fileID: 11400000, guid: 29a29362463571b46a4daca05950102d, type: 2}
+  isGenericDecision: 0
+  startTimeToOccur: 7
+  endTimeToOccur: 9
+  locationForDecision: {fileID: 11400000, guid: 6b4d1b7c74aa5ad41ad9e5a69d53938f, type: 2}
