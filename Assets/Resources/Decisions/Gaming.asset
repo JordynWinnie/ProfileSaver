@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50dbe2ba3e1dc47d6b6bf850dda1ff59, type: 3}
+  m_Name: Gaming
+  m_EditorClassIdentifier: 
+  decisionTitle: Gaming with friends
+  decisionString: 'Your friends invite you to game with them '
+  decisionIcon: {fileID: 21300000, guid: c9daab719d62ba748a70f3f3aa5ba01b, type: 3}
+  availableChoices:
+  - {fileID: 11400000, guid: 8c29461f45dbe0d4980aaad1f4b02d4b, type: 2}
+  - {fileID: 11400000, guid: e41d5da0ad1e0f5478c34f27f76c4297, type: 2}
+  isGenericDecision: 0
+  profilesGetDecision: []
+  startTimeToOccur: 21
+  endTimeToOccur: 22

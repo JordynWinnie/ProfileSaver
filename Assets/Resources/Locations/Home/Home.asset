@@ -22,3 +22,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 24600016ba7f2454ab4ddb6e5c823f1e, type: 2}
   situationPopups:
   - {fileID: 11400000, guid: cf34da69290c2487cbe08010191b9b94, type: 2}
+  - {fileID: 11400000, guid: 186c3791cb8756943813e606cc20029f, type: 2}
+  - {fileID: 11400000, guid: 18cbd5a5ec50e594c8e1ea06dcd5e70f, type: 2}
+  - {fileID: 11400000, guid: 32031d94ca08d7a4083997e36b734073, type: 2}
