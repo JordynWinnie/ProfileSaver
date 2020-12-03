@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50dbe2ba3e1dc47d6b6bf850dda1ff59, type: 3}
+  m_Name: SleepyDrink
+  m_EditorClassIdentifier: 
+  decisionTitle: Sleepy, get a drink?
+  decisionString: 'You feel sleepy, buy some coffee/tea? '
+  decisionIcon: {fileID: 0}
+  availableChoices:
+  - {fileID: 11400000, guid: 02821072753371b4497366809ad9d34d, type: 2}
+  - {fileID: 11400000, guid: 407f4e909ef4fc24997262ad8a9c9e99, type: 2}
+  isGenericDecision: 0
+  profilesGetDecision: []
+  startTimeToOccur: 0
+  endTimeToOccur: 0

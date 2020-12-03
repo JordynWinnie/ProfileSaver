@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50dbe2ba3e1dc47d6b6bf850dda1ff59, type: 3}
+  m_Name: Sale
+  m_EditorClassIdentifier: 
+  decisionTitle: Sale
+  decisionString: 'Something very expensive you had your eye on is on sale '
+  decisionIcon: {fileID: 0}
+  availableChoices:
+  - {fileID: 11400000, guid: 3cc8c99634797084d90526325ac40b89, type: 2}
+  - {fileID: 11400000, guid: cf81e29d425a5ac46bbdbb024a93966b, type: 2}
+  isGenericDecision: 0
+  profilesGetDecision: []
+  startTimeToOccur: 9
+  endTimeToOccur: 21

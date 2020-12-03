@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50dbe2ba3e1dc47d6b6bf850dda1ff59, type: 3}
+  m_Name: EatDinnerWFriends
+  m_EditorClassIdentifier: 
+  decisionTitle: Friends invite you to dinner
+  decisionString: Your friends invite you to eat dinner with them
+  decisionIcon: {fileID: 0}
+  availableChoices:
+  - {fileID: 11400000, guid: 964c1a2033d5bc44b9fe9ec666b78b4c, type: 2}
+  - {fileID: 11400000, guid: cb5b143165641b9499d3f62765abe321, type: 2}
+  isGenericDecision: 0
+  profilesGetDecision: []
+  startTimeToOccur: 18
+  endTimeToOccur: 20
