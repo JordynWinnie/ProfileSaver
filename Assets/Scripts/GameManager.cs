@@ -194,14 +194,14 @@ public class GameManager : MonoBehaviour
 
     public void StatCheck()
     {
-        if (instance.Hunger <= 2)
+        if (instance.Hunger <= 1)
         {
             AlertDialog.instance.ShowAlert("You got really hungry. -5 Happiness -2 Health", AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
             instance.Happiness -= 5;
             instance.Health -= 2;
         }
 
-        if (instance.Energy <= 20)
+        if (instance.Energy <= 10)
         {
             AlertDialog.instance.ShowAlert("You got really tired. -5 Happiness -2 Health", AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
             instance.Happiness -= 5;

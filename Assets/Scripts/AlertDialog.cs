@@ -61,6 +61,7 @@ public class AlertDialog : MonoBehaviour
     public void ShowAlert(Choices choices, AlertLength alertLength, AlertType alertType)
     {
         var sb = new StringBuilder();
+        sb.Append($"{choices.choiceName}: ");
         if (choices.timeTaken != 0)
         {
             sb.Append($"{choices.timeTaken}h Passed ");

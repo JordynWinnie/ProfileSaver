@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TMPro;
@@ -134,7 +135,7 @@ public class DisplayInformation : MonoBehaviour
     {
         TimerScript.timerController.Pause(true);
         DisplayPopup(situationPopup);
-        var decision = decisionList[Random.Range(0, decisionList.Count)];
+        var decision = decisionList[UnityEngine.Random.Range(0, decisionList.Count)];
         var children = choicesUI.GetComponentsInChildren<Button>(true);
 
         var choices = decision.availableChoices;
@@ -210,10 +211,10 @@ public class DisplayInformation : MonoBehaviour
             location.ShowAvatar(true);
             currentLocation = location;
 
-            AlertDialog.instance.ShowAlert($"You travelled to {location.locationInformation.locationName}. 30mins Passed -5 Energy -1 Hunger", AlertDialog.AlertLength.Length_Short, AlertDialog.AlertType.Warning);
+            AlertDialog.instance.ShowAlert($"You travelled to {location.locationInformation.locationName}. 30mins Passed -2.5 Energy -0.5 Hunger", AlertDialog.AlertLength.Length_Short, AlertDialog.AlertType.Warning);
             GameManager.instance.gameTime.AddTime(0.5f);
-            GameManager.instance.Energy -= 5;
-            GameManager.instance.Hunger -= 1;
+            GameManager.instance.Energy -= 2.5f;
+            GameManager.instance.Hunger -= 0.5f;
             GameManager.instance.StatCheck();
             var queryForLocationPopup = currentProfile.situationsForProfile.Where(x => timePassedForDay >= x.startTimeToOccur
             && timePassedForDay <= x.endTimeToOccur
@@ -221,7 +222,7 @@ public class DisplayInformation : MonoBehaviour
 
             if (queryForLocationPopup.Any())
             {
-                if (Random.Range(1, 5) == 1)
+                if (UnityEngine.Random.Range(1, 5) == 1)
                 {
                     DisplayDecisionPopup(queryForLocationPopup.ToList());
                     return;
@@ -231,7 +232,7 @@ public class DisplayInformation : MonoBehaviour
             if (locationInformation.situationPopups.Where(x => timePassedForDay >= x.startTimeToOccur
         && timePassedForDay <= x.endTimeToOccur).Any())
             {
-                if (Random.Range(1, 5) == 1)
+                if (UnityEngine.Random.Range(1, 5) == 1)
                 {
                     DisplayDecisionPopup(locationInformation.situationPopups);
                     return;
@@ -278,7 +279,7 @@ public class DisplayInformation : MonoBehaviour
             var newChoice = new Choices
             {
                 choiceName = "End the day",
-                energy = 50,
+                energy = 25,
                 happinessToAdd = 0,
                 hunger = -1,
                 healthToAdd = 0,
@@ -332,9 +333,9 @@ public class DisplayInformation : MonoBehaviour
         var newChoice = new Choices
         {
             choiceName = "End the day",
-            energy = 50,
+            energy = 25,
             happinessToAdd = 0,
-            hunger = -1,
+            hunger = -2,
             healthToAdd = 0,
             moneyToAdd = 0,
             timeTaken = 0,
@@ -363,12 +364,63 @@ public class DisplayInformation : MonoBehaviour
 
     private string EndOfDaySummary()
     {
+        var goalMgr = GoalManager.instance;
         var sb = new StringBuilder();
         sb.AppendLine($"Money Earned: {GameManager.instance.Money - GameManager.instance.oldMoney}");
         sb.AppendLine($"Health Status: {GameManager.instance.Health}/100");
         sb.AppendLine($"Happiness Status: {GameManager.instance.Happiness}/100");
 
         GameManager.instance.oldMoney = GameManager.instance.Money;
+        sb.AppendLine();
+        sb.AppendLine("Daily Goal Summary: ");
+        var totalGoals = GameManager.instance.currentProfile.goals.Where(x => x.goalType == GoalManager.GoalLength.Daily).Count();
+        var completedDaily = goalMgr.completeGoals.Where(x => x.goalType == GoalManager.GoalLength.Daily).ToList();
+        var incompletedDaily = goalMgr.incompleteGoals.Where(x => x.goalType == GoalManager.GoalLength.Daily).ToList();
+
+        if (completedDaily.Count != 0)
+        {
+            sb.AppendLine("Compeleted Goals: ");
+            foreach (var completeGoal in completedDaily)
+            {
+                sb.AppendLine($"- {completeGoal.goalName}");
+            }
+        }
+
+        if (incompletedDaily.Count != 0)
+        {
+            sb.AppendLine("Incompleted Goals: ");
+            foreach (var incompleteGoal in incompletedDaily)
+            {
+                sb.AppendLine($"- {incompleteGoal.goalName}");
+            }
+        }
+
+        sb.AppendLine();
+        var percentComplete = ((float)completedDaily.Count / totalGoals) * 100f;
+        sb.AppendLine($"Total Complete: {completedDaily.Count}/{totalGoals} ({Math.Truncate(percentComplete)})%");
+
+        if (percentComplete >= 80f)
+        {
+            sb.AppendLine("You're really on task! +50 Energy +10 Happiness +5 Health");
+            GameManager.instance.Energy += 25;
+            GameManager.instance.Happiness += 10;
+            GameManager.instance.Health += 5;
+            sb.AppendLine("Reward: +25 Energy +10 Happiness +5 Health");
+        }
+        else if (percentComplete <= 79f && percentComplete >= 40f)
+        {
+            sb.AppendLine("You forgot a few tasks, but good try!");
+            GameManager.instance.Energy += 25;
+            GameManager.instance.Happiness += 5;
+            GameManager.instance.Health += 3;
+            sb.AppendLine("Reward: +25 Energy +5 Happiness");
+        }
+        else
+        {
+            sb.AppendLine("You didn't manage to complete most of your goals. :(");
+            sb.AppendLine("Penalty: -10 Happiness");
+            GameManager.instance.Happiness -= 10;
+        }
 
         return sb.ToString();
     }

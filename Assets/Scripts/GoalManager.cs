@@ -20,8 +20,8 @@ public class GoalManager : MonoBehaviour
     public int mealDinner { get; set; }
 
     [SerializeField] private List<Stat> trackedStatistics;
-    private List<Goal> incompleteGoals = new List<Goal>();
-    private List<Goal> completeGoals = new List<Goal>();
+    public List<Goal> incompleteGoals = new List<Goal>();
+    public List<Goal> completeGoals = new List<Goal>();
 
     // Start is called before the first frame update
     private void Awake()
@@ -140,6 +140,11 @@ public class GoalManager : MonoBehaviour
                 }
                 else
                 {
+                    if (!incompleteGoals.Contains(goal))
+                    {
+                        completeGoals.Remove(goal);
+                        incompleteGoals.Add(goal);
+                    }
                     sb.AppendLine($"- {goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (INCOMPLETE)");
                 }
             }
