@@ -63,7 +63,6 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private List<Sprite> happinessStates;
     [SerializeField] private List<Sprite> energyStates;
 
-    // Update is called once per frame
     private void Update()
     {
         timeUI.text = GameManager.instance.gameTime.ReturnTimeString();
@@ -277,17 +276,29 @@ public class DisplayInformation : MonoBehaviour
 
         if (locationInformation.locationName.Equals("Home"))
         {
-            var button = Instantiate(choiceButton);
+            var button = Instantiate(choiceButton, layout.transform);
 
             button.GetComponentInChildren<TextMeshProUGUI>().text = "End the day";
-
+            var newChoice = new Choices
+            {
+                choiceName = "End the day",
+                energy = 50,
+                happinessToAdd = 0,
+                hunger = -1,
+                healthToAdd = 0,
+                moneyToAdd = 0,
+                timeTaken = 0,
+                miscStatParams = string.Empty,
+                progressionForStat = 0,
+                statType = Stat.StatType.Default
+            };
+            button.GetComponentInChildren<ChoiceButton>().SetUpChoiceButton(newChoice);
             button.GetComponent<Button>().onClick.AddListener(delegate
             {
+                ApplyChanges(newChoice);
                 CloseAllPopups();
                 EndDay(time);
             });
-
-            button.transform.SetParent(layout.transform);
         }
 
         if (locationInformation.locationName.Equals("School"))
@@ -307,7 +318,6 @@ public class DisplayInformation : MonoBehaviour
 
         if (locationInformation.locationName.Equals("Workplace"))
         {
-            print("Workplace Called");
             foreach (var thingsToDo in currentProfile.workplaceChoices)
             {
                 var button = Instantiate(choiceButton, layout.transform);
