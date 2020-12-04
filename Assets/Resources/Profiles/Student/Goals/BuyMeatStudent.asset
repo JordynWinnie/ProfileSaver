@@ -9,16 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81ddfb2ae04e34c67953688a363ddb2b, type: 3}
-  m_Name: BuyFish
+  m_Script: {fileID: 11500000, guid: d35f600a59112d94497a3c528d52dd91, type: 3}
+  m_Name: BuyMeatStudent
   m_EditorClassIdentifier: 
-  choiceName: Buy Fish
-  happinessToAdd: 0
-  healthToAdd: 0
-  moneyToAdd: -30
-  hunger: 0
-  energy: 0
-  timeTaken: 1
-  statType: 0
-  progressionForStat: 1
-  miscStatParams: Fish
+  goalName: Buy 4 meat from supermarket
+  statType: 5
+  goalType: 1
+  totalCommitment: 4
+  acceptAllTime: 1
+  onlyAcceptFromTime: 0
+  onlyAcceptToTime: 0
+  miscStatParams: Meat

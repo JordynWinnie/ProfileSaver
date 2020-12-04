@@ -17,7 +17,7 @@ MonoBehaviour:
   healthToAdd: -5
   moneyToAdd: 21
   hunger: -3
-  energy: -20
+  energy: -40
   timeTaken: 3
   statType: 2
   progressionForStat: 3

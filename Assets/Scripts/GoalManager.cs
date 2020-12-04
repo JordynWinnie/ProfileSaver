@@ -47,6 +47,21 @@ public class GoalManager : MonoBehaviour
                 print($"{item.statType}: Visted: {item.placeVisited} - Time: {item.timeOfAction} - Day: {item.dayOfAction} - ActionContributes: {item.actionCount} - MiscParams: {item.miscStatParams}");
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            foreach (var item in completeGoals)
+            {
+                print($"Complete: {item.goalName}");
+            }
+
+            foreach (var item in incompleteGoals)
+            {
+                print($"Incomplete: {item.goalName}");
+            }
+        }
+
+        UpdateGoals();
     }
 
     public Stat AddStat(Stat stat)
@@ -55,10 +70,18 @@ public class GoalManager : MonoBehaviour
         return stat;
     }
 
-    public string PrintGoals()
+    private void Start()
     {
-        completeGoals.Clear();
-        incompleteGoals.Clear();
+        foreach (var goal in GameManager.instance.currentProfile.goals)
+        {
+            incompleteGoals.Add(goal);
+        }
+
+        UpdateGoals();
+    }
+
+    public string UpdateGoals()
+    {
         var currentGameTime = GameManager.instance.gameTime;
         var goalList = GameManager.instance.currentProfile.goals;
         var sb = new StringBuilder();
@@ -106,12 +129,17 @@ public class GoalManager : MonoBehaviour
                 var amountCompleted = statList.Sum(x => x.actionCount);
                 if (amountCompleted >= goal.totalCommitment)
                 {
-                    completeGoals.Add(goal);
+                    if (!completeGoals.Contains(goal))
+                    {
+                        completeGoals.Add(goal);
+                        incompleteGoals.Remove(goal);
+
+                        AlertDialog.instance.ShowAlert($"You completed: {goal.goalName}", AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.Message);
+                    }
                     sb.AppendLine($"- {goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (COMPLETE)");
                 }
                 else
                 {
-                    incompleteGoals.Add(goal);
                     sb.AppendLine($"- {goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (INCOMPLETE)");
                 }
             }

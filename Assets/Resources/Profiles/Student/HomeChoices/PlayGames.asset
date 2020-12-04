@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81ddfb2ae04e34c67953688a363ddb2b, type: 3}
-  m_Name: BuyFish
+  m_Name: PlayGames
   m_EditorClassIdentifier: 
-  choiceName: Buy Fish
-  happinessToAdd: 0
-  healthToAdd: 0
-  moneyToAdd: -30
-  hunger: 0
-  energy: 0
-  timeTaken: 1
+  choiceName: Game
+  happinessToAdd: 10
+  healthToAdd: -2
+  moneyToAdd: 0
+  hunger: -2
+  energy: -10
+  timeTaken: 3
   statType: 0
-  progressionForStat: 1
-  miscStatParams: Fish
+  progressionForStat: 3
+  miscStatParams: GameStudent

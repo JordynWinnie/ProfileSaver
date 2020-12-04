@@ -1,6 +1,6 @@
 ﻿public class Stat
 {
-    public enum StatType { Default, StudyTime, WorkTime, PlaceVisit, MealTaken, ItemPurchased }
+    public enum StatType { Default, StudyTime, WorkTime, PlaceVisit, MealTaken, ItemPurchased, MoneyToSave }
 
     public StatType statType { get; set; }
     public float dayOfAction { get; set; }

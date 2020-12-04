@@ -17,24 +17,26 @@ MonoBehaviour:
   maxIncome: 700
   age: 14
   timeToWake: 6.5
-  timeToSleep: 22
+  timeToSleep: 23
   profileIcon: {fileID: 21300000, guid: 711161a3ceb91dd4d8463b4369593fa4, type: 3}
-  description: You are playing as a student who works part time every Sunday. As
-    a gaming addict, you work about 8 hours on average to satisfy your gaming needs.
-    You are also a reclusive person who avoids hanging out with some of your friends,
-    and prefer to play games by yourself instead of going out for meals.
+  description: 'You are playing as a student who works part time for 8 hours to gain
+    some money for his gaming. Being a recluse with only a few friends, you prefers
+    to game over going out for meals. '
   goals:
-  - {fileID: 11400000, guid: c5c6dfd16a6cec2498f2162f5788df0e, type: 2}
   - {fileID: 11400000, guid: 901a48697256a084cb9e90392b973e4b, type: 2}
   - {fileID: 11400000, guid: e170367be0ee9034895eeb1930e22391, type: 2}
   - {fileID: 11400000, guid: 62471fd8b9fedac47b86a0841981a389, type: 2}
-  - {fileID: 11400000, guid: 76d0534eb04d46745a2fc2eab4d60ae4, type: 2}
-  - {fileID: 11400000, guid: 01f2a4e5aca7c5f499060ce0f35cd407, type: 2}
+  - {fileID: 11400000, guid: 14fe15f53faccae43b61b18a8668d21d, type: 2}
+  - {fileID: 11400000, guid: 858b7ab39f5ce814682fcca531f96527, type: 2}
+  - {fileID: 11400000, guid: c5c6dfd16a6cec2498f2162f5788df0e, type: 2}
+  - {fileID: 11400000, guid: 6adb728029e9ec142a9f1b10c909bd85, type: 2}
   - {fileID: 11400000, guid: 7c72f7ea737fc2942a33cb5322795f04, type: 2}
   schoolChoices:
   - {fileID: 11400000, guid: 10702d3cf1381474fa1f251df0edf76f, type: 2}
   workplaceChoices:
   - {fileID: 11400000, guid: 4dad755dad894264398e53433b26f23b, type: 2}
+  homeChoices:
+  - {fileID: 11400000, guid: 5acbab0d59e14454e87d38d47b8c1f16, type: 2}
   situationsForProfile:
   - {fileID: 11400000, guid: 2f8eb391997270241b9255de56d7be79, type: 2}
   - {fileID: 11400000, guid: 18cbd5a5ec50e594c8e1ea06dcd5e70f, type: 2}

@@ -262,23 +262,19 @@ public class DisplayInformation : MonoBehaviour
         }
         foreach (var choice in locationInformation.thingsToDo)
         {
-            var button = Instantiate(choiceButton);
-
-            button.GetComponentInChildren<ChoiceButton>().SetUpChoiceButton(choice);
-
-            button.GetComponent<Button>().onClick.AddListener(delegate
-            {
-                ApplyChanges(choice);
-            });
-
-            button.transform.SetParent(layout.transform);
+            GenerateButton(layout, choice);
         }
 
         if (locationInformation.locationName.Equals("Home"))
         {
-            var button = Instantiate(choiceButton, layout.transform);
+            foreach (var choice in currentProfile.homeChoices)
+            {
+                GenerateButton(layout, choice);
+            }
 
+            var button = Instantiate(choiceButton, layout.transform);
             button.GetComponentInChildren<TextMeshProUGUI>().text = "End the day";
+
             var newChoice = new Choices
             {
                 choiceName = "End the day",
@@ -295,7 +291,6 @@ public class DisplayInformation : MonoBehaviour
             button.GetComponentInChildren<ChoiceButton>().SetUpChoiceButton(newChoice);
             button.GetComponent<Button>().onClick.AddListener(delegate
             {
-                ApplyChanges(newChoice);
                 CloseAllPopups();
                 EndDay(time);
             });
@@ -303,37 +298,51 @@ public class DisplayInformation : MonoBehaviour
 
         if (locationInformation.locationName.Equals("School"))
         {
-            foreach (var thingsToDo in currentProfile.schoolChoices)
+            foreach (var choice in currentProfile.schoolChoices)
             {
-                var button = Instantiate(choiceButton, layout.transform);
-
-                button.GetComponentInChildren<ChoiceButton>().SetUpChoiceButton(thingsToDo);
-
-                button.GetComponent<Button>().onClick.AddListener(delegate
-                {
-                    ApplyChanges(thingsToDo);
-                });
+                GenerateButton(layout, choice);
             }
         }
 
         if (locationInformation.locationName.Equals("Workplace"))
         {
-            foreach (var thingsToDo in currentProfile.workplaceChoices)
+            foreach (var choice in currentProfile.workplaceChoices)
             {
-                var button = Instantiate(choiceButton, layout.transform);
-
-                button.GetComponentInChildren<ChoiceButton>().SetUpChoiceButton(thingsToDo);
-
-                button.GetComponent<Button>().onClick.AddListener(delegate
-                {
-                    ApplyChanges(thingsToDo);
-                });
+                GenerateButton(layout, choice);
             }
         }
     }
 
+    private void GenerateButton(FlexibleLayoutGroup layout, Choices choice)
+    {
+        var button = Instantiate(choiceButton);
+
+        button.GetComponentInChildren<ChoiceButton>().SetUpChoiceButton(choice);
+
+        button.GetComponent<Button>().onClick.AddListener(delegate
+        {
+            ApplyChanges(choice);
+        });
+
+        button.transform.SetParent(layout.transform);
+    }
+
     private void EndDay(float time)
     {
+        var newChoice = new Choices
+        {
+            choiceName = "End the day",
+            energy = 50,
+            happinessToAdd = 0,
+            hunger = -1,
+            healthToAdd = 0,
+            moneyToAdd = 0,
+            timeTaken = 0,
+            miscStatParams = string.Empty,
+            progressionForStat = 0,
+            statType = Stat.StatType.Default
+        };
+        ApplyChanges(newChoice);
         TimerScript.timerController.Pause(true);
         TimerScript.timerController.ResetTime();
         blackFade.gameObject.SetActive(true);
@@ -386,7 +395,7 @@ public class DisplayInformation : MonoBehaviour
         CloseAllPopups();
         goalsMenu.gameObject.SetActive(true);
         blackFade.gameObject.SetActive(true);
-        goalText.text = GoalManager.instance.PrintGoals();
+        goalText.text = GoalManager.instance.UpdateGoals();
         TimerScript.timerController.Pause(true);
     }
 
