@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static bool isGameLoad = false;
     [SerializeField] private Profile[] profiles;
     public bool isInDevelopment = true;
     private Decision[] decisions;
@@ -125,7 +123,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        print("Hello");
         profiles = Resources.LoadAll<Profile>("Profiles");
         decisions = Resources.LoadAll<Decision>("Decisions");
         locations = FindObjectsOfType<Location>();
@@ -142,16 +139,7 @@ public class GameManager : MonoBehaviour
 
         if (instance.currentProfile == null && !isInDevelopment)
         {
-            if (isGameLoad)
-            {
-                print("GameLoad");
-                SetUpValues(SaveSystem.LoadData());
-            }
-            else
-            {
-                SceneManager.LoadScene(1);
-            }
-            
+            SceneManager.LoadScene(1);
         }
         else
         {
@@ -195,17 +183,18 @@ public class GameManager : MonoBehaviour
         {
             SaveSystem.SaveData(instance);
         }
-        
-        
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            var data = SaveSystem.LoadData();
+            SetUpValues(data);
+        }
     }
 
     public Decision ReturnRandomDecision() => decisions[Random.Range(0, decisions.Length)];
 
-    public void SetUpValues(SaveData saveData)
+    private void SetUpValues(SaveData saveData)
     {
-        print("LoadedProf: " + saveData.currentProfile);
-        
-        print(locations.Length);
         instance.Energy = saveData.energy;
         instance.Health = saveData.health;
         instance.Money = saveData.money;
@@ -216,9 +205,8 @@ public class GameManager : MonoBehaviour
         startMoneyOfMonth = saveData.startMoneyOfMonth;
         GoalManager.instance.trackedStatistics = saveData.statList;
         var profile = profiles.First(x => x.profileName == saveData.currentProfile);
-        var location = DisplayInformation.infoDisplayHelper.locationList.First(x=>x.locationInformation.locationName == saveData.currentLocation);
+        var location = locations.First(x=>x.locationInformation.locationName == saveData.currentLocation);
         instance.currentProfile = profile;
-        print("LoadedLoc: " + location.locationInformation.locationName);
         DisplayInformation.infoDisplayHelper.currentLocation = location;
     }
 

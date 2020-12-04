@@ -100,10 +100,10 @@ public class DisplayInformation : MonoBehaviour
         {
             energyIcon.sprite = energyStates[0];
         }
-        
+
         ResetAvatarLocation();
         currentLocation.ShowAvatar(true);
-        GameManager.instance.currentLocation = currentLocation;
+        GameManager.instance.currentLocation = infoDisplayHelper.currentLocation;
     }
 
     public void ApplyChanges(Choices choice)
