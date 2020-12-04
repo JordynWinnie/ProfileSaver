@@ -228,16 +228,6 @@ public class DisplayInformation : MonoBehaviour
                     return;
                 }
             }
-
-            if (locationInformation.situationPopups.Where(x => timePassedForDay >= x.startTimeToOccur
-        && timePassedForDay <= x.endTimeToOccur).Any())
-            {
-                if (UnityEngine.Random.Range(1, 5) == 1)
-                {
-                    DisplayDecisionPopup(locationInformation.situationPopups);
-                    return;
-                }
-            }
             return;
         }
 

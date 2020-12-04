@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Student
   m_EditorClassIdentifier: 
   profileName: Student
-  income: 200
+  income: 400
   maxIncome: 700
   age: 14
   timeToWake: 6.5
   timeToSleep: 23
-  profileIcon: {fileID: 21300000, guid: 711161a3ceb91dd4d8463b4369593fa4, type: 3}
+  profileIcon: {fileID: 21300000, guid: 0362d1c7daa007b4d81575d18cfab2d5, type: 3}
   description: 'You are playing as a student who works part time for 8 hours to gain
     some money for his gaming. Being a recluse with only a few friends, you prefers
     to game over going out for meals. '

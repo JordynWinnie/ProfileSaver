@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EndOfMonthEvaluation : MonoBehaviour
@@ -7,6 +8,7 @@ public class EndOfMonthEvaluation : MonoBehaviour
     [SerializeField] private StarDisplay healthDisplay;
     [SerializeField] private StarDisplay wealthDisplay;
     [SerializeField] private StarDisplay happinessDisplay;
+    [SerializeField] private StarDisplay goalsDisplay;
     [SerializeField] private StarDisplay overallDisplay;
 
     private void Start()
@@ -14,10 +16,10 @@ public class EndOfMonthEvaluation : MonoBehaviour
         healthDisplay.DisplayStar(CalculateHealth());
         wealthDisplay.DisplayStar(CalculateWealth());
         happinessDisplay.DisplayStar(CalculateHappiness());
-
+        goalsDisplay.DisplayStar(CalculateGoals());
         var list = new List<int>
         {
-            CalculateHealth(), CalculateWealth(), CalculateHappiness()
+            CalculateHealth(), CalculateWealth(), CalculateHappiness(), CalculateGoals()
         };
 
         overallDisplay.DisplayStar(CalculateOverall(list));
@@ -115,5 +117,15 @@ public class EndOfMonthEvaluation : MonoBehaviour
         {
             return 5;
         }
+    }
+
+    private int CalculateGoals()
+    {
+        var completedGoalCount = GoalManager.instance.completeGoals.Where(x => x.goalType == GoalManager.GoalLength.Monthly).Count();
+        var totalGoals = GameManager.instance.currentProfile.goals.Where(x => x.goalType == GoalManager.GoalLength.Monthly).Count();
+
+        var percentageComplete = ((float)completedGoalCount / totalGoals) * 5f;
+
+        return Mathf.RoundToInt(percentageComplete);
     }
 }
