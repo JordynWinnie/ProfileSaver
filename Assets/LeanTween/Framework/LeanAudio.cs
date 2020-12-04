@@ -17,7 +17,7 @@ public class LeanAudioStream
         int count = 0;
         while (count < data.Length)
         {
-            data[count] = audioArr[this.position];
+            data[count] = audioArr[position];
             position++;
             count++;
         }
@@ -25,7 +25,7 @@ public class LeanAudioStream
 
     public void OnAudioSetPosition(int newPosition)
     {
-        this.position = newPosition;
+        position = newPosition;
     }
 }
 
@@ -325,7 +325,7 @@ public class LeanAudio : object
         AudioSource aSource = tempGO.AddComponent<AudioSource>(); // add an audio source
         aSource.clip = clip; // define the clip
         aSource.Play(); // start the sound
-        GameObject.Destroy(tempGO, clip.length); // destroy object after clip duration
+        Object.Destroy(tempGO, clip.length); // destroy object after clip duration
         return aSource; // return the AudioSource reference
     }
 
@@ -421,43 +421,43 @@ public class LeanAudioOptions : object
 
     public LeanAudioOptions setWaveSine()
     {
-        this.waveStyle = LeanAudioWaveStyle.Sine;
+        waveStyle = LeanAudioWaveStyle.Sine;
         return this;
     }
 
     public LeanAudioOptions setWaveSquare()
     {
-        this.waveStyle = LeanAudioWaveStyle.Square;
+        waveStyle = LeanAudioWaveStyle.Square;
         return this;
     }
 
     public LeanAudioOptions setWaveSawtooth()
     {
-        this.waveStyle = LeanAudioWaveStyle.Sawtooth;
+        waveStyle = LeanAudioWaveStyle.Sawtooth;
         return this;
     }
 
     public LeanAudioOptions setWaveNoise()
     {
-        this.waveStyle = LeanAudioWaveStyle.Noise;
+        waveStyle = LeanAudioWaveStyle.Noise;
         return this;
     }
 
     public LeanAudioOptions setWaveStyle(LeanAudioWaveStyle style)
     {
-        this.waveStyle = style;
+        waveStyle = style;
         return this;
     }
 
     public LeanAudioOptions setWaveNoiseScale(float waveScale)
     {
-        this.waveNoiseScale = waveScale;
+        waveNoiseScale = waveScale;
         return this;
     }
 
     public LeanAudioOptions setWaveNoiseInfluence(float influence)
     {
-        this.waveNoiseInfluence = influence;
+        waveNoiseInfluence = influence;
         return this;
     }
 }

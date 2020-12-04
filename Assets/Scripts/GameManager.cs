@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,11 +10,15 @@ public class GameManager : MonoBehaviour
     private Decision[] decisions;
     public static GameManager instance;
     public Profile currentProfile;
+    public Location currentLocation = null;
+    public Location[] locations;
 
     private float _health = 50f;
     private float _happiness = 50f;
     private float _energy = 50f;
     private float _hunger = 10f;
+
+    public List<Stat> statList;
 
     #region Variable Declaration
 
@@ -52,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     public class GameTime
     {
-        private float timeInHours = 0f;
+        public float timeInHours = 0f;
         public float timePassedForTheDay = 0f;
         private readonly string[] days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
@@ -120,7 +125,8 @@ public class GameManager : MonoBehaviour
     {
         profiles = Resources.LoadAll<Profile>("Profiles");
         decisions = Resources.LoadAll<Decision>("Decisions");
-
+        locations = FindObjectsOfType<Location>();
+        print($"Found: {locations.Length} Locations");
         if (instance == null)
         {
             instance = this;
@@ -137,7 +143,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            currentProfile = profiles.Where(x => x.profileName == "Student").First();
+            currentProfile = profiles.First(x => x.profileName == "Student");
             SetUpValues();
         }
     }
@@ -164,20 +170,44 @@ public class GameManager : MonoBehaviour
         {
             gameTime.SetTime(23.5f);
         }
+
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            foreach (var stat in statList)
+            {
+                print(stat.placeVisited);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SaveSystem.SaveData(instance);
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            var data = SaveSystem.LoadData();
+            SetUpValues(data);
+        }
     }
 
     public Decision ReturnRandomDecision() => decisions[Random.Range(0, decisions.Length)];
 
-    public void SetUpValues(float health, float happiness, float money, float time, float hunger, float energy, float startMoney)
+    private void SetUpValues(SaveData saveData)
     {
-        instance.Energy = energy;
-        instance.Health = health;
-        instance.Money = money;
-        instance.gameTime.SetTime(time);
-        instance.Hunger = hunger;
-        instance.Happiness = happiness;
-        oldMoney = money;
-        startMoneyOfMonth = startMoney;
+        instance.Energy = saveData.energy;
+        instance.Health = saveData.health;
+        instance.Money = saveData.money;
+        instance.gameTime.SetTimeRaw(saveData.timeInHours, saveData.timePassedForDay);
+        instance.Hunger = saveData.hunger;
+        instance.Happiness = saveData.happiness;
+        oldMoney = saveData.oldMoney;
+        startMoneyOfMonth = saveData.startMoneyOfMonth;
+        GoalManager.instance.trackedStatistics = saveData.statList;
+        var profile = profiles.First(x => x.profileName == saveData.currentProfile);
+        var location = locations.First(x=>x.locationInformation.locationName == saveData.currentLocation);
+        instance.currentProfile = profile;
+        DisplayInformation.infoDisplayHelper.currentLocation = location;
     }
 
     public void SetUpValues()

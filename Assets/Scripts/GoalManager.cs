@@ -19,7 +19,7 @@ public class GoalManager : MonoBehaviour
     public int mealLunch { get; set; }
     public int mealDinner { get; set; }
 
-    [SerializeField] private List<Stat> trackedStatistics;
+    public List<Stat> trackedStatistics;
     public List<Goal> incompleteGoals = new List<Goal>();
     public List<Goal> completeGoals = new List<Goal>();
 
@@ -33,7 +33,7 @@ public class GoalManager : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -82,6 +82,7 @@ public class GoalManager : MonoBehaviour
 
     public string UpdateGoals()
     {
+        GameManager.instance.statList = instance.trackedStatistics;
         var currentGameTime = GameManager.instance.gameTime;
         var goalList = GameManager.instance.currentProfile.goals;
         var sb = new StringBuilder();

@@ -23,7 +23,7 @@ public class TimerScript : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 

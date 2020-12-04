@@ -100,7 +100,10 @@ public class DisplayInformation : MonoBehaviour
         {
             energyIcon.sprite = energyStates[0];
         }
+
+        ResetAvatarLocation();
         currentLocation.ShowAvatar(true);
+        GameManager.instance.currentLocation = infoDisplayHelper.currentLocation;
     }
 
     public void ApplyChanges(Choices choice)
@@ -150,7 +153,7 @@ public class DisplayInformation : MonoBehaviour
         }
         foreach (var choice in decision.availableChoices)
         {
-            var button = Instantiate(choiceButton);
+            var button = Instantiate(choiceButton, layout.transform, true);
 
             button.GetComponentInChildren<ChoiceButton>().SetUpChoiceButton(choice);
 
@@ -158,8 +161,6 @@ public class DisplayInformation : MonoBehaviour
             {
                 ApplyChanges(choice);
             });
-
-            button.transform.SetParent(layout.transform);
         }
     }
 
@@ -363,7 +364,7 @@ public class DisplayInformation : MonoBehaviour
         GameManager.instance.oldMoney = GameManager.instance.Money;
         sb.AppendLine();
         sb.AppendLine("Daily Goal Summary: ");
-        var totalGoals = GameManager.instance.currentProfile.goals.Where(x => x.goalType == GoalManager.GoalLength.Daily).Count();
+        var totalGoals = GameManager.instance.currentProfile.goals.Count(x => x.goalType == GoalManager.GoalLength.Daily);
         var completedDaily = goalMgr.completeGoals.Where(x => x.goalType == GoalManager.GoalLength.Daily).ToList();
         var incompletedDaily = goalMgr.incompleteGoals.Where(x => x.goalType == GoalManager.GoalLength.Daily).ToList();
 

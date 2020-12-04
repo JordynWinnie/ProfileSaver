@@ -384,7 +384,7 @@ public class LeanTween : MonoBehaviour
 
     public void Update()
     {
-        LeanTween.update();
+        update();
     }
 
 #if UNITY_5_4_OR_NEWER
@@ -770,7 +770,7 @@ public class LeanTween : MonoBehaviour
         return descrs.ToArray();
     }
 
-    [System.Obsolete("Use 'pause( id )' instead")]
+    [Obsolete("Use 'pause( id )' instead")]
     public static void pause(GameObject gameObject, int uniqueId)
     {
         pause(uniqueId);
@@ -847,7 +847,7 @@ public class LeanTween : MonoBehaviour
         }
     }
 
-    [System.Obsolete("Use 'resume( id )' instead")]
+    [Obsolete("Use 'resume( id )' instead")]
     public static void resume(GameObject gameObject, int uniqueId)
     {
         resume(uniqueId);
@@ -1167,7 +1167,7 @@ public class LeanTween : MonoBehaviour
     * LeanTween.play(gameObject.GetComponent&lt;RectTransform&gt;(), sprites).setLoopPingPong();
     */
 
-    public static LTDescr play(RectTransform rectTransform, UnityEngine.Sprite[] sprites)
+    public static LTDescr play(RectTransform rectTransform, Sprite[] sprites)
     {
         float defaultFrameRate = 0.25f;
         float time = defaultFrameRate * sprites.Length;
@@ -3106,14 +3106,14 @@ public class LeanTween : MonoBehaviour
 
     // LeanTween Listening/Dispatch
 
-    private static System.Action<LTEvent>[] eventListeners;
+    private static Action<LTEvent>[] eventListeners;
     private static GameObject[] goListeners;
     private static int eventsMaxSearch = 0;
     public static int EVENTS_MAX = 10;
     public static int LISTENERS_MAX = 10;
     private static int INIT_LISTENERS_MAX = LISTENERS_MAX;
 
-    public static void addListener(int eventId, System.Action<LTEvent> callback)
+    public static void addListener(int eventId, Action<LTEvent> callback)
     {
         addListener(tweenEmpty, eventId, callback);
     }
@@ -3131,12 +3131,12 @@ public class LeanTween : MonoBehaviour
     * void jumpUp( LTEvent e ){ Debug.Log("jump!"); }<br />
     */
 
-    public static void addListener(GameObject caller, int eventId, System.Action<LTEvent> callback)
+    public static void addListener(GameObject caller, int eventId, Action<LTEvent> callback)
     {
         if (eventListeners == null)
         {
             INIT_LISTENERS_MAX = LISTENERS_MAX;
-            eventListeners = new System.Action<LTEvent>[EVENTS_MAX * LISTENERS_MAX];
+            eventListeners = new Action<LTEvent>[EVENTS_MAX * LISTENERS_MAX];
             goListeners = new GameObject[EVENTS_MAX * LISTENERS_MAX];
         }
         // Debug.Log("searching for an empty space for:"+caller + " eventid:"+event);
@@ -3169,7 +3169,7 @@ public class LeanTween : MonoBehaviour
         Debug.LogError("You ran out of areas to add listeners, consider increasing LISTENERS_MAX, ex: LeanTween.LISTENERS_MAX = " + (LISTENERS_MAX * 2));
     }
 
-    public static bool removeListener(int eventId, System.Action<LTEvent> callback)
+    public static bool removeListener(int eventId, Action<LTEvent> callback)
     {
         return removeListener(tweenEmpty, eventId, callback);
     }
@@ -3194,7 +3194,7 @@ public class LeanTween : MonoBehaviour
     * void jumpUp( LTEvent e ){ }<br />
     */
 
-    public static bool removeListener(GameObject caller, int eventId, System.Action<LTEvent> callback)
+    public static bool removeListener(GameObject caller, int eventId, Action<LTEvent> callback)
     {
         for (i = 0; i < eventsMaxSearch; i++)
         {
@@ -3295,33 +3295,33 @@ public class LTBezier
         bb = 3 * (a + c) - 6 * b;
         cc = 3 * (b - a);
 
-        this.len = 1.0f / precision;
-        arcLengths = new float[(int)this.len + (int)1];
+        len = 1.0f / precision;
+        arcLengths = new float[(int)len + (int)1];
         arcLengths[0] = 0;
 
         Vector3 ov = a;
         Vector3 v;
         float clen = 0.0f;
-        for (int i = 1; i <= this.len; i++)
+        for (int i = 1; i <= len; i++)
         {
             v = bezierPoint(i * precision);
             clen += (ov - v).magnitude;
-            this.arcLengths[i] = clen;
+            arcLengths[i] = clen;
             ov = v;
         }
-        this.length = clen;
+        length = clen;
     }
 
     private float map(float u)
     {
-        float targetLength = u * this.arcLengths[(int)this.len];
+        float targetLength = u * arcLengths[(int)len];
         int low = 0;
-        int high = (int)this.len;
+        int high = (int)len;
         int index = 0;
         while (low < high)
         {
             index = low + ((int)((high - low) / 2.0f) | 0);
-            if (this.arcLengths[index] < targetLength)
+            if (arcLengths[index] < targetLength)
             {
                 low = index + 1;
             }
@@ -3330,12 +3330,12 @@ public class LTBezier
                 high = index;
             }
         }
-        if (this.arcLengths[index] > targetLength)
+        if (arcLengths[index] > targetLength)
             index--;
         if (index < 0)
             index = 0;
 
-        return (index + (targetLength - arcLengths[index]) / (arcLengths[index + 1] - arcLengths[index])) / this.len;
+        return (index + (targetLength - arcLengths[index]) / (arcLengths[index + 1] - arcLengths[index])) / len;
     }
 
     private Vector3 bezierPoint(float t)
@@ -3598,7 +3598,7 @@ public class LTBezierPath
 * Vector3 pt = ltSpline.point( 0.6f ); // retrieve a point along the path
 */
 
-[System.Serializable]
+[Serializable]
 public class LTSpline
 {
     public static int DISTANCE_COUNT = 3; // increase for a more accurate constant speed
@@ -3613,7 +3613,7 @@ public class LTSpline
 
     public Vector3[] pts;
 
-    [System.NonSerialized]
+    [NonSerialized]
     public Vector3[] ptsAdj;
 
     public int ptsAdjLength;
@@ -3642,7 +3642,7 @@ public class LTSpline
         }
 
         this.pts = new Vector3[pts.Length];
-        System.Array.Copy(pts, this.pts, pts.Length);
+        Array.Copy(pts, this.pts, pts.Length);
 
         numSections = pts.Length - 3;
 
@@ -3916,15 +3916,15 @@ public class LTSpline
 
     public void drawGizmo(Color color)
     {
-        if (this.ptsAdjLength >= 4)
+        if (ptsAdjLength >= 4)
         {
-            Vector3 prevPt = this.ptsAdj[0];
+            Vector3 prevPt = ptsAdj[0];
 
             Color colorBefore = Gizmos.color;
             Gizmos.color = color;
-            for (int i = 0; i < this.ptsAdjLength; i++)
+            for (int i = 0; i < ptsAdjLength; i++)
             {
-                Vector3 currPt2 = this.ptsAdj[i];
+                Vector3 currPt2 = ptsAdj[i];
                 // Debug.Log("currPt2:"+currPt2);
 
                 Gizmos.DrawLine(prevPt, currPt2);
@@ -3994,13 +3994,13 @@ public class LTSpline
 
         if (constantSpeed)
         {
-            if (this.ptsAdjLength >= 4)
+            if (ptsAdjLength >= 4)
             {
-                Vector3 prevPt = this.ptsAdj[0];
+                Vector3 prevPt = ptsAdj[0];
 
-                for (int i = 0; i < this.ptsAdjLength; i++)
+                for (int i = 0; i < ptsAdjLength; i++)
                 {
-                    Vector3 currPt2 = this.ptsAdj[i];
+                    Vector3 currPt2 = ptsAdj[i];
                     GL.Vertex(prevPt);
                     GL.Vertex(currPt2);
 
@@ -4010,11 +4010,11 @@ public class LTSpline
         }
         else
         {
-            if (this.pts.Length >= 4)
+            if (pts.Length >= 4)
             {
-                Vector3 prevPt = this.pts[0];
+                Vector3 prevPt = pts[0];
 
-                float split = 1f / ((float)this.pts.Length * 10f);
+                float split = 1f / ((float)pts.Length * 10f);
 
                 float iter = 0f;
                 while (iter < 1f)
@@ -4039,13 +4039,13 @@ public class LTSpline
 
     public Vector3[] generateVectors()
     {
-        if (this.pts.Length >= 4)
+        if (pts.Length >= 4)
         {
             List<Vector3> meshPoints = new List<Vector3>();
-            Vector3 prevPt = this.pts[0];
+            Vector3 prevPt = pts[0];
             meshPoints.Add(prevPt);
 
-            float split = 1f / ((float)this.pts.Length * 10f);
+            float split = 1f / ((float)pts.Length * 10f);
 
             float iter = 0f;
             while (iter < 1f)
@@ -4094,7 +4094,7 @@ public class LTSpline
 * @param {float} rotation:float (Optional) initial rotation in degrees (0-360)
 */
 
-[System.Serializable]
+[Serializable]
 public class LTRect : System.Object
 {
     /**
@@ -4137,7 +4137,7 @@ public class LTRect : System.Object
     public LTRect()
     {
         reset();
-        this.rotateEnabled = this.alphaEnabled = true;
+        rotateEnabled = alphaEnabled = true;
         _rect = new Rect(0f, 0f, 1f, 1f);
     }
 
@@ -4150,17 +4150,17 @@ public class LTRect : System.Object
     public LTRect(float x, float y, float width, float height)
     {
         _rect = new Rect(x, y, width, height);
-        this.alpha = 1.0f;
-        this.rotation = 0.0f;
-        this.rotateEnabled = this.alphaEnabled = false;
+        alpha = 1.0f;
+        rotation = 0.0f;
+        rotateEnabled = alphaEnabled = false;
     }
 
     public LTRect(float x, float y, float width, float height, float alpha)
     {
         _rect = new Rect(x, y, width, height);
         this.alpha = alpha;
-        this.rotation = 0.0f;
-        this.rotateEnabled = this.alphaEnabled = false;
+        rotation = 0.0f;
+        rotateEnabled = alphaEnabled = false;
     }
 
     public LTRect(float x, float y, float width, float height, float alpha, float rotation)
@@ -4168,10 +4168,10 @@ public class LTRect : System.Object
         _rect = new Rect(x, y, width, height);
         this.alpha = alpha;
         this.rotation = rotation;
-        this.rotateEnabled = this.alphaEnabled = false;
+        rotateEnabled = alphaEnabled = false;
         if (rotation != 0.0f)
         {
-            this.rotateEnabled = true;
+            rotateEnabled = true;
             resetForRotation();
         }
     }
@@ -4202,18 +4202,18 @@ public class LTRect : System.Object
 
     public void setId(int id, int counter)
     {
-        this._id = id;
+        _id = id;
         this.counter = counter;
     }
 
     public void reset()
     {
-        this.alpha = 1.0f;
-        this.rotation = 0.0f;
-        this.rotateEnabled = this.alphaEnabled = false;
-        this.margin = Vector2.zero;
-        this.sizeByHeight = false;
-        this.useColor = false;
+        alpha = 1.0f;
+        rotation = 0.0f;
+        rotateEnabled = alphaEnabled = false;
+        margin = Vector2.zero;
+        sizeByHeight = false;
+        useColor = false;
     }
 
     public void resetForRotation()
@@ -4279,9 +4279,9 @@ public class LTRect : System.Object
             }
             if (fontScaleToFit)
             {
-                if (this.useSimpleScale)
+                if (useSimpleScale)
                 {
-                    style.fontSize = (int)(_rect.height * this.relativeRect.height);
+                    style.fontSize = (int)(_rect.height * relativeRect.height);
                 }
                 else
                 {
@@ -4312,7 +4312,7 @@ public class LTRect : System.Object
     public LTRect setColor(Color color)
     {
         this.color = color;
-        this.useColor = true;
+        useColor = true;
         return this;
     }
 
@@ -4324,7 +4324,7 @@ public class LTRect : System.Object
 
     public LTRect setLabel(String str)
     {
-        this.labelStr = str;
+        labelStr = str;
         return this;
     }
 
@@ -4338,7 +4338,7 @@ public class LTRect : System.Object
     public LTRect setUseSimpleScale(bool useSimpleScale)
     {
         this.useSimpleScale = useSimpleScale;
-        this.relativeRect = new Rect(0f, 0f, Screen.width, Screen.height);
+        relativeRect = new Rect(0f, 0f, Screen.width, Screen.height);
         return this;
     }
 
@@ -4552,7 +4552,7 @@ public class LTGUI
         {
             destroy(rect.id);
         }
-        if (rect.type == LTGUI.Element_Type.Label && rect.style != null)
+        if (rect.type == Element_Type.Label && rect.style != null)
         {
             if (rect.style.normal.textColor.a <= 0f)
             {
