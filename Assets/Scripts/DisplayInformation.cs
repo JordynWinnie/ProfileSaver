@@ -366,6 +366,8 @@ public class DisplayInformation : MonoBehaviour
 
     public void ContinueToNextDay()
     {
+        var gameTime = GameManager.instance.gameTime;
+        var locationInformation = GameManager.instance.currentLocation.locationInformation;
         var time = GameManager.instance.gameTime.ReturnTimePassedForDay();
         var dayToSet = GameManager.instance.gameTime.ReturnDayNumber() - 1;
         var profile = GameManager.instance.currentProfile;
@@ -375,6 +377,8 @@ public class DisplayInformation : MonoBehaviour
         SaveSystem.SaveData(GameManager.instance);
         if (dayToSet % 30 == 0)
         {
+            GoalManager.instance.AddStat(new Stat(Stat.StatType.MoneyToSave, gameTime.ReturnDayNumber(),
+                gameTime.ReturnTimePassedForDay(), GameManager.instance.Money, locationInformation.locationName, locationInformation.locationName));
             GameManager.instance.Money += GameManager.instance.currentProfile.income;
             SaveSystem.SaveData(GameManager.instance);
             SceneManager.LoadScene(2);
