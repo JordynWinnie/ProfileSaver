@@ -106,19 +106,21 @@ public class DisplayInformation : MonoBehaviour
         GameManager.instance.currentLocation = currentLocation;
     }
 
-    public void ApplyChanges(Choices choice)
+    public void ApplyChanges(Choices choice, bool isDecision)
     {
         var currentHunger = GameManager.instance.Hunger;
         var currentEnergy = GameManager.instance.Energy;
         var time = GameManager.instance.gameTime;
         var currLocation = currentOpenLocation == null ? string.Empty : currentOpenLocation.locationName;
-
-        if (currentEnergy + choice.energy < 0 || currentHunger + choice.hunger < 0)
+        if (!isDecision)
         {
-            AlertDialog.instance.ShowAlert("You're too hungry or tired", AlertDialog.AlertLength.Length_Short, AlertDialog.AlertType.CriticalError);
-            return;
+            if (currentEnergy + choice.energy < 0 || currentHunger + choice.hunger < 0)
+            {
+                AlertDialog.instance.ShowAlert("You're too hungry or tired", AlertDialog.AlertLength.Length_Short, AlertDialog.AlertType.CriticalError);
+                return;
+            }
         }
-
+        
         AlertDialog.instance.ShowAlert(choice, AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.Message);
 
         GoalManager.instance.AddStat(new Stat(choice.statType, time.ReturnDayNumber(), time.ReturnTimePassedForDay(), choice.progressionForStat, currLocation, choice.miscStatParams));
@@ -159,7 +161,7 @@ public class DisplayInformation : MonoBehaviour
 
             button.GetComponent<Button>().onClick.AddListener(delegate
             {
-                ApplyChanges(choice);
+                ApplyChanges(choice, true);
             });
         }
     }
@@ -313,7 +315,7 @@ public class DisplayInformation : MonoBehaviour
 
         button.GetComponent<Button>().onClick.AddListener(delegate
         {
-            ApplyChanges(choice);
+            ApplyChanges(choice, false);
         });
 
         button.transform.SetParent(layout.transform);
@@ -334,7 +336,7 @@ public class DisplayInformation : MonoBehaviour
             progressionForStat = 0,
             statType = Stat.StatType.Default
         };
-        ApplyChanges(newChoice);
+        ApplyChanges(newChoice, true);
         TimerScript.timerController.Pause(true);
         TimerScript.timerController.ResetTime();
         blackFade.gameObject.SetActive(true);
