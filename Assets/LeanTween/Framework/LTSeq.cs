@@ -1,48 +1,63 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /**
-* Internal Representation of a Sequence<br>
-* <br>
-* &nbsp;&nbsp;<h4>Example:</h4>
-* var seq = LeanTween.sequence();<br>
-* seq.append(1f); <span style="color:gray">// delay everything one second</span><br>
-* seq.append( () => { <span style="color:gray">// fire an event before start</span><br>
-* &nbsp;Debug.Log("I have started");<br>
-* });<br>
-* seq.append( LeanTween.move(cube1, Vector3.one * 10f, 1f) ); <span style="color:gray">// do a tween</span><br>
-* seq.append( (object obj) => { <span style="color:gray">// fire event after tween</span><br>
-* &nbsp;var dict = obj as Dictionary<string,string>;<br>
-* &nbsp;Debug.Log("We are done now obj value:"+dict["hi"]);<br>
-* }, new Dictionary<string,string>(){ {"hi","sup"} } );<br>
-* @class LTSeq
-* @constructor
-*/
-
+ * Internal Representation of a Sequence
+ * <br>
+ *     <br>
+ *         &nbsp;&nbsp;<h4>Example:</h4>
+ *         var seq = LeanTween.sequence();
+ *         <br>
+ *             seq.append(1f); <span style="color:gray">// delay everything one second</span>
+ *             <br>
+ *                 seq.append( () => { <span style="color:gray">// fire an event before start</span>
+ *                 <br>
+ *                     &nbsp;Debug.Log("I have started");
+ *                     <br>
+ *                         });
+ *                         <br>
+ *                             seq.append( LeanTween.move(cube1, Vector3.one * 10f, 1f) );
+ *                             <span style="color:gray">// do a tween</span>
+ *                             <br>
+ *                                 seq.append( (object obj) => { <span style="color:gray">// fire event after tween</span>
+ *                                 <br>
+ *                                     &nbsp;var dict = obj as Dictionary
+ *                                     <string, string>
+ *                                         ;
+ *                                         <br>
+ *                                             &nbsp;Debug.Log("We are done now obj value:"+dict["hi"]);
+ *                                             <br>
+ *                                                 }, new Dictionary
+ *                                                 <string, string>
+ *                                                     (){ {"hi","sup"} } );
+ *                                                     <br>
+ *                                                         @class LTSeq
+ *                                                         @constructor
+ */
 public class LTSeq
 {
-    public LTSeq previous;
-
-    public LTSeq current;
-
-    public LTDescr tween;
-
-    public float totalDelay;
-
-    public float timeScale;
-
-    private int debugIter;
+    private uint _id;
 
     public uint counter;
 
-    public bool toggle = false;
+    public LTSeq current;
 
-    private uint _id;
+    private int debugIter;
+    public LTSeq previous;
+
+    public float timeScale;
+
+    public bool toggle;
+
+    public float totalDelay;
+
+    public LTDescr tween;
 
     public int id
     {
         get
         {
-            uint toId = _id | counter << 16;
+            var toId = _id | (counter << 16);
 
             /*uint backId = toId & 0xFFFF;
 			uint backCounter = toId >> 16;
@@ -50,7 +65,7 @@ public class LTSeq
 				Debug.LogError("BAD CONVERSION toId:"+_id);
 			}*/
 
-            return (int)toId;
+            return (int) toId;
         }
     }
 
@@ -68,19 +83,19 @@ public class LTSeq
 
         counter = global_counter;
 
-        this.current = this;
+        current = this;
     }
 
     private LTSeq addOn()
     {
-        this.current.toggle = true;
-        LTSeq lastCurrent = this.current;
-        this.current = LeanTween.sequence(true);
+        current.toggle = true;
+        var lastCurrent = current;
+        current = LeanTween.sequence();
         // Debug.Log("this.current:" + this.current.id + " lastCurrent:" + lastCurrent.id);
-        this.current.previous = lastCurrent;
+        current.previous = lastCurrent;
         lastCurrent.toggle = false;
-        this.current.totalDelay = lastCurrent.totalDelay;
-        this.current.debugIter = lastCurrent.debugIter + 1;
+        current.totalDelay = lastCurrent.totalDelay;
+        current.debugIter = lastCurrent.debugIter + 1;
         return current;
     }
 
@@ -88,87 +103,97 @@ public class LTSeq
     {
         //		Debug.Log("delay:"+delay+" count:"+this.current.count+" this.current.totalDelay:"+this.current.totalDelay);
 
-        LTSeq prev = this.current.previous;
+        var prev = current.previous;
 
-        if (prev != null && prev.tween != null)
-        {
-            return this.current.totalDelay + prev.tween.time;
-        }
-        return this.current.totalDelay;
+        if (prev != null && prev.tween != null) return current.totalDelay + prev.tween.time;
+        return current.totalDelay;
     }
 
     /**
-	* Add a time delay to the sequence
-	* @method append (delay)
-	* @param {float} delay:float amount of time to add to the sequence
-	* @return {LTSeq} LTDescr an object that distinguishes the tween
-	* var seq = LeanTween.sequence();<br>
-	* seq.append(1f); // delay everything one second<br>
-	* seq.append( LeanTween.move(cube1, Vector3.one * 10f, 1f) ); // do a tween<br>
-	*/
-
+     * Add a time delay to the sequence
+     * @method append (delay)
+     * @param {float} delay:float amount of time to add to the sequence
+     * @return {LTSeq} LTDescr an object that distinguishes the tween
+     * var seq = LeanTween.sequence();
+     * <br>
+     *     seq.append(1f); // delay everything one second
+     *     <br>
+     *         seq.append( LeanTween.move(cube1, Vector3.one * 10f, 1f) ); // do a tween<br>
+     */
     public LTSeq append(float delay)
     {
-        this.current.totalDelay += delay;
+        current.totalDelay += delay;
 
-        return this.current;
+        return current;
     }
 
     /**
-	* Add a time delay to the sequence
-	* @method append (method)
-	* @param {System.Action} callback:System.Action method you want to be called
-	* @return {LTSeq} LTSeq an object that you can add tweens, methods and time on to
-	* @example
-	* var seq = LeanTween.sequence();<br>
-	* seq.append( () => { // fire an event before start<br>
-	* &nbsp;Debug.Log("I have started");<br>
-	* });<br>
-	* seq.append( LeanTween.move(cube1, Vector3.one * 10f, 1f) ); // do a tween<br>
-	* seq.append( () => { // fire event after tween<br>
-	* &nbsp;Debug.Log("We are done now");<br>
-	* });;<br>
-	*/
-
-    public LTSeq append(System.Action callback)
+     * Add a time delay to the sequence
+     * @method append (method)
+     * @param {System.Action} callback:System.Action method you want to be called
+     * @return {LTSeq} LTSeq an object that you can add tweens, methods and time on to
+     * @example
+     * var seq = LeanTween.sequence();
+     * <br>
+     *     seq.append( () => { // fire an event before start
+     *     <br>
+     *         &nbsp;Debug.Log("I have started");
+     *         <br>
+     *             });
+     *             <br>
+     *                 seq.append( LeanTween.move(cube1, Vector3.one * 10f, 1f) ); // do a tween
+     *                 <br>
+     *                     seq.append( () => { // fire event after tween
+     *                     <br>
+     *                         &nbsp;Debug.Log("We are done now");
+     *                         <br>
+     *                             });;<br>
+     */
+    public LTSeq append(Action callback)
     {
-        LTDescr newTween = LeanTween.delayedCall(0f, callback);
+        var newTween = LeanTween.delayedCall(0f, callback);
         //		Debug.Log("newTween:" + newTween);
         return append(newTween);
     }
 
     /**
-	* Add a time delay to the sequence
-	* @method add (method(object))
-	* @param {System.Action} callback:System.Action method you want to be called
-	* @return {LTSeq} LTSeq an object that you can add tweens, methods and time on to
-	* @example
-	* var seq = LeanTween.sequence();<br>
-	* seq.append( () => { // fire an event before start<br>
-	* &nbsp;Debug.Log("I have started");<br>
-	* });<br>
-	* seq.append( LeanTween.move(cube1, Vector3.one * 10f, 1f) ); // do a tween<br>
-	* seq.append((object obj) => { // fire event after tween
-	* &nbsp;var dict = obj as Dictionary<string,string>;
-	* &nbsp;Debug.Log("We are done now obj value:"+dict["hi"]);
-	* &nbsp;}, new Dictionary<string,string>(){ {"hi","sup"} } );
-	*/
-
-    public LTSeq append(System.Action<object> callback, object obj)
+     * Add a time delay to the sequence
+     * @method add (method(object))
+     * @param {System.Action} callback:System.Action method you want to be called
+     * @return {LTSeq} LTSeq an object that you can add tweens, methods and time on to
+     * @example
+     * var seq = LeanTween.sequence();
+     * <br>
+     *     seq.append( () => { // fire an event before start
+     *     <br>
+     *         &nbsp;Debug.Log("I have started");
+     *         <br>
+     *             });
+     *             <br>
+     *                 seq.append( LeanTween.move(cube1, Vector3.one * 10f, 1f) ); // do a tween
+     *                 <br>
+     *                     seq.append((object obj) => { // fire event after tween
+     *                     &nbsp;var dict = obj as Dictionary
+     *                     <string, string>
+     *                         ;
+     *                         &nbsp;Debug.Log("We are done now obj value:"+dict["hi"]);
+     *                         &nbsp;}, new Dictionary<string, string>(){ {"hi","sup"} } );
+     */
+    public LTSeq append(Action<object> callback, object obj)
     {
         append(LeanTween.delayedCall(0f, callback).setOnCompleteParam(obj));
 
         return addOn();
     }
 
-    public LTSeq append(GameObject gameObject, System.Action callback)
+    public LTSeq append(GameObject gameObject, Action callback)
     {
         append(LeanTween.delayedCall(gameObject, 0f, callback));
 
         return addOn();
     }
 
-    public LTSeq append(GameObject gameObject, System.Action<object> callback, object obj)
+    public LTSeq append(GameObject gameObject, Action<object> callback, object obj)
     {
         append(LeanTween.delayedCall(gameObject, 0f, callback).setOnCompleteParam(obj));
 
@@ -176,32 +201,33 @@ public class LTSeq
     }
 
     /**
-	* Retrieve a sequencer object where you can easily chain together tweens and methods one after another
-	*
-	* @method add (tween)
-	* @return {LTSeq} LTSeq an object that you can add tweens, methods and time on to
-	* @example
-	* var seq = LeanTween.sequence();<br>
-	* seq.append( LeanTween.move(cube1, Vector3.one * 10f, 1f) ); // do a move tween<br>
-	* seq.append( LeanTween.rotateAround( avatar1, Vector3.forward, 360f, 1f ) ); // then do a rotate tween<br>
-	*/
-
+     * Retrieve a sequencer object where you can easily chain together tweens and methods one after another
+     * 
+     * @method add (tween)
+     * @return {LTSeq} LTSeq an object that you can add tweens, methods and time on to
+     * @example
+     * var seq = LeanTween.sequence();
+     * <br>
+     *     seq.append( LeanTween.move(cube1, Vector3.one * 10f, 1f) ); // do a move tween
+     *     <br>
+     *         seq.append( LeanTween.rotateAround( avatar1, Vector3.forward, 360f, 1f ) ); // then do a rotate tween<br>
+     */
     public LTSeq append(LTDescr tween)
     {
-        this.current.tween = tween;
+        current.tween = tween;
 
         //		Debug.Log("tween:" + tween + " delay:" + this.current.totalDelay);
 
-        this.current.totalDelay = addPreviousDelays();
+        current.totalDelay = addPreviousDelays();
 
-        tween.setDelay(this.current.totalDelay);
+        tween.setDelay(current.totalDelay);
 
         return addOn();
     }
 
     public LTSeq insert(LTDescr tween)
     {
-        this.current.tween = tween;
+        current.tween = tween;
 
         tween.setDelay(addPreviousDelays());
 
@@ -211,7 +237,7 @@ public class LTSeq
     public LTSeq setScale(float timeScale)
     {
         //		Debug.Log("this.current:" + this.current.previous.debugIter+" tween:"+this.current.previous.tween);
-        setScaleRecursive(this.current, timeScale, 500);
+        setScaleRecursive(current, timeScale, 500);
 
         return addOn();
     }

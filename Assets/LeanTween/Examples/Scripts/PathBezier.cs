@@ -5,27 +5,21 @@ namespace DentedPixel.LTExamples
     public class PathBezier : MonoBehaviour
     {
         public Transform[] trans;
-
-        private LTBezierPath cr;
         private GameObject avatar1;
 
-        private void OnEnable()
-        {
-            // create the path
-            cr = new LTBezierPath(new Vector3[] { trans[0].position, trans[2].position, trans[1].position, trans[3].position, trans[3].position, trans[5].position, trans[4].position, trans[6].position });
-        }
+        private LTBezierPath cr;
+
+        private float iter;
 
         private void Start()
         {
             avatar1 = GameObject.Find("Avatar1");
 
             // Tween automatically
-            LTDescr descr = LeanTween.move(avatar1, cr.pts, 6.5f).setOrientToPath(true).setRepeat(-1);
+            var descr = LeanTween.move(avatar1, cr.pts, 6.5f).setOrientToPath(true).setRepeat(-1);
             Debug.Log("length of path 1:" + cr.length);
             Debug.Log("length of path 2:" + descr.optional.path.length);
         }
-
-        private float iter;
 
         private void Update()
         {
@@ -35,6 +29,16 @@ namespace DentedPixel.LTExamples
             iter += Time.deltaTime * 0.07f;
             if (iter > 1.0f)
                 iter = 0.0f;
+        }
+
+        private void OnEnable()
+        {
+            // create the path
+            cr = new LTBezierPath(new[]
+            {
+                trans[0].position, trans[2].position, trans[1].position, trans[3].position, trans[3].position,
+                trans[5].position, trans[4].position, trans[6].position
+            });
         }
 
         private void OnDrawGizmos()

@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,11 +9,13 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Image profileImage;
     [SerializeField] private TextMeshProUGUI profileName;
     [SerializeField] private TextMeshProUGUI profileDescription;
+    [SerializeField] private Profile[] profiles;
+    [SerializeField] private Profile selectedProfile;
 
     public void StartNewGame()
     {
-        GameManager.instance.SetUpValues();
-        SceneManager.LoadScene(0);
+        GameManager.profileToLoad = selectedProfile;
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame()
@@ -20,12 +23,30 @@ public class MainMenuController : MonoBehaviour
         Application.Quit();
     }
 
+    public void LoadGame()
+    {
+        StartCoroutine(LoadScene());
+    }
+
     public void ShuffleProfile()
     {
-        var profile = GameManager.instance.ReturnRandomProfile();
-        GameManager.instance.currentProfile = profile;
-        profileImage.sprite = profile.profileIcon;
-        profileName.text = profile.name;
-        profileDescription.text = $"{profile.description}\nIncome: {profile.income}";
+        profiles = Resources.LoadAll<Profile>("Profiles");
+        selectedProfile = profiles[Random.Range(0, profiles.Length)];
+        profileImage.sprite = selectedProfile.profileIcon;
+        profileName.text = selectedProfile.profileName;
+        profileDescription.text = selectedProfile.description;
+    }
+
+    private IEnumerator LoadScene()
+    {
+        GameManager.isGameLoad = true;
+        // Start loading the scene
+        var asyncLoadLevel = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+        // Wait until the level finish loading
+        while (!asyncLoadLevel.isDone)
+            yield return null;
+        // Wait a frame so every Awake and Start method is called
+
+        yield return new WaitForEndOfFrame();
     }
 }

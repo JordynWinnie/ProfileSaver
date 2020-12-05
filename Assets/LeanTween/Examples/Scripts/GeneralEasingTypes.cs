@@ -1,24 +1,24 @@
-﻿using System.Reflection;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GeneralEasingTypes : MonoBehaviour
 {
     public float lineDrawScale = 10f;
     public AnimationCurve animationCurve;
 
-    private string[] easeTypes = new string[]{
-        "EaseLinear","EaseAnimationCurve","EaseSpring",
-        "EaseInQuad","EaseOutQuad","EaseInOutQuad",
-        "EaseInCubic","EaseOutCubic","EaseInOutCubic",
-        "EaseInQuart","EaseOutQuart","EaseInOutQuart",
-        "EaseInQuint","EaseOutQuint","EaseInOutQuint",
-        "EaseInSine","EaseOutSine","EaseInOutSine",
-        "EaseInExpo","EaseOutExpo","EaseInOutExpo",
-        "EaseInCirc","EaseOutCirc","EaseInOutCirc",
-        "EaseInBounce","EaseOutBounce","EaseInOutBounce",
-        "EaseInBack","EaseOutBack","EaseInOutBack",
-        "EaseInElastic","EaseOutElastic","EaseInOutElastic",
-        "EasePunch","EaseShake",
+    private readonly string[] easeTypes =
+    {
+        "EaseLinear", "EaseAnimationCurve", "EaseSpring",
+        "EaseInQuad", "EaseOutQuad", "EaseInOutQuad",
+        "EaseInCubic", "EaseOutCubic", "EaseInOutCubic",
+        "EaseInQuart", "EaseOutQuart", "EaseInOutQuart",
+        "EaseInQuint", "EaseOutQuint", "EaseInOutQuint",
+        "EaseInSine", "EaseOutSine", "EaseInOutSine",
+        "EaseInExpo", "EaseOutExpo", "EaseInOutExpo",
+        "EaseInCirc", "EaseOutCirc", "EaseInOutCirc",
+        "EaseInBounce", "EaseOutBounce", "EaseInOutBounce",
+        "EaseInBack", "EaseOutBack", "EaseInOutBack",
+        "EaseInElastic", "EaseOutElastic", "EaseInOutElastic",
+        "EasePunch", "EaseShake"
     };
 
     private void Start()
@@ -28,14 +28,14 @@ public class GeneralEasingTypes : MonoBehaviour
 
     private void demoEaseTypes()
     {
-        for (int i = 0; i < easeTypes.Length; i++)
+        for (var i = 0; i < easeTypes.Length; i++)
         {
-            string easeName = easeTypes[i];
-            Transform obj1 = GameObject.Find(easeName).transform.Find("Line");
-            float obj1val = 0f;
-            LTDescr lt = LeanTween.value(obj1.gameObject, 0f, 1f, 5f).setOnUpdate((float val) =>
+            var easeName = easeTypes[i];
+            var obj1 = GameObject.Find(easeName).transform.Find("Line");
+            var obj1val = 0f;
+            var lt = LeanTween.value(obj1.gameObject, 0f, 1f, 5f).setOnUpdate(val =>
             {
-                Vector3 vec = obj1.localPosition;
+                var vec = obj1.localPosition;
                 vec.x = obj1val * lineDrawScale;
                 vec.y = val * lineDrawScale;
 
@@ -51,18 +51,13 @@ public class GeneralEasingTypes : MonoBehaviour
             }
             else
             {
-                MethodInfo theMethod = lt.GetType().GetMethod("set" + easeName);
+                var theMethod = lt.GetType().GetMethod("set" + easeName);
                 theMethod.Invoke(lt, null);
             }
 
             if (easeName.IndexOf("EasePunch") >= 0)
-            {
                 lt.setScale(1f);
-            }
-            else if (easeName.IndexOf("EaseOutBounce") >= 0)
-            {
-                lt.setOvershoot(2f);
-            }
+            else if (easeName.IndexOf("EaseOutBounce") >= 0) lt.setOvershoot(2f);
         }
 
         LeanTween.delayedCall(gameObject, 10f, resetLines);
@@ -71,9 +66,9 @@ public class GeneralEasingTypes : MonoBehaviour
 
     private void resetLines()
     {
-        for (int i = 0; i < easeTypes.Length; i++)
+        for (var i = 0; i < easeTypes.Length; i++)
         {
-            Transform obj1 = GameObject.Find(easeTypes[i]).transform.Find("Line");
+            var obj1 = GameObject.Find(easeTypes[i]).transform.Find("Line");
             obj1.localPosition = new Vector3(0f, 0f, 0f);
         }
     }

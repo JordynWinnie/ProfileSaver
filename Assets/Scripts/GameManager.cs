@@ -1,183 +1,112 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Profile[] profiles;
-    public bool isInDevelopment = true;
-    private Decision[] decisions;
+    public static bool isGameLoad;
+    public static Profile profileToLoad;
+    public static bool isContinueMonth;
+
     public static GameManager instance;
+
     public Profile currentProfile;
 
-    private float _health = 50f;
-    private float _happiness = 50f;
+    public bool isInDevelopment;
+
+    public Location currentLocation;
+    public List<Location> locationsList = new List<Location>();
+
+    public List<Stat> statList;
     private float _energy = 50f;
+    private float _happiness = 50f;
+
+    private float _health = 50f;
     private float _hunger = 10f;
-
-    #region Variable Declaration
-
-    public float Money { get; set; } = 500f;
-
-    public float Energy
-    {
-        get => _energy;
-        set { if (value >= 100) _energy = 100; else if (value <= 0) _energy = 0; else _energy = value; }
-    }
-
-    public float Hunger
-    {
-        get => _hunger;
-        set { if (value >= 10) _hunger = 10; else if (value <= 0) _hunger = 0; else _hunger = value; }
-    }
-
-    public float Health
-    {
-        get => _health;
-        set { if (value >= 100) _health = 100; else if (value < 0) _health = 0; else _health = value; }
-    }
-
-    public float Happiness
-    {
-        get => _happiness;
-        set { if (value >= 100) _happiness = value; else if (value < 0) _happiness = 0; else _happiness = value; }
-    }
-
-    public float oldMoney { get; set; }
-    public float startMoneyOfMonth { get; set; }
-
-    #endregion Variable Declaration
 
     public GameTime gameTime = new GameTime();
 
-    public class GameTime
-    {
-        private float timeInHours = 0f;
-        public float timePassedForTheDay = 0f;
-        private readonly string[] days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
-
-        public float ReturnTime() => timeInHours;
-
-        public void SetTime(float timeToSet)
-        {
-            if (timeToSet > 24)
-            {
-                Debug.LogWarning("Invalid time set: " + timeToSet);
-                return;
-            }
-            timeInHours = (ReturnDayNumber() - 1) * 24;
-            timePassedForTheDay = 0f;
-            timeInHours += timeToSet;
-            timePassedForTheDay += timeToSet;
-        }
-
-        public void SetTimeRaw(float timeToSetInHours, float timePassedForDay)
-        {
-            timeInHours = timeToSetInHours;
-            timePassedForTheDay = timePassedForDay;
-        }
-
-        public void ResetTimePassedForDay() => timePassedForTheDay = 0f;
-
-        public float ReturnTimePassedForDay() => timePassedForTheDay;
-
-        public float AddTime(float timeToIncrease)
-        {
-            timeInHours += timeToIncrease;
-            timePassedForTheDay += timeToIncrease;
-            return timeInHours;
-        }
-
-        public int ReturnDayNumber(float time) => (int)time / 24 + 1;
-
-        public int ReturnDayNumber() => (int)timeInHours / 24 + 1;
-
-        public int ReturnHour(float time) => (int)time % 24;
-
-        public int ReturnHour() => (int)timeInHours % 24;
-
-        public float ReturnHourRaw() => timeInHours % 24;
-
-        public float ReturnMinutes(float time) => (time % 24 % 1) * 60;
-
-        public float ReturnMinutes() => (timeInHours % 24 % 1) * 60;
-
-        public string ReturnTimeString()
-        {
-            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
-            $"DAY {ReturnDayNumber()} ({ReturnDayOfWeek()})";
-        }
-
-        public string CalculateTimeString(float time)
-        {
-            return $"{ReturnHour(time).ToString().PadLeft(2, '0')}:{ReturnMinutes(time).ToString().PadLeft(2, '0')}";
-        }
-
-        public string ReturnDayOfWeek() => days[ReturnDayNumber() % 7];
-    }
-
     private void Awake()
     {
-        profiles = Resources.LoadAll<Profile>("Profiles");
-        decisions = Resources.LoadAll<Decision>("Decisions");
-
         if (instance == null)
-        {
             instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
+    }
 
-        if (instance.currentProfile == null && !isInDevelopment)
+    private void Start()
+    {
+        if (isInDevelopment)
         {
-            SceneManager.LoadScene(1);
+            var profiles = Resources.LoadAll<Profile>("Profiles");
+            currentProfile = profiles.First(x => x.profileName == "Student");
+            print("DeveloperMode");
+            SetUpValues();
+            return;
+        }
+
+        if (isGameLoad)
+        {
+            print("GameLoad");
+            SetUpValues(SaveSystem.LoadData());
+            if (isContinueMonth)
+            {
+                instance.Money += instance.currentProfile.income;
+                AlertDialog.instance.ShowAlert($"Monthly Income: +${instance.currentProfile.income}",
+                    AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.Message);
+            }
         }
         else
         {
-            currentProfile = profiles.Where(x => x.profileName == "Student").First();
+            print("Game Start");
+            currentProfile = profileToLoad;
+            profileToLoad = null;
             SetUpValues();
         }
     }
 
-    public Profile ReturnRandomProfile()
-    {
-        currentProfile = profiles[Random.Range(0, profiles.Length)];
-        return currentProfile;
-    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            gameTime.AddTime(23.5f);
-        }
+        print("GameTime: " + gameTime.timeInHours);
+        if (Input.GetKeyDown(KeyCode.Q)) gameTime.AddTime(23.5f);
 
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            gameTime.AddTime(0.5f);
-        }
+        if (Input.GetKeyDown(KeyCode.W)) gameTime.AddTime(0.5f);
 
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T)) gameTime.SetTime(23.5f);
+
+        if (Input.GetKeyDown(KeyCode.Y))
+            foreach (var stat in statList)
+                print(stat.placeVisited);
+
+        if (Input.GetKeyDown(KeyCode.S)) SaveSystem.SaveData(instance);
+
+        foreach (var location in locationsList)
         {
-            gameTime.SetTime(23.5f);
+            print(location.locationInformation.locationName);
+            location.avatarLocation.sprite = currentProfile.profileIcon;
+            location.ShowAvatar(false);
         }
     }
 
-    public Decision ReturnRandomDecision() => decisions[Random.Range(0, decisions.Length)];
-
-    public void SetUpValues(float health, float happiness, float money, float time, float hunger, float energy, float startMoney)
+    public void SetUpValues(SaveData saveData)
     {
-        instance.Energy = energy;
-        instance.Health = health;
-        instance.Money = money;
-        instance.gameTime.SetTime(time);
-        instance.Hunger = hunger;
-        instance.Happiness = happiness;
-        oldMoney = money;
-        startMoneyOfMonth = startMoney;
+        var profiles = Resources.LoadAll<Profile>("Profiles");
+        instance.Energy = saveData.energy;
+        instance.Health = saveData.health;
+        instance.Money = saveData.money;
+        print(saveData.timeInHours);
+        instance.gameTime.SetTimeRaw(saveData.timeInHours, saveData.timePassedForDay);
+        instance.Hunger = saveData.hunger;
+        instance.Happiness = saveData.happiness;
+        oldMoney = saveData.oldMoney;
+        startMoneyOfMonth = saveData.startMoneyOfMonth;
+        GoalManager.instance.trackedStatistics = saveData.statList;
+        currentProfile = profiles.First(x => x.profileName == saveData.currentProfile);
+        var location = locationsList.First(x => x.locationInformation.locationName == saveData.currentLocation);
+
+        DisplayInformation.infoDisplayHelper.currentLocation = location;
     }
 
     public void SetUpValues()
@@ -194,33 +123,209 @@ public class GameManager : MonoBehaviour
 
     public void StatCheck()
     {
-        if (instance.Hunger <= 2)
+        if (instance.Hunger <= 1)
         {
-            AlertDialog.instance.ShowAlert("You got really hungry. -5 Happiness -2 Health", AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
+            AlertDialog.instance.ShowAlert("You got really hungry. -5 Happiness -2 Health",
+                AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
             instance.Happiness -= 5;
             instance.Health -= 2;
         }
 
-        if (instance.Energy <= 20)
+        if (instance.Energy <= 10)
         {
-            AlertDialog.instance.ShowAlert("You got really tired. -5 Happiness -2 Health", AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
+            AlertDialog.instance.ShowAlert("You got really tired. -5 Happiness -2 Health",
+                AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
             instance.Happiness -= 5;
             instance.Health -= 2;
         }
 
         if (instance.Happiness <= 15)
         {
-            AlertDialog.instance.ShowAlert("You are very sad. -2 Health", AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
+            AlertDialog.instance.ShowAlert("You are very sad. -2 Health", AlertDialog.AlertLength.Length_Normal,
+                AlertDialog.AlertType.CriticalError);
             instance.Health -= 2;
         }
 
         if (instance.Health <= 10)
-        {
-            AlertDialog.instance.ShowAlert("Warning, your health is in critical condition", AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.Warning);
-        }
+            AlertDialog.instance.ShowAlert("Warning, your health is in critical condition",
+                AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.Warning);
         else if (instance.Health <= 25)
+            AlertDialog.instance.ShowAlert("Warning, your health is in bad condition",
+                AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.CriticalError);
+
+        SaveSystem.SaveData(instance);
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void QuitGame()
+    {
+        Time.timeScale = 1;
+        instance.currentProfile = null;
+        isGameLoad = false;
+        isContinueMonth = false;
+        SceneManager.LoadScene(0);
+    }
+
+
+    public class GameTime
+    {
+        private readonly string[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        public float timeInHours;
+        public float timePassedForTheDay;
+
+        public float ReturnTime()
         {
-            AlertDialog.instance.ShowAlert("Warning, your health is in bad condition", AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.CriticalError);
+            return timeInHours;
+        }
+
+        public void SetTime(float timeToSet)
+        {
+            if (timeToSet > 24)
+            {
+                Debug.LogWarning("Invalid time set: " + timeToSet);
+                return;
+            }
+
+            timeInHours = (ReturnDayNumber() - 1) * 24;
+            timePassedForTheDay = 0f;
+            timeInHours += timeToSet;
+            timePassedForTheDay += timeToSet;
+        }
+
+        public void SetTimeRaw(float timeToSetInHours, float timePassedForDay)
+        {
+            timeInHours = timeToSetInHours;
+            timePassedForTheDay = timePassedForDay;
+        }
+
+        public void ResetTimePassedForDay()
+        {
+            timePassedForTheDay = 0f;
+        }
+
+        public float ReturnTimePassedForDay()
+        {
+            return timePassedForTheDay;
+        }
+
+        public float AddTime(float timeToIncrease)
+        {
+            timeInHours += timeToIncrease;
+            timePassedForTheDay += timeToIncrease;
+            return timeInHours;
+        }
+
+        public int ReturnDayNumber(float time)
+        {
+            return (int) time / 24 + 1;
+        }
+
+        public int ReturnDayNumber()
+        {
+            return (int) timeInHours / 24 + 1;
+        }
+
+        public int ReturnHour(float time)
+        {
+            return (int) time % 24;
+        }
+
+        public int ReturnHour()
+        {
+            return (int) timeInHours % 24;
+        }
+
+        public float ReturnHourRaw()
+        {
+            return timeInHours % 24;
+        }
+
+        public float ReturnMinutes(float time)
+        {
+            return time % 24 % 1 * 60;
+        }
+
+        public float ReturnMinutes()
+        {
+            return timeInHours % 24 % 1 * 60;
+        }
+
+        public string ReturnTimeString()
+        {
+            return $"{ReturnHour().ToString().PadLeft(2, '0')}:{ReturnMinutes().ToString().PadLeft(2, '0')} " +
+                   $"DAY {ReturnDayNumber()} ({ReturnDayOfWeek()})";
+        }
+
+        public string CalculateTimeString(float time)
+        {
+            return $"{ReturnHour(time).ToString().PadLeft(2, '0')}:{ReturnMinutes(time).ToString().PadLeft(2, '0')}";
+        }
+
+        public string ReturnDayOfWeek()
+        {
+            return days[ReturnDayNumber() % 7];
         }
     }
+
+    #region Variable Declaration
+
+    public float Money { get; set; } = 500f;
+
+    public float Energy
+    {
+        get => _energy;
+        set
+        {
+            if (value >= 100) _energy = 100;
+            else if (value <= 0) _energy = 0;
+            else _energy = value;
+        }
+    }
+
+    public float Hunger
+    {
+        get => _hunger;
+        set
+        {
+            if (value >= 10) _hunger = 10;
+            else if (value <= 0) _hunger = 0;
+            else _hunger = value;
+        }
+    }
+
+    public float Health
+    {
+        get => _health;
+        set
+        {
+            if (value >= 100) _health = 100;
+            else if (value < 0) _health = 0;
+            else _health = value;
+        }
+    }
+
+    public float Happiness
+    {
+        get => _happiness;
+        set
+        {
+            if (value >= 100) _happiness = value;
+            else if (value < 0) _happiness = 0;
+            else _happiness = value;
+        }
+    }
+
+    public float oldMoney { get; set; }
+    public float startMoneyOfMonth { get; set; }
+
+    #endregion Variable Declaration
 }

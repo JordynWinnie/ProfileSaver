@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class StarDisplay : MonoBehaviour
@@ -12,9 +10,6 @@ public class StarDisplay : MonoBehaviour
     {
         var stars = GetComponentsInChildren<Image>();
 
-        for (int i = 0; i < numberToDisplay; i++)
-        {
-            stars[i].sprite = filledStar;
-        }
+        for (var i = 0; i < numberToDisplay; i++) stars[i].sprite = filledStar;
     }
 }

@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: BuyMeat
   m_EditorClassIdentifier: 
   choiceName: Buy Meat
-  happiness: 10
-  health: 0
-  money: -40
+  happinessToAdd: 0
+  healthToAdd: 0
+  moneyToAdd: -40
   hunger: 0
   energy: 0
   timeTaken: 0
+  statType: 5
+  progressionForStat: 1
+  miscStatParams: Meat

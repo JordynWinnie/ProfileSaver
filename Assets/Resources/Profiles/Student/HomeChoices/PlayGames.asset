@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81ddfb2ae04e34c67953688a363ddb2b, type: 3}
-  m_Name: WorkStudent
+  m_Name: PlayGames
   m_EditorClassIdentifier: 
-  choiceName: Work Part Time (7/hr)
-  happinessToAdd: -5
-  healthToAdd: -5
-  moneyToAdd: 21
-  hunger: -3
-  energy: -20
+  choiceName: Game
+  happinessToAdd: 10
+  healthToAdd: -2
+  moneyToAdd: 0
+  hunger: -2
+  energy: -10
   timeTaken: 3
-  statType: 2
+  statType: 0
   progressionForStat: 3
-  miscStatParams: 
+  miscStatParams: GameStudent

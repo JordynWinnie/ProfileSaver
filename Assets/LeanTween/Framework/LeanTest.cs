@@ -14,11 +14,8 @@ public class LeanTester : MonoBehaviour
 
     private IEnumerator timeoutCheck()
     {
-        float pauseEndTime = Time.realtimeSinceStartup + timeout;
-        while (Time.realtimeSinceStartup < pauseEndTime)
-        {
-            yield return 0;
-        }
+        var pauseEndTime = Time.realtimeSinceStartup + timeout;
+        while (Time.realtimeSinceStartup < pauseEndTime) yield return 0;
         if (LeanTest.testsFinished == false)
         {
             Debug.Log(LeanTest.formatB("Tests timed out!"));
@@ -32,12 +29,12 @@ public class LeanTester : MonoBehaviour
 public class LeanTest : object
 {
     public static int expected = 0;
-    private static int tests = 0;
-    private static int passes = 0;
+    private static int tests;
+    private static int passes;
 
     public static float timeout = 15f;
-    public static bool timeoutStarted = false;
-    public static bool testsFinished = false;
+    public static bool timeoutStarted;
+    public static bool testsFinished;
 
     public static void debug(string name, bool didPass, string failExplaination = null)
     {
@@ -46,14 +43,15 @@ public class LeanTest : object
 
     public static void expect(bool didPass, string definition, string failExplaination = null)
     {
-        float len = printOutLength(definition);
-        int paddingLen = 40 - (int)(len * 1.05f);
+        var len = printOutLength(definition);
+        var paddingLen = 40 - (int) (len * 1.05f);
 #if UNITY_FLASH
 		string padding = padRight(paddingLen);
 #else
-        string padding = "".PadRight(paddingLen, "_"[0]);
+        var padding = "".PadRight(paddingLen, "_"[0]);
 #endif
-        string logName = formatB(definition) + " " + padding + " [ " + (didPass ? formatC("pass", "green") : formatC("fail", "red")) + " ]";
+        var logName = formatB(definition) + " " + padding + " [ " +
+                      (didPass ? formatC("pass", "green") : formatC("fail", "red")) + " ]";
         if (didPass == false && failExplaination != null)
             logName += " - " + failExplaination;
         Debug.Log(logName);
@@ -63,20 +61,16 @@ public class LeanTest : object
 
         // Debug.Log("tests:"+tests+" expected:"+expected);
         if (tests == expected && testsFinished == false)
-        {
             overview();
-        }
         else if (tests > expected)
-        {
             Debug.Log(formatB("Too many tests for a final report!") + " set LeanTest.expected = " + tests);
-        }
 
         if (timeoutStarted == false)
         {
             timeoutStarted = true;
-            GameObject tester = new GameObject();
+            var tester = new GameObject();
             tester.name = "~LeanTest";
-            LeanTester test = tester.AddComponent(typeof(LeanTester)) as LeanTester;
+            var test = tester.AddComponent(typeof(LeanTester)) as LeanTester;
             test.timeout = timeout;
 #if !UNITY_EDITOR
 			tester.hideFlags = HideFlags.HideAndDontSave;
@@ -86,32 +80,21 @@ public class LeanTest : object
 
     public static string padRight(int len)
     {
-        string str = "";
-        for (int i = 0; i < len; i++)
-        {
-            str += "_";
-        }
+        var str = "";
+        for (var i = 0; i < len; i++) str += "_";
         return str;
     }
 
     public static float printOutLength(string str)
     {
-        float len = 0.0f;
-        for (int i = 0; i < str.Length; i++)
-        {
+        var len = 0.0f;
+        for (var i = 0; i < str.Length; i++)
             if (str[i] == "I"[0])
-            {
                 len += 0.5f;
-            }
             else if (str[i] == "J"[0])
-            {
                 len += 0.85f;
-            }
             else
-            {
                 len += 1.0f;
-            }
-        }
         return len;
     }
 
@@ -141,8 +124,9 @@ public class LeanTest : object
     public static void overview()
     {
         testsFinished = true;
-        int failedCnt = (expected - passes);
-        string failedStr = failedCnt > 0 ? formatBC("" + failedCnt, "red") : "" + failedCnt;
-        Debug.Log(formatB("Final Report:") + " _____________________ PASSED: " + formatBC("" + passes, "green") + " FAILED: " + failedStr + " ");
+        var failedCnt = expected - passes;
+        var failedStr = failedCnt > 0 ? formatBC("" + failedCnt, "red") : "" + failedCnt;
+        Debug.Log(formatB("Final Report:") + " _____________________ PASSED: " + formatBC("" + passes, "green") +
+                  " FAILED: " + failedStr + " ");
     }
 }
