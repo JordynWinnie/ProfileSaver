@@ -1,19 +1,21 @@
 ﻿using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
     public static bool isGameLoad = false;
-    [SerializeField] private Profile[] profiles;
-    public bool isInDevelopment = true;
-    private Decision[] decisions;
-    public static GameManager instance;
+    public static Profile profileToLoad = null;
+    
     public Profile currentProfile;
+    
+    public bool isInDevelopment = true;
+    
+    public static GameManager instance;
+    
     public Location currentLocation = null;
-    public Location[] locations;
+    public List<Location> locationsList = new List<Location>();
 
     private float _health = 50f;
     private float _happiness = 50f;
@@ -56,6 +58,7 @@ public class GameManager : MonoBehaviour
     #endregion Variable Declaration
 
     public GameTime gameTime = new GameTime();
+    
 
     public class GameTime
     {
@@ -125,11 +128,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        print("Hello");
-        profiles = Resources.LoadAll<Profile>("Profiles");
-        decisions = Resources.LoadAll<Decision>("Decisions");
-        locations = FindObjectsOfType<Location>();
-        print($"Found: {locations.Length} Locations");
         if (instance == null)
         {
             instance = this;
@@ -139,6 +137,11 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+        currentProfile = profileToLoad;
+    }
+
+    private void Start()
+    {
 
         if (instance.currentProfile == null && !isInDevelopment)
         {
@@ -149,22 +152,20 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(1);
+                print("Game Start");
+                currentProfile = profileToLoad;
+                profileToLoad = null;
+                SetUpValues();
             }
-            
         }
         else
         {
-            currentProfile = profiles.First(x => x.profileName == "Student");
             SetUpValues();
         }
-    }
 
-    public Profile ReturnRandomProfile()
-    {
-        currentProfile = profiles[Random.Range(0, profiles.Length)];
-        return currentProfile;
+        
     }
+    
 
     private void Update()
     {
@@ -196,16 +197,17 @@ public class GameManager : MonoBehaviour
             SaveSystem.SaveData(instance);
         }
         
-        
+        foreach (var location in locationsList)
+        {
+            print(location.locationInformation.locationName);
+            location.avatarLocation.sprite = currentProfile.profileIcon;
+            location.ShowAvatar(false);
+        }
     }
-
-    public Decision ReturnRandomDecision() => decisions[Random.Range(0, decisions.Length)];
 
     public void SetUpValues(SaveData saveData)
     {
-        print("LoadedProf: " + saveData.currentProfile);
-        
-        print(locations.Length);
+        var profiles = Resources.LoadAll<Profile>("Profiles");
         instance.Energy = saveData.energy;
         instance.Health = saveData.health;
         instance.Money = saveData.money;
@@ -215,10 +217,9 @@ public class GameManager : MonoBehaviour
         oldMoney = saveData.oldMoney;
         startMoneyOfMonth = saveData.startMoneyOfMonth;
         GoalManager.instance.trackedStatistics = saveData.statList;
-        var profile = profiles.First(x => x.profileName == saveData.currentProfile);
-        var location = DisplayInformation.infoDisplayHelper.locationList.First(x=>x.locationInformation.locationName == saveData.currentLocation);
-        instance.currentProfile = profile;
-        print("LoadedLoc: " + location.locationInformation.locationName);
+        currentProfile = profiles.First(x => x.profileName == saveData.currentProfile);
+        var location = locationsList.First(x=>x.locationInformation.locationName == saveData.currentLocation);
+        
         DisplayInformation.infoDisplayHelper.currentLocation = location;
     }
 

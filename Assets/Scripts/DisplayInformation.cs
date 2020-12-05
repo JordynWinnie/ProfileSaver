@@ -12,7 +12,7 @@ public class DisplayInformation : MonoBehaviour
     public static DisplayInformation infoDisplayHelper;
     public LocationInformation currentOpenLocation = null;
     public Location currentLocation = null;
-    public List<Location> locationList;
+    //public List<Location> locationList;
 
     private void Awake()
     {
@@ -178,7 +178,7 @@ public class DisplayInformation : MonoBehaviour
 
     public void ResetAvatarLocation()
     {
-        foreach (var location in locationList)
+        foreach (var location in GameManager.instance.locationsList)
         {
             location.ShowAvatar(false);
         }
@@ -350,7 +350,7 @@ public class DisplayInformation : MonoBehaviour
 
         daySummary.text = EndOfDaySummary();
         ResetAvatarLocation();
-        currentLocation = locationList.Where(x => x.locationInformation.locationName == "Home").First();
+        currentLocation = GameManager.instance.locationsList.Where(x => x.locationInformation.locationName == "Home").First();
     }
 
     private string EndOfDaySummary()

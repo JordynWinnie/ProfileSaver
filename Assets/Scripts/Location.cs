@@ -5,7 +5,7 @@ using TMPro;
 public class Location : MonoBehaviour
 {
     [SerializeField] public LocationInformation locationInformation;
-    [SerializeField] private Image avatarLocation;
+    [SerializeField] public Image avatarLocation;
 
     // Start is called before the first frame update
     private void Start()
@@ -16,9 +16,8 @@ public class Location : MonoBehaviour
 
         GetComponent<Image>().sprite = locationInformation.locationSprite;
         GetComponentInChildren<TextMeshProUGUI>().text = locationInformation.locationName;
-        avatarLocation.sprite = GameManager.instance.currentProfile.profileIcon;
-        ShowAvatar(false);
-        DisplayInformation.infoDisplayHelper.locationList.Add(this);
+
+        GameManager.instance.locationsList.Add(this);
     }
 
     public void ShowAvatar(bool isShown)

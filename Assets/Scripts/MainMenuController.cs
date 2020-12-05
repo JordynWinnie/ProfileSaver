@@ -9,11 +9,13 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Image profileImage;
     [SerializeField] private TextMeshProUGUI profileName;
     [SerializeField] private TextMeshProUGUI profileDescription;
-
+    [SerializeField] private Profile[] profiles;
+    [SerializeField] private Profile selectedProfile = null;
+ 
     public void StartNewGame()
     {
-        GameManager.instance.SetUpValues();
-        SceneManager.LoadScene(0);
+        GameManager.profileToLoad = selectedProfile;
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame()
@@ -28,17 +30,17 @@ public class MainMenuController : MonoBehaviour
 
     public void ShuffleProfile()
     {
-        var profile = GameManager.instance.ReturnRandomProfile();
-        GameManager.instance.currentProfile = profile;
-        profileImage.sprite = profile.profileIcon;
-        profileName.text = profile.name;
-        profileDescription.text = $"{profile.description}\nIncome: {profile.income}";
+        profiles = Resources.LoadAll<Profile>("Profiles");
+        selectedProfile = profiles[Random.Range(0, profiles.Length)];
+        profileImage.sprite = selectedProfile.profileIcon;
+        profileName.text = selectedProfile.profileName;
+        profileDescription.text = selectedProfile.description;
     }
     private IEnumerator LoadScene()
     {
         GameManager.isGameLoad = true;
         // Start loading the scene
-        AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+        AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync(1,LoadSceneMode.Single);
         // Wait until the level finish loading
         while (!asyncLoadLevel.isDone)
             yield return null;

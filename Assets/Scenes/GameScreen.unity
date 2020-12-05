@@ -2193,6 +2193,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 232477357}
     m_Modifications:
+    - target: {fileID: 483644607023681405, guid: 4e255ab73ae990b47b3d4198a7acd127, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0362d1c7daa007b4d81575d18cfab2d5, type: 3}
+    - target: {fileID: 483644607023681405, guid: 4e255ab73ae990b47b3d4198a7acd127, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 483644607023681405, guid: 4e255ab73ae990b47b3d4198a7acd127, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 483644607023681405, guid: 4e255ab73ae990b47b3d4198a7acd127, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3357791487263908300, guid: 4e255ab73ae990b47b3d4198a7acd127, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -2670,11 +2686,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd35906fecc286644ac16062cabea0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profiles: []
-  isInDevelopment: 0
   currentProfile: {fileID: 0}
+  isInDevelopment: 0
   currentLocation: {fileID: 0}
-  locations: []
+  locationsList: []
   statList: []
 --- !u!4 &705386141
 Transform:
@@ -5764,7 +5779,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentOpenLocation: {fileID: 0}
   currentLocation: {fileID: 1180224939}
-  locationList: []
   choiceButton: {fileID: 4833226209716481582, guid: 0783cad2eff1c4923ae354c42d20a921, type: 3}
   timeUI: {fileID: 2041378489}
   moneyUI: {fileID: 2114416576}
