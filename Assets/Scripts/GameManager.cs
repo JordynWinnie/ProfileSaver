@@ -160,6 +160,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            var profiles = Resources.LoadAll<Profile>("Profiles");
+            currentProfile = profiles.First(x => x.profileName == "Student");
+            print("DeveloperMode");
             SetUpValues();
         }
 
