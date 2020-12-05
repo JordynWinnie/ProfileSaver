@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.IO;
-using  System.Runtime.Serialization.Formatters.Binary;
+﻿using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
-public static class SaveSystem 
+public static class SaveSystem
 {
     public static void SaveData(GameManager gameManager)
     {
@@ -27,6 +27,7 @@ public static class SaveSystem
             fileStream.Close();
             return data;
         }
+
         return null;
     }
 }

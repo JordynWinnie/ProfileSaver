@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GeneralSimpleUI : MonoBehaviour
 {
@@ -11,36 +12,29 @@ public class GeneralSimpleUI : MonoBehaviour
         Debug.Log("For better examples see the 4.6_Examples folder!");
         if (button == null)
         {
-            Debug.LogError("Button not assigned! Create a new button via Hierarchy->Create->UI->Button. Then assign it to the button variable");
+            Debug.LogError(
+                "Button not assigned! Create a new button via Hierarchy->Create->UI->Button. Then assign it to the button variable");
             return;
         }
 
         // Tweening various values in a block callback style
         LeanTween.value(button.gameObject, button.anchoredPosition, new Vector2(200f, 100f), 1f).setOnUpdate(
-            (Vector2 val) =>
-            {
-                button.anchoredPosition = val;
-            }
+            (Vector2 val) => { button.anchoredPosition = val; }
         );
 
         LeanTween.value(gameObject, 1f, 0.5f, 1f).setOnUpdate(
-            (float volume) =>
-            {
-                Debug.Log("volume:" + volume);
-            }
+            (float volume) => { Debug.Log("volume:" + volume); }
         );
 
-        LeanTween.value(gameObject, gameObject.transform.position, gameObject.transform.position + new Vector3(0, 1f, 0), 1f).setOnUpdate(
-            (Vector3 val) =>
-            {
-                gameObject.transform.position = val;
-            }
+        LeanTween.value(gameObject, gameObject.transform.position,
+            gameObject.transform.position + new Vector3(0, 1f, 0), 1f).setOnUpdate(
+            (Vector3 val) => { gameObject.transform.position = val; }
         );
 
         LeanTween.value(gameObject, Color.red, Color.green, 1f).setOnUpdate(
-            (Color val) =>
+            val =>
             {
-                UnityEngine.UI.Image image = (UnityEngine.UI.Image)button.gameObject.GetComponent(typeof(UnityEngine.UI.Image));
+                var image = (Image) button.gameObject.GetComponent(typeof(Image));
                 image.color = val;
             }
         );

@@ -19,8 +19,15 @@ public class Following : MonoBehaviour
     public Transform dude5Title;
 
     private Color dude1ColorVelocity;
+    private Color fromColor;
+    private Vector3 fromVec3;
+
+    private float fromY;
+    private Color velocityColor;
 
     private Vector3 velocityPos;
+    private Vector3 velocityVec3;
+    private float velocityY;
 
     private void Start()
     {
@@ -60,19 +67,13 @@ public class Following : MonoBehaviour
         LeanTween.rotateAround(Camera.main.gameObject, Vector3.left, 360f, 300f).setPoint(localPos).setRepeat(-1);
     }
 
-    private float fromY;
-    private float velocityY;
-    private Vector3 fromVec3;
-    private Vector3 velocityVec3;
-    private Color fromColor;
-    private Color velocityColor;
-
     private void Update()
     {
         // Use the smooth methods to follow variables in which ever manner you wish!
         fromY = LeanSmooth.spring(fromY, followArrow.localPosition.y, ref velocityY, 1.1f);
         fromVec3 = LeanSmooth.spring(fromVec3, dude5Title.localPosition, ref velocityVec3, 1.1f);
-        fromColor = LeanSmooth.spring(fromColor, dude1.GetComponent<Renderer>().material.color, ref velocityColor, 1.1f);
+        fromColor = LeanSmooth.spring(fromColor, dude1.GetComponent<Renderer>().material.color, ref velocityColor,
+            1.1f);
         Debug.Log("Smoothed y:" + fromY + " vec3:" + fromVec3 + " color:" + fromColor);
     }
 

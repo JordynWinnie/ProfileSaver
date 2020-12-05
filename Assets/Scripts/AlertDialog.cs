@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -6,40 +7,26 @@ using UnityEngine.UI;
 
 public class AlertDialog : MonoBehaviour
 {
+    public enum AlertLength
+    {
+        Length_Short = 1,
+        Length_Normal = 2,
+        Length_Long = 4
+    }
+
+    public enum AlertType
+    {
+        CriticalError,
+        Warning,
+        Message
+    }
+
     public static AlertDialog instance;
-    private RectTransform currentAlert;
-    private Text textUI;
     private Image alertBox;
-    private Queue<Alert> alertQueue = new Queue<Alert>();
-    private bool isShowing = false;
-
-    private class Alert
-    {
-        public string textToDisplay;
-        public AlertLength alertLength;
-
-        public AlertType alertType;
-
-        public Alert(string textToDisplay, AlertLength alertLength, AlertType alertType)
-        {
-            this.textToDisplay = textToDisplay;
-            this.alertLength = alertLength;
-            this.alertType = alertType;
-        }
-    }
-
-    public enum AlertLength { Length_Short = 1, Length_Normal = 2, Length_Long = 4 }
-
-    public enum AlertType { CriticalError, Warning, Message }
-
-    private void Start()
-    {
-        alertBox = GetComponentInChildren<Image>();
-        currentAlert = GetComponent<RectTransform>();
-        textUI = GetComponentInChildren<Text>();
-        StartCoroutine(GoThroughQueue());
-        currentAlert.gameObject.transform.localScale = Vector3.zero;
-    }
+    private readonly Queue<Alert> alertQueue = new Queue<Alert>();
+    private RectTransform currentAlert;
+    private bool isShowing;
+    private Text textUI;
 
     private void Awake()
     {
@@ -51,6 +38,15 @@ public class AlertDialog : MonoBehaviour
         {
             Destroy(instance.gameObject);
         }
+    }
+
+    private void Start()
+    {
+        alertBox = GetComponentInChildren<Image>();
+        currentAlert = GetComponent<RectTransform>();
+        textUI = GetComponentInChildren<Text>();
+        StartCoroutine(GoThroughQueue());
+        currentAlert.gameObject.transform.localScale = Vector3.zero;
     }
 
     public void ShowAlert(string text, AlertLength alertLength, AlertType alertType)
@@ -66,22 +62,28 @@ public class AlertDialog : MonoBehaviour
         {
             sb.Append($"{choices.timeTaken}h Passed ");
         }
+
         if (choices.energy != 0)
         {
             sb.Append($"{HelperFunctions.ReturnSign(choices.energy)}{Mathf.Abs(choices.energy)} energy ");
         }
+
         if (choices.healthToAdd != 0)
         {
             sb.Append($"{HelperFunctions.ReturnSign(choices.healthToAdd)}{Mathf.Abs(choices.healthToAdd)} health ");
         }
+
         if (choices.happinessToAdd != 0)
         {
-            sb.Append($"{HelperFunctions.ReturnSign(choices.happinessToAdd)}{Mathf.Abs(choices.happinessToAdd)} happiness ");
+            sb.Append(
+                $"{HelperFunctions.ReturnSign(choices.happinessToAdd)}{Mathf.Abs(choices.happinessToAdd)} happiness ");
         }
+
         if (choices.hunger != 0)
         {
             sb.Append($"{HelperFunctions.ReturnSign(choices.hunger)}{Mathf.Abs(choices.hunger)} hunger ");
         }
+
         if (choices.moneyToAdd != 0)
         {
             sb.Append($"{HelperFunctions.ReturnSign(choices.moneyToAdd)}${Mathf.Abs(choices.moneyToAdd)} ");
@@ -92,7 +94,8 @@ public class AlertDialog : MonoBehaviour
 
     public void DismissAlert(AlertLength alertLength)
     {
-        LeanTween.alpha(currentAlert, 0f, 0.5f).setFrom(1f).setEase(LeanTweenType.linear).setDelay((float)alertLength * 0.5f).setOnComplete(HideAlert);
+        LeanTween.alpha(currentAlert, 0f, 0.5f).setFrom(1f).setEase(LeanTweenType.linear)
+            .setDelay((float) alertLength * 0.5f).setOnComplete(HideAlert);
     }
 
     private void HideAlert()
@@ -129,15 +132,28 @@ public class AlertDialog : MonoBehaviour
                     case AlertType.Message:
                         alertBox.color = new Color(0.07f, 0.63f, 0.07f);
                         break;
-
-                    default:
-                        break;
                 }
 
                 currentAlert.gameObject.transform.localScale = Vector3.one;
-                LeanTween.alpha(currentAlert, 1f, 0.25f).setFrom(0f).setEase(LeanTweenType.linear).setOnComplete(new System.Action(delegate { DismissAlert(currAlr.alertLength); }));
+                LeanTween.alpha(currentAlert, 1f, 0.25f).setFrom(0f).setEase(LeanTweenType.linear)
+                    .setOnComplete(new Action(delegate { DismissAlert(currAlr.alertLength); }));
                 yield return new WaitUntil(() => isShowing == false);
             }
+        }
+    }
+
+    private class Alert
+    {
+        public readonly AlertLength alertLength;
+
+        public readonly AlertType alertType;
+        public readonly string textToDisplay;
+
+        public Alert(string textToDisplay, AlertLength alertLength, AlertType alertType)
+        {
+            this.textToDisplay = textToDisplay;
+            this.alertLength = alertLength;
+            this.alertType = alertType;
         }
     }
 }

@@ -80,7 +80,7 @@
       <updated>1607088301235</updated>
       <workItem from="1607088316871" duration="5457000" />
       <workItem from="1607093909663" duration="4312000" />
-      <workItem from="1607139572045" duration="6927000" />
+      <workItem from="1607139572045" duration="7304000" />
     </task>
     <servers />
   </component>
@@ -93,6 +93,10 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="1069" y="579" key="ANALYSIS_DLG_com.jetbrains.rider.actions.impl.cleanup.RiderCodeCleanupAction$actionPerformed$dlg$1" timestamp="1607150523015">
+      <screen x="62" y="0" width="2498" height="1440" />
+    </state>
+    <state x="1069" y="579" key="ANALYSIS_DLG_com.jetbrains.rider.actions.impl.cleanup.RiderCodeCleanupAction$actionPerformed$dlg$1/62.0.2498.1440/2560.197.1858.1080@62.0.2498.1440" timestamp="1607150523015" />
     <state width="2455" height="535" key="GridCell.Tab.0.bottom" timestamp="1607093824760">
       <screen x="62" y="0" width="2498" height="1440" />
     </state>
@@ -175,13 +179,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/EndOfMonthEvaluation.cs</url>
-          <line>54</line>
+          <line>44</line>
           <properties documentPath="J:\ProfileSaver_GDP_Prototype\Assets\Scripts\EndOfMonthEvaluation.cs" initialLine="54">
             <startOffsets>
-              <option value="1579" />
+              <option value="1446" />
             </startOffsets>
             <endOffsets>
-              <option value="1618" />
+              <option value="1485" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />

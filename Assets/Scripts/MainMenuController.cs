@@ -10,8 +10,8 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI profileName;
     [SerializeField] private TextMeshProUGUI profileDescription;
     [SerializeField] private Profile[] profiles;
-    [SerializeField] private Profile selectedProfile = null;
- 
+    [SerializeField] private Profile selectedProfile;
+
     public void StartNewGame()
     {
         GameManager.profileToLoad = selectedProfile;
@@ -36,16 +36,17 @@ public class MainMenuController : MonoBehaviour
         profileName.text = selectedProfile.profileName;
         profileDescription.text = selectedProfile.description;
     }
+
     private IEnumerator LoadScene()
     {
         GameManager.isGameLoad = true;
         // Start loading the scene
-        AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync(1,LoadSceneMode.Single);
+        var asyncLoadLevel = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
         // Wait until the level finish loading
         while (!asyncLoadLevel.isDone)
             yield return null;
         // Wait a frame so every Awake and Start method is called
-        
+
         yield return new WaitForEndOfFrame();
     }
 }

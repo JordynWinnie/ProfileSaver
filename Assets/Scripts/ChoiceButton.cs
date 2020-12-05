@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ChoiceButton : MonoBehaviour
@@ -20,9 +20,6 @@ public class ChoiceButton : MonoBehaviour
     public void SetUpChoiceButton()
     {
         var children = GetComponentsInChildren<Image>();
-        foreach (var child in children)
-        {
-            child.gameObject.SetActive(false);
-        }
+        foreach (var child in children) child.gameObject.SetActive(false);
     }
 }

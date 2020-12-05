@@ -3,16 +3,11 @@ using UnityEngine;
 public class PathSplines : MonoBehaviour
 {
     public Transform[] trans;
-
-    private LTSpline cr;
     private GameObject avatar1;
 
-    private void OnEnable()
-    {
-        // create the path
-        cr = new LTSpline(new Vector3[] { trans[0].position, trans[1].position, trans[2].position, trans[3].position, trans[4].position });
-        // cr = new LTSpline( new Vector3[] {new Vector3(-1f,0f,0f), new Vector3(0f,0f,0f), new Vector3(4f,0f,0f), new Vector3(20f,0f,0f), new Vector3(30f,0f,0f)} );
-    }
+    private LTSpline cr;
+
+    private float iter;
 
     private void Start()
     {
@@ -21,12 +16,11 @@ public class PathSplines : MonoBehaviour
         // Tween automatically
         LeanTween.move(avatar1, cr, 6.5f).setOrientToPath(true).setRepeat(1).setOnComplete(() =>
         {
-            Vector3[] next = new Vector3[] { trans[4].position, trans[3].position, trans[2].position, trans[1].position, trans[0].position };
+            Vector3[] next =
+                {trans[4].position, trans[3].position, trans[2].position, trans[1].position, trans[0].position};
             LeanTween.moveSpline(avatar1, next, 6.5f); // move it back to the start without an LTSpline
         }).setEase(LeanTweenType.easeOutQuad);
     }
-
-    private float iter;
 
     private void Update()
     {
@@ -36,6 +30,14 @@ public class PathSplines : MonoBehaviour
         iter += Time.deltaTime * 0.07f;
         if (iter > 1.0f)
             iter = 0.0f;
+    }
+
+    private void OnEnable()
+    {
+        // create the path
+        cr = new LTSpline(new[]
+            {trans[0].position, trans[1].position, trans[2].position, trans[3].position, trans[4].position});
+        // cr = new LTSpline( new Vector3[] {new Vector3(-1f,0f,0f), new Vector3(0f,0f,0f), new Vector3(4f,0f,0f), new Vector3(20f,0f,0f), new Vector3(30f,0f,0f)} );
     }
 
     private void OnDrawGizmos()

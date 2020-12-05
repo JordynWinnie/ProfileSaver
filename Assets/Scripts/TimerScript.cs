@@ -1,30 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
 
 public class TimerScript : MonoBehaviour
 {
-    private Image timerBar;
+    public static TimerScript timerController;
     public float maxTime = 5f;
-    private float timeLeft = 0f;
+    public bool isPaused;
     private TextMeshProUGUI secondsTime;
-    public bool isPaused = false;
-
-    public static TimerScript timerController = null;
+    private float timeLeft;
+    private Image timerBar;
 
     private void Awake()
     {
         if (timerController == null)
-        {
             timerController = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
 
     // Start is called before the first frame update
@@ -40,16 +33,14 @@ public class TimerScript : MonoBehaviour
     {
         if (timeLeft > 0f)
         {
-            if (!isPaused)
-            {
-                timeLeft -= Time.deltaTime;
-            }
+            if (!isPaused) timeLeft -= Time.deltaTime;
             timerBar.fillAmount = timeLeft / maxTime;
             secondsTime.text = Math.Truncate(timeLeft).ToString();
         }
         else
         {
-            AlertDialog.instance.ShowAlert("You decided to do nothing. 30mins passed -5 Energy -1 Hunger", AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
+            AlertDialog.instance.ShowAlert("You decided to do nothing. 30mins passed -5 Energy -1 Hunger",
+                AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
             GameManager.instance.Energy -= 5;
             GameManager.instance.Hunger -= 1;
             GameManager.instance.gameTime.AddTime(0.5f);

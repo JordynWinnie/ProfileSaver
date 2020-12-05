@@ -3,7 +3,16 @@
 [Serializable]
 public class Stat
 {
-    public enum StatType { Default, StudyTime, WorkTime, PlaceVisit, MealTaken, ItemPurchased, MoneyToSave }
+    public enum StatType
+    {
+        Default,
+        StudyTime,
+        WorkTime,
+        PlaceVisit,
+        MealTaken,
+        ItemPurchased,
+        MoneyToSave
+    }
 
     public StatType statType;
     public float dayOfAction;
@@ -12,7 +21,8 @@ public class Stat
     public string placeVisited;
     public string miscStatParams;
 
-    public Stat(StatType statType, float dayOfAction, float timeOfAction, float actionCount, string placeVisited, string miscStatParams = null)
+    public Stat(StatType statType, float dayOfAction, float timeOfAction, float actionCount, string placeVisited,
+        string miscStatParams = null)
     {
         this.timeOfAction = timeOfAction;
         this.dayOfAction = dayOfAction;

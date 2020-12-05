@@ -11,7 +11,8 @@ public class PathSpline2d : MonoBehaviour
 
     private void Start()
     {
-        Vector3[] path = new Vector3[] {
+        Vector3[] path =
+        {
             cubes[0].position,
             cubes[1].position,
             cubes[2].position,

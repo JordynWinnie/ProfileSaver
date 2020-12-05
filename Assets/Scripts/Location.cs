@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class Location : MonoBehaviour
 {
@@ -23,13 +23,8 @@ public class Location : MonoBehaviour
     public void ShowAvatar(bool isShown)
     {
         if (isShown)
-        {
             avatarLocation.color = Color.white;
-        }
         else
-        {
             avatarLocation.color = Color.clear;
-        }
-        
     }
 }

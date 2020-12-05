@@ -1,9 +1,13 @@
 //namespace DentedPixel{
+
 using System;
 using UnityEngine;
 
 public class LTDescrOptional
 {
+    public AnimationCurve animationCurve;
+    public Color color;
+    public int initFrameCount;
     public Transform toTrans { get; set; }
     public Vector3 point { get; set; }
     public Vector3 axis { get; set; }
@@ -11,9 +15,6 @@ public class LTDescrOptional
     public Quaternion origRotation { get; set; }
     public LTBezierPath path { get; set; }
     public LTSpline spline { get; set; }
-    public AnimationCurve animationCurve;
-    public int initFrameCount;
-    public Color color;
 
     public LTRect ltRect { get; set; } // maybe get rid of this eventually
 
@@ -71,25 +72,14 @@ public class LTDescrOptional
             onUpdateFloat(val);
 
         if (onUpdateFloatRatio != null)
-        {
             onUpdateFloatRatio(val, ratioPassed);
-        }
         else if (onUpdateFloatObject != null)
-        {
             onUpdateFloatObject(val, onUpdateParam);
-        }
         else if (onUpdateVector3Object != null)
-        {
             onUpdateVector3Object(LTDescr.newVect, onUpdateParam);
-        }
         else if (onUpdateVector3 != null)
-        {
             onUpdateVector3(LTDescr.newVect);
-        }
-        else if (onUpdateVector2 != null)
-        {
-            onUpdateVector2(new Vector2(LTDescr.newVect.x, LTDescr.newVect.y));
-        }
+        else if (onUpdateVector2 != null) onUpdateVector2(new Vector2(LTDescr.newVect.x, LTDescr.newVect.y));
     }
 }
 
