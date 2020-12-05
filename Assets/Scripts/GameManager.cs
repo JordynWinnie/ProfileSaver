@@ -191,7 +191,6 @@ public class GameManager : MonoBehaviour
         {
             if (timeToSet > 24)
             {
-                Debug.LogWarning("Invalid time set: " + timeToSet);
                 return;
             }
 
