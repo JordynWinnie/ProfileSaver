@@ -8,10 +8,11 @@ public class GameManager : MonoBehaviour
 {
     public static bool isGameLoad = false;
     public static Profile profileToLoad = null;
+    public static bool isContinueMonth = false;
     
     public Profile currentProfile;
     
-    public bool isInDevelopment = true;
+    public bool isInDevelopment = false;
     
     public static GameManager instance;
     
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
         private readonly string[] days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
         public float ReturnTime() => timeInHours;
-
+        
         public void SetTime(float timeToSet)
         {
             if (timeToSet > 24)
@@ -137,41 +138,43 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        currentProfile = profileToLoad;
     }
 
     private void Start()
     {
-
-        if (instance.currentProfile == null && !isInDevelopment)
-        {
-            if (isGameLoad)
-            {
-                print("GameLoad");
-                SetUpValues(SaveSystem.LoadData());
-            }
-            else
-            {
-                print("Game Start");
-                currentProfile = profileToLoad;
-                profileToLoad = null;
-                SetUpValues();
-            }
-        }
-        else
+        if (isInDevelopment)
         {
             var profiles = Resources.LoadAll<Profile>("Profiles");
             currentProfile = profiles.First(x => x.profileName == "Student");
             print("DeveloperMode");
             SetUpValues();
+            return;
+        }
+        
+        if (isGameLoad)
+        {
+            print("GameLoad");
+            SetUpValues(SaveSystem.LoadData());
+            if (isContinueMonth)
+            {
+                GameManager.instance.Money += GameManager.instance.currentProfile.income;
+                AlertDialog.instance.ShowAlert($"Monthly Income: +${GameManager.instance.currentProfile.income}", AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.Message);
+            }
+        }
+        else
+        {
+            print("Game Start");
+            currentProfile = profileToLoad;
+            profileToLoad = null;
+            SetUpValues();
         }
 
-        
     }
     
 
     private void Update()
     {
+        print("GameTime: " + gameTime.timeInHours);
         if (Input.GetKeyDown(KeyCode.Q))
         {
             gameTime.AddTime(23.5f);
@@ -214,6 +217,7 @@ public class GameManager : MonoBehaviour
         instance.Energy = saveData.energy;
         instance.Health = saveData.health;
         instance.Money = saveData.money;
+        print(saveData.timeInHours);
         instance.gameTime.SetTimeRaw(saveData.timeInHours, saveData.timePassedForDay);
         instance.Hunger = saveData.hunger;
         instance.Happiness = saveData.happiness;
@@ -285,6 +289,9 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Time.timeScale = 1;
+        GameManager.instance.currentProfile = null;
+        GameManager.isGameLoad = false;
+        isContinueMonth = false;
         SceneManager.LoadScene(0);
     }
 }

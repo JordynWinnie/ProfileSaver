@@ -7,8 +7,13 @@ public class EndGameScreenScript : MonoBehaviour
 {
     public void ContinueGame()
     {
-        GameManager.instance.Money += GameManager.instance.currentProfile.income;
-        AlertDialog.instance.ShowAlert($"Monthly Income: +${GameManager.instance.currentProfile.income}", AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.Message);
+        GameManager.isGameLoad = true;
+        GameManager.isContinueMonth = true;
+        SceneManager.LoadScene(1);
+    }
+
+    public void TryAnother()
+    {
         SceneManager.LoadScene(0);
     }
 }
