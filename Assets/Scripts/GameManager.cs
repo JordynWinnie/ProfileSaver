@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static bool isGameLoad;
+    public static bool isGameLoad = false;
     public static Profile profileToLoad;
-    public static bool isContinueMonth;
+    public static bool isContinueMonth = false;
 
     public static GameManager instance;
 
     public Profile currentProfile;
 
-    public bool isInDevelopment;
+    public bool isInDevelopment = false;
 
     public Location currentLocation;
     public List<Location> locationsList = new List<Location>();
@@ -48,14 +48,21 @@ public class GameManager : MonoBehaviour
 
         if (isGameLoad)
         {
+            print("ValueOfIsContinue: " + isContinueMonth);
             print("GameLoad");
-            SetUpValues(SaveSystem.LoadData());
+            
             if (isContinueMonth)
             {
-                instance.Money += instance.currentProfile.income;
-                AlertDialog.instance.ShowAlert($"Monthly Income: +${instance.currentProfile.income}",
-                    AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.Message);
+                print("IsContinueMonth");
+                
+                SetUpValues(SaveSystem.LoadData());
+                
+                //AlertDialog.instance.ShowAlert($"Monthly Income: +${instance.currentProfile.income}",
+                    //AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.Message);
+                return;
             }
+            
+            SetUpValues(SaveSystem.LoadData());
         }
         else
         {
@@ -70,7 +77,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         print("GameTime: " + gameTime.timeInHours);
-        if (Input.GetKeyDown(KeyCode.Q)) gameTime.AddTime(23.5f);
+        if (Input.GetKeyDown(KeyCode.Q)) gameTime.AddTime(696f);
 
         if (Input.GetKeyDown(KeyCode.W)) gameTime.AddTime(0.5f);
 
@@ -88,10 +95,12 @@ public class GameManager : MonoBehaviour
             location.avatarLocation.sprite = currentProfile.profileIcon;
             location.ShowAvatar(false);
         }
+        currentLocation.ShowAvatar(true);
     }
 
     public void SetUpValues(SaveData saveData)
     {
+        print("LocationSaved: "  + saveData.currentLocation);
         var profiles = Resources.LoadAll<Profile>("Profiles");
         instance.Energy = saveData.energy;
         instance.Health = saveData.health;
@@ -104,9 +113,9 @@ public class GameManager : MonoBehaviour
         startMoneyOfMonth = saveData.startMoneyOfMonth;
         GoalManager.instance.trackedStatistics = saveData.statList;
         currentProfile = profiles.First(x => x.profileName == saveData.currentProfile);
-        var location = locationsList.First(x => x.locationInformation.locationName == saveData.currentLocation);
-
-        DisplayInformation.infoDisplayHelper.currentLocation = location;
+        var location1 = locationsList.FirstOrDefault(x => x.locationInformation.locationName == saveData.currentLocation);
+        print("LocationLoaded: " + location1.locationInformation.locationName);
+        instance.currentLocation = location1;
     }
 
     public void SetUpValues()
@@ -119,6 +128,7 @@ public class GameManager : MonoBehaviour
         instance.Happiness = 50f;
         oldMoney = instance.Money;
         startMoneyOfMonth = instance.Money;
+        instance.currentLocation = locationsList.FirstOrDefault(x => x.locationInformation.locationName == "Home");
     }
 
     public void StatCheck()

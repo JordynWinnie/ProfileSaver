@@ -39,8 +39,6 @@ public class GoalManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (var goal in GameManager.instance.currentProfile.goals) incompleteGoals.Add(goal);
-
         UpdateGoals();
     }
 

@@ -12,7 +12,7 @@ public class DisplayInformation : MonoBehaviour
 {
     public static DisplayInformation infoDisplayHelper;
     public LocationInformation currentOpenLocation;
-    public Location currentLocation;
+    //public Location currentLocation;
 
     [SerializeField] private GameObject choiceButton;
     [SerializeField] private TextMeshProUGUI timeUI;
@@ -84,10 +84,6 @@ public class DisplayInformation : MonoBehaviour
             energyIcon.sprite = energyStates[1];
         else
             energyIcon.sprite = energyStates[0];
-
-        ResetAvatarLocation();
-        currentLocation.ShowAvatar(true);
-        GameManager.instance.currentLocation = currentLocation;
     }
 
     public void ApplyChanges(Choices choice, bool isDecision)
@@ -180,11 +176,11 @@ public class DisplayInformation : MonoBehaviour
             return;
         }
 
-        if (!location.locationInformation.locationName.Equals(currentLocation.locationInformation.locationName))
+        if (!location.locationInformation.locationName.Equals(GameManager.instance.currentLocation.locationInformation.locationName))
         {
             ResetAvatarLocation();
             location.ShowAvatar(true);
-            currentLocation = location;
+            GameManager.instance.currentLocation = location;
 
             AlertDialog.instance.ShowAlert(
                 $"You travelled to {location.locationInformation.locationName}. 30mins Passed -2.5 Energy -0.5 Hunger",
@@ -306,7 +302,7 @@ public class DisplayInformation : MonoBehaviour
 
         daySummary.text = EndOfDaySummary();
         ResetAvatarLocation();
-        currentLocation = GameManager.instance.locationsList.Where(x => x.locationInformation.locationName == "Home")
+        GameManager.instance.currentLocation = GameManager.instance.locationsList.Where(x => x.locationInformation.locationName == "Home")
             .First();
     }
 
@@ -377,9 +373,14 @@ public class DisplayInformation : MonoBehaviour
         if (time < 24) dayToSet += 1;
         GameManager.instance.gameTime.SetTimeRaw(dayToSet * 24 + profile.timeToWake, profile.timeToWake);
         SaveSystem.SaveData(GameManager.instance);
-        if (dayToSet % 30 == 0) SceneManager.LoadScene(2);
+        if (dayToSet % 30 == 0)
+        {
+            GameManager.instance.Money += GameManager.instance.currentProfile.income;
+            SaveSystem.SaveData(GameManager.instance);
+            SceneManager.LoadScene(2);
+        }
     }
-
+    
     public void DisplayGoal()
     {
         CloseAllPopups();
