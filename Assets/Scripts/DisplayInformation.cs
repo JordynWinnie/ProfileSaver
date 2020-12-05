@@ -427,6 +427,7 @@ public class DisplayInformation : MonoBehaviour
             dayToSet += 1;
         }
         GameManager.instance.gameTime.SetTimeRaw((dayToSet * 24) + profile.timeToWake, profile.timeToWake);
+        SaveSystem.SaveData(GameManager.instance);
         if (dayToSet % 30 == 0)
         {
             SceneManager.LoadScene(2);

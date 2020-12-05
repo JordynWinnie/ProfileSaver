@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -136,7 +137,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
         currentProfile = profileToLoad;
     }
 
@@ -268,5 +268,23 @@ public class GameManager : MonoBehaviour
         {
             AlertDialog.instance.ShowAlert("Warning, your health is in bad condition", AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.CriticalError);
         }
+
+        SaveSystem.SaveData(instance);
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void QuitGame()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
     }
 }

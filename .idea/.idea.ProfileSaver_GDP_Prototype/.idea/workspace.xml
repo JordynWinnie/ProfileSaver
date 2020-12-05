@@ -20,10 +20,10 @@
         <option value="$PROJECT_DIR$/Assets/SciptableObjects/Profile.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Stat.cs" />
         <option value="$PROJECT_DIR$/Assets/SaveData.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GoalManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MainMenuController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Location.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GoalManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
       </list>
     </option>
@@ -79,7 +79,7 @@
       <updated>1607088301235</updated>
       <workItem from="1607088316871" duration="5457000" />
       <workItem from="1607093909663" duration="4312000" />
-      <workItem from="1607139572045" duration="2925000" />
+      <workItem from="1607139572045" duration="5120000" />
     </task>
     <servers />
   </component>
@@ -164,9 +164,9 @@
       <screen x="62" y="0" width="2498" height="1440" />
     </state>
     <state x="967" y="340" key="run.anything.popup/62.0.2498.1440/2560.197.1858.1080@62.0.2498.1440" timestamp="1607093755615" />
-    <state x="974" y="325" width="672" height="678" key="search.everywhere.popup" timestamp="1607096763253">
+    <state x="974" y="325" width="672" height="678" key="search.everywhere.popup" timestamp="1607146115793">
       <screen x="62" y="0" width="2498" height="1440" />
     </state>
-    <state x="974" y="325" width="672" height="678" key="search.everywhere.popup/62.0.2498.1440/2560.197.1858.1080@62.0.2498.1440" timestamp="1607096763253" />
+    <state x="974" y="325" width="672" height="678" key="search.everywhere.popup/62.0.2498.1440/2560.197.1858.1080@62.0.2498.1440" timestamp="1607146115793" />
   </component>
 </project>

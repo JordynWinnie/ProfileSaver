@@ -67,7 +67,9 @@ public class GoalManager : MonoBehaviour
     public Stat AddStat(Stat stat)
     {
         trackedStatistics.Add(stat);
+        SaveSystem.SaveData(GameManager.instance);
         return stat;
+        
     }
 
     private void Start()
