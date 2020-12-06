@@ -10,14 +10,13 @@ public class Location : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        //GameManager.instance.locationsList.Add(this);
         var button = GetComponent<Button>();
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(delegate { DisplayInformation.infoDisplayHelper.DisplayLocationPopup(this); });
 
         GetComponent<Image>().sprite = locationInformation.locationSprite;
         GetComponentInChildren<TextMeshProUGUI>().text = locationInformation.locationName;
-
-        GameManager.instance.locationsList.Add(this);
     }
 
     public void ShowAvatar(bool isShown)

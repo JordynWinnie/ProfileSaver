@@ -25,6 +25,7 @@ public class MainMenuController : MonoBehaviour
 
     public void LoadGame()
     {
+        print("LoadScene Called");
         StartCoroutine(LoadScene());
     }
 
@@ -39,6 +40,7 @@ public class MainMenuController : MonoBehaviour
 
     private IEnumerator LoadScene()
     {
+        
         GameManager.isGameLoad = true;
         // Start loading the scene
         var asyncLoadLevel = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
@@ -48,5 +50,10 @@ public class MainMenuController : MonoBehaviour
         // Wait a frame so every Awake and Start method is called
 
         yield return new WaitForEndOfFrame();
+    }
+
+    public void LoadTutorial()
+    {
+        SceneManager.LoadScene(4);
     }
 }

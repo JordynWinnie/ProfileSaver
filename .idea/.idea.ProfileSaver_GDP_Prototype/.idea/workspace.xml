@@ -21,9 +21,10 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Stat.cs" />
         <option value="$PROJECT_DIR$/Assets/SaveData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MainMenuController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Location.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GoalManager.cs" />
         <option value="$PROJECT_DIR$/Assets/EndGameScreenScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/EndOfMonthEvaluation.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GoalManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Location.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" />
       </list>
@@ -80,7 +81,8 @@
       <updated>1607088301235</updated>
       <workItem from="1607088316871" duration="5457000" />
       <workItem from="1607093909663" duration="4312000" />
-      <workItem from="1607139572045" duration="7304000" />
+      <workItem from="1607139572045" duration="7824000" />
+      <workItem from="1607154959493" duration="5579000" />
     </task>
     <servers />
   </component>
@@ -173,24 +175,5 @@
       <screen x="62" y="0" width="2498" height="1440" />
     </state>
     <state x="974" y="325" width="672" height="678" key="search.everywhere.popup/62.0.2498.1440/2560.197.1858.1080@62.0.2498.1440" timestamp="1607146115793" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/EndOfMonthEvaluation.cs</url>
-          <line>44</line>
-          <properties documentPath="J:\ProfileSaver_GDP_Prototype\Assets\Scripts\EndOfMonthEvaluation.cs" initialLine="54">
-            <startOffsets>
-              <option value="1446" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1485" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

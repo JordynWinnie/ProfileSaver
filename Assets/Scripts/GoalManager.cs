@@ -39,8 +39,6 @@ public class GoalManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (var goal in GameManager.instance.currentProfile.goals) incompleteGoals.Add(goal);
-
         UpdateGoals();
     }
 
@@ -71,6 +69,10 @@ public class GoalManager : MonoBehaviour
 
     public string UpdateGoals()
     {
+        if (GameManager.instance.currentProfile == null)
+        {
+            return null;
+        }
         GameManager.instance.statList = instance.trackedStatistics;
         var currentGameTime = GameManager.instance.gameTime;
         var goalList = GameManager.instance.currentProfile.goals;

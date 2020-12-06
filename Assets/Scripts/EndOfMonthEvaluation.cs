@@ -85,10 +85,8 @@ public class EndOfMonthEvaluation : MonoBehaviour
 
     private int CalculateGoals()
     {
-        var completedGoalCount = GoalManager.instance.completeGoals
-            .Where(x => x.goalType == GoalManager.GoalLength.Monthly).Count();
-        var totalGoals = GameManager.instance.currentProfile.goals
-            .Where(x => x.goalType == GoalManager.GoalLength.Monthly).Count();
+        var completedGoalCount = GoalManager.instance.completeGoals.Count(x => x.goalType == GoalManager.GoalLength.Monthly);
+        var totalGoals = GameManager.instance.currentProfile.goals.Count(x => x.goalType == GoalManager.GoalLength.Monthly);
 
         var percentageComplete = (float) completedGoalCount / totalGoals * 5f;
 
