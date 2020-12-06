@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d35f600a59112d94497a3c528d52dd91, type: 3}
-  m_Name: WorkGoal
+  m_Name: WorkGoalTeacher
   m_EditorClassIdentifier: 
-  goalName: "Work for 180 hours between 08:00 \u2013 18:00 "
-  statType: 0
+  goalName: Teach for 180 hours
+  statType: 2
   goalType: 1
-  totalCommitment: 0
+  totalCommitment: 180
   acceptAllTime: 1
   onlyAcceptFromTime: 0
   onlyAcceptToTime: 0

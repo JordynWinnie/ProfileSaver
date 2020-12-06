@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d35f600a59112d94497a3c528d52dd91, type: 3}
-  m_Name: BuyFishGoal
+  m_Name: SavingsGoalTeacher
   m_EditorClassIdentifier: 
-  goalName: 'Buy 10 fishes from the supermarket '
-  statType: 5
+  goalName: 'Save a minimum of $2,000    '
+  statType: 6
   goalType: 1
-  totalCommitment: 10
+  totalCommitment: 3000
   acceptAllTime: 1
   onlyAcceptFromTime: 0
   onlyAcceptToTime: 0
-  miscStatParams: Fish
+  miscStatParams: 

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Teacher
   m_EditorClassIdentifier: 
   profileName: Mr Nash
-  income: 3000
-  maxIncome: 5000
+  income: 1500
+  maxIncome: 2000
   age: 47
   timeToWake: 7
   timeToSleep: 23
@@ -23,12 +23,26 @@ MonoBehaviour:
     day. You live with your wife and 2 daughters Sally and Mandy. You also love to
     cook for the family whenever you have time.
   goals:
-  - {fileID: 11400000, guid: 7c72f7ea737fc2942a33cb5322795f04, type: 2}
+  - {fileID: 11400000, guid: 901a48697256a084cb9e90392b973e4b, type: 2}
   - {fileID: 11400000, guid: 62471fd8b9fedac47b86a0841981a389, type: 2}
   - {fileID: 11400000, guid: e170367be0ee9034895eeb1930e22391, type: 2}
-  - {fileID: 11400000, guid: 76d0534eb04d46745a2fc2eab4d60ae4, type: 2}
-  - {fileID: 11400000, guid: 901a48697256a084cb9e90392b973e4b, type: 2}
-  schoolChoices: []
+  - {fileID: 11400000, guid: dac8a9b2c8b0d5a498266d26b03048f8, type: 2}
+  - {fileID: 11400000, guid: 82aafd2a2497dba458c0a910414209b1, type: 2}
+  - {fileID: 11400000, guid: 817ac433fdf150e409261153cbca65a9, type: 2}
+  - {fileID: 11400000, guid: 758db811cd3d8554bba328d0053609f4, type: 2}
+  - {fileID: 11400000, guid: ebb78a605c108d64f9eaa587446ddccf, type: 2}
+  schoolChoices:
+  - {fileID: 11400000, guid: a1e2bba4b233ab545add494929e8e171, type: 2}
   workplaceChoices: []
   homeChoices: []
-  situationsForProfile: []
+  situationsForProfile:
+  - {fileID: 11400000, guid: 2f8eb391997270241b9255de56d7be79, type: 2}
+  - {fileID: 11400000, guid: 18cbd5a5ec50e594c8e1ea06dcd5e70f, type: 2}
+  - {fileID: 11400000, guid: d83aa835a9981514984ade7427ca3b19, type: 2}
+  - {fileID: 11400000, guid: 7d4667ec178ed6d429c1c32cb53174a0, type: 2}
+  - {fileID: 11400000, guid: cf34da69290c2487cbe08010191b9b94, type: 2}
+  - {fileID: 11400000, guid: 3087cd53157d7422681ac2d8f491410f, type: 2}
+  - {fileID: 11400000, guid: 32031d94ca08d7a4083997e36b734073, type: 2}
+  - {fileID: 11400000, guid: 71739699980d9ab429b74fd2555e1b43, type: 2}
+  - {fileID: 11400000, guid: dbc7dd2f94f8ebc43a473434832913ac, type: 2}
+  - {fileID: 0}

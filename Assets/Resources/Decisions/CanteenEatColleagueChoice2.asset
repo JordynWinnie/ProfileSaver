@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81ddfb2ae04e34c67953688a363ddb2b, type: 3}
-  m_Name: TeachStudents
+  m_Name: CanteenEatColleagueChoice2
   m_EditorClassIdentifier: 
-  choiceName: Teach students
+  choiceName: Skip lunch to do work
   happinessToAdd: 0
-  healthToAdd: -10
-  moneyToAdd: 200
-  hunger: -5
-  energy: -50
-  timeTaken: 8
-  statType: 2
-  progressionForStat: 8
+  healthToAdd: 0
+  moneyToAdd: 0
+  hunger: 0
+  energy: 0
+  timeTaken: 0
+  statType: 0
+  progressionForStat: 0
   miscStatParams: 

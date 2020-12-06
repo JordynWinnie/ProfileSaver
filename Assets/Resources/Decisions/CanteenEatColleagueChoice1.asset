@@ -9,14 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d35f600a59112d94497a3c528d52dd91, type: 3}
-  m_Name: WorkGoal
+  m_Script: {fileID: 11500000, guid: 81ddfb2ae04e34c67953688a363ddb2b, type: 3}
+  m_Name: CanteenEatColleagueChoice1
   m_EditorClassIdentifier: 
-  goalName: Work 20 Hours this Month
-  statType: 2
-  goalType: 1
-  totalCommitment: 20
-  acceptAllTime: 1
-  onlyAcceptFromTime: 0
-  onlyAcceptToTime: 0
+  choiceName: Join Colleagues for lunch
+  happinessToAdd: 10
+  healthToAdd: 5
+  moneyToAdd: -10
+  hunger: 3
+  energy: 20
+  timeTaken: 1
+  statType: 4
+  progressionForStat: 1
   miscStatParams: 
