@@ -28,3 +28,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e170367be0ee9034895eeb1930e22391, type: 2}
   - {fileID: 11400000, guid: 76d0534eb04d46745a2fc2eab4d60ae4, type: 2}
   - {fileID: 11400000, guid: 901a48697256a084cb9e90392b973e4b, type: 2}
+  schoolChoices: []
+  workplaceChoices: []
+  homeChoices: []
+  situationsForProfile: []
