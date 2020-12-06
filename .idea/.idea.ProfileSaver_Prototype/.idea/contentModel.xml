@@ -58,6 +58,7 @@
           <e p="License.txt" t="Include" />
           <e p="ReadMe.txt" t="Include" />
         </e>
+        <e p="LoseGameScript.cs" t="Include" />
         <e p="SaveData.cs" t="Include" />
         <e p="SaveSystem.cs" t="Include" />
         <e p="SciptableObjects" t="Include">

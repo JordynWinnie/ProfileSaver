@@ -2,24 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f7868401-f1cb-4b72-a5be-6d377eeddb45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/contentModel.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/riderModule.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/CameraScript.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/CameraScript.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Profiles/Student 2/Student 2.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Profiles/Student 2/Student 2.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Profiles/Student/Student.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Profiles/Student/Student.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScreen.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScreen.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Location.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Location.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Fonts/VCR_OSD_MONO_1.001 SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/VCR_OSD_MONO_1.001 SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/EndingScreens.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/EndingScreens.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +13,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/LoseGameScript.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/CameraScript.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Location.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GoalManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/LoseGameScript.cs" />
       </list>
     </option>
   </component>
@@ -85,7 +75,7 @@
       <option name="presentableId" value="Default" />
       <updated>1607230478671</updated>
       <workItem from="1607230487575" duration="615000" />
-      <workItem from="1607237296860" duration="313000" />
+      <workItem from="1607237296860" duration="813000" />
     </task>
     <servers />
   </component>

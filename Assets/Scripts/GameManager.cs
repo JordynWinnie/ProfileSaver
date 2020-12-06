@@ -167,6 +167,10 @@ public class GameManager : MonoBehaviour
                 AlertDialog.AlertLength.Length_Long, AlertDialog.AlertType.CriticalError);
 
         SaveSystem.SaveData(instance);
+        if (Health <= 0)
+        {
+            SceneManager.LoadScene(3);
+        }
     }
 
     public void PauseGame()
