@@ -51,4 +51,9 @@ public class MainMenuController : MonoBehaviour
 
         yield return new WaitForEndOfFrame();
     }
+
+    public void LoadTutorial()
+    {
+        SceneManager.LoadScene(4);
+    }
 }

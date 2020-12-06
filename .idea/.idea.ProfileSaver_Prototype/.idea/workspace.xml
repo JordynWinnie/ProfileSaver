@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="f7868401-f1cb-4b72-a5be-6d377eeddb45" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Fonts/VCR_OSD_MONO_1.001 SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Fonts/VCR_OSD_MONO_1.001 SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/EndingScreens.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/EndingScreens.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/CloseButton.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/CloseButton.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Profiles/Student 2.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Profiles/Student 2.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MainMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MainMenuController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +36,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/LoseGameScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/TutorialScript.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -22,9 +44,11 @@
         <option value="$PROJECT_DIR$/Assets/CameraScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Location.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GoalManager.cs" />
         <option value="$PROJECT_DIR$/Assets/LoseGameScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MainMenuController.cs" />
+        <option value="$PROJECT_DIR$/Assets/TutorialScript.cs" />
       </list>
     </option>
   </component>
@@ -75,7 +99,7 @@
       <option name="presentableId" value="Default" />
       <updated>1607230478671</updated>
       <workItem from="1607230487575" duration="615000" />
-      <workItem from="1607237296860" duration="813000" />
+      <workItem from="1607237296860" duration="4295000" />
     </task>
     <servers />
   </component>
@@ -84,10 +108,25 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="367" y="145" key="RiderGenerateDialog" timestamp="1607245400600">
+      <screen x="0" y="25" width="1398" height="875" />
+    </state>
+    <state x="367" y="145" key="RiderGenerateDialog/0.25.1398.875@0.25.1398.875" timestamp="1607245400600" />
     <state x="208" y="98" key="SettingsEditor" timestamp="1607230531445">
       <screen x="0" y="25" width="1398" height="875" />
     </state>

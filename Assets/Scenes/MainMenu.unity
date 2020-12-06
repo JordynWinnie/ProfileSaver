@@ -220,7 +220,7 @@ PrefabInstance:
       objectReference: {fileID: 1347018173}
     - target: {fileID: 7012022551697513757, guid: aed0f5f6f186d6348b6a5605b4ccc128, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadGame
+      value: LoadTutorial
       objectReference: {fileID: 0}
     - target: {fileID: 7012022551697513757, guid: aed0f5f6f186d6348b6a5605b4ccc128, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
