@@ -62,6 +62,8 @@ public class DisplayInformation : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance.currentProfile == null) return;
+        
         timeUI.text = GameManager.instance.gameTime.ReturnTimeString();
         moneyUI.text = $"${GameManager.instance.Money}";
         healthUI.text = $"{GameManager.instance.Health}/100";

@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
     public bool isInDevelopment = false;
 
     public Location currentLocation;
-    public List<Location> locationsList = new List<Location>();
+    [SerializeField]
+    public List<Location> locationsList;
 
     public List<Stat> statList;
     private float _energy = 50f;
@@ -89,6 +90,8 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S)) SaveSystem.SaveData(instance);
 
+        if (currentProfile == null) return;
+        
         foreach (var location in locationsList)
         {
             print(location.locationInformation.locationName);

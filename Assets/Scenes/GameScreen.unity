@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &7187690 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3357791487263908306, guid: 4e255ab73ae990b47b3d4198a7acd127, type: 3}
+  m_PrefabInstance: {fileID: 2009816436}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9320142bc8f3c24f8b18c29b4880923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &14967217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1041,6 +1052,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190559524}
   m_CullTransparentMesh: 0
+--- !u!114 &193695727 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3357791487263908306, guid: 4e255ab73ae990b47b3d4198a7acd127, type: 3}
+  m_PrefabInstance: {fileID: 14967217}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9320142bc8f3c24f8b18c29b4880923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &221948120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2864,6 +2886,12 @@ MonoBehaviour:
   currentProfile: {fileID: 0}
   isInDevelopment: 0
   currentLocation: {fileID: 0}
+  locationsList:
+  - {fileID: 193695727}
+  - {fileID: 2104887389}
+  - {fileID: 7187690}
+  - {fileID: 1460852663}
+  - {fileID: 1410976439}
   statList: []
 --- !u!4 &705386141
 Transform:
@@ -5162,6 +5190,17 @@ MonoBehaviour:
   trackedStatistics: []
   incompleteGoals: []
   completeGoals: []
+--- !u!114 &1410976439 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3357791487263908306, guid: 4e255ab73ae990b47b3d4198a7acd127, type: 3}
+  m_PrefabInstance: {fileID: 1786535039}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9320142bc8f3c24f8b18c29b4880923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1421540000
 GameObject:
   m_ObjectHideFlags: 0
@@ -5198,7 +5237,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -5320,6 +5359,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439093863}
   m_CullTransparentMesh: 0
+--- !u!114 &1460852663 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3357791487263908306, guid: 4e255ab73ae990b47b3d4198a7acd127, type: 3}
+  m_PrefabInstance: {fileID: 624616213}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9320142bc8f3c24f8b18c29b4880923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1506458279
 GameObject:
   m_ObjectHideFlags: 0
@@ -6462,7 +6512,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -6477,7 +6527,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1421540002}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -6532,7 +6582,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentOpenLocation: {fileID: 0}
-  currentLocation: {fileID: 0}
   choiceButton: {fileID: 4833226209716481582, guid: 0783cad2eff1c4923ae354c42d20a921, type: 3}
   timeUI: {fileID: 2041378489}
   moneyUI: {fileID: 2114416576}
@@ -6830,6 +6879,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2041378487}
   m_CullTransparentMesh: 0
+--- !u!114 &2104887389 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3357791487263908306, guid: 4e255ab73ae990b47b3d4198a7acd127, type: 3}
+  m_PrefabInstance: {fileID: 1611993561}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9320142bc8f3c24f8b18c29b4880923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2114416574
 GameObject:
   m_ObjectHideFlags: 0
