@@ -687,7 +687,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'After about a month (avg 30 days passed), your stats will be calculated
-    and star ratings will be given to you
+    and star ratings will be given to you.
 
 '
   m_isRightToLeft: 0
@@ -2140,7 +2140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'good luck and have fun
+  m_text: 'Good luck and have fun!
 
 
 '
@@ -3171,7 +3171,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'dont take too long to decide as there is a timer which will run out and
+  m_text: 'Dont take too long to decide as there is a timer which will run out and
     there will be penalties!
 
 '
@@ -3518,7 +3518,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'travelling also uses up hunger and time, so spend ur time wisely
+  m_text: 'Travelling also uses up hunger and time, so spend ur time wisely!
 
 '
   m_isRightToLeft: 0
@@ -3954,7 +3954,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'random events might appear as you play the game.
+  m_text: 'Random events might appear as you play the game.
 
 
 '
@@ -4321,8 +4321,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'game autosaves your profile after every decision, which can be accessed
-    through the load game in main menu
+  m_text: 'The game autosaves your profile after every decision, which can be accessed
+    through the load game in main menu.
 
 
 '
