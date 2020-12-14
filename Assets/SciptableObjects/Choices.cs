@@ -11,7 +11,7 @@ public class Choices : ScriptableObject
     [FormerlySerializedAs("money")] public float moneyToAdd;
 
     public float hunger;
-    public float energy;
+
     public float timeTaken;
     public Stat.StatType statType;
     public float progressionForStat;

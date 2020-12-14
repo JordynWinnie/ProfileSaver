@@ -48,8 +48,7 @@ public class DisplayInformation : MonoBehaviour
     [SerializeField] private Button goalsButton;
 
     [SerializeField] private List<Sprite> happinessStates;
-    [SerializeField] private List<Sprite> energyStates;
-    
+
     [SerializeField] private TextMeshProUGUI statusBarText;
 
     private void Awake()
@@ -234,7 +233,6 @@ public class DisplayInformation : MonoBehaviour
             var newChoice = new Choices
             {
                 choiceName = "End the day",
-                energy = 25,
                 happinessToAdd = 0,
                 hunger = -1,
                 healthToAdd = 0,
@@ -277,7 +275,6 @@ public class DisplayInformation : MonoBehaviour
         var newChoice = new Choices
         {
             choiceName = "End the day",
-            energy = 25,
             happinessToAdd = 0,
             hunger = -2,
             healthToAdd = 0,
@@ -408,12 +405,7 @@ public class DisplayInformation : MonoBehaviour
         {
             sb.Append($"{choices.timeTaken}h Passed ");
         }
-
-        if (choices.energy != 0)
-        {
-            sb.Append($"{HelperFunctions.ReturnSign(choices.energy)}{Mathf.Abs(choices.energy)} energy ");
-        }
-
+        
         if (choices.healthToAdd != 0)
         {
             sb.Append($"{HelperFunctions.ReturnSign(choices.healthToAdd)}{Mathf.Abs(choices.healthToAdd)} health ");

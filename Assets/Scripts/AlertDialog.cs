@@ -53,44 +53,7 @@ public class AlertDialog : MonoBehaviour
     {
         alertQueue.Enqueue(new Alert(text, alertLength, alertType));
     }
-
-    public void ShowAlert(Choices choices, AlertLength alertLength, AlertType alertType)
-    {
-        var sb = new StringBuilder();
-        sb.Append($"{choices.choiceName}: ");
-        if (choices.timeTaken != 0)
-        {
-            sb.Append($"{choices.timeTaken}h Passed ");
-        }
-
-        if (choices.energy != 0)
-        {
-            sb.Append($"{HelperFunctions.ReturnSign(choices.energy)}{Mathf.Abs(choices.energy)} energy ");
-        }
-
-        if (choices.healthToAdd != 0)
-        {
-            sb.Append($"{HelperFunctions.ReturnSign(choices.healthToAdd)}{Mathf.Abs(choices.healthToAdd)} health ");
-        }
-
-        if (choices.happinessToAdd != 0)
-        {
-            sb.Append(
-                $"{HelperFunctions.ReturnSign(choices.happinessToAdd)}{Mathf.Abs(choices.happinessToAdd)} happiness ");
-        }
-
-        if (choices.hunger != 0)
-        {
-            sb.Append($"{HelperFunctions.ReturnSign(choices.hunger)}{Mathf.Abs(choices.hunger)} hunger ");
-        }
-
-        if (choices.moneyToAdd != 0)
-        {
-            sb.Append($"{HelperFunctions.ReturnSign(choices.moneyToAdd)}${Mathf.Abs(choices.moneyToAdd)} ");
-        }
-
-        alertQueue.Enqueue(new Alert(sb.ToString(), alertLength, alertType));
-    }
+    
 
     public void DismissAlert(AlertLength alertLength)
     {

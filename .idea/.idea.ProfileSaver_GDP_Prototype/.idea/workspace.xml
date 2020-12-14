@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31601b70-32ec-4530-ad55-af824af1d9d0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Choice1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Choice1.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TimerScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TimerScript.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,9 +28,10 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Location.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MainMenuController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SaveData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TimerScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ChoiceButton.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" />
       </list>
     </option>
   </component>
@@ -93,7 +89,7 @@
       <workItem from="1607139572045" duration="7824000" />
       <workItem from="1607154959493" duration="5579000" />
       <workItem from="1607179674788" duration="898000" />
-      <workItem from="1607949676502" duration="3415000" />
+      <workItem from="1607949676502" duration="3845000" />
     </task>
     <servers />
   </component>
