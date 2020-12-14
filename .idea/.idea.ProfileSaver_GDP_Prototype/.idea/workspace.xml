@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="31601b70-32ec-4530-ad55-af824af1d9d0" name="Default Changelist" comment="" />
+    <list default="true" id="31601b70-32ec-4530-ad55-af824af1d9d0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScreen.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScreen.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,12 +25,12 @@
         <option value="$PROJECT_DIR$/Assets/SciptableObjects/Profile.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Stat.cs" />
         <option value="$PROJECT_DIR$/Assets/SaveData.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MainMenuController.cs" />
         <option value="$PROJECT_DIR$/Assets/EndGameScreenScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/EndOfMonthEvaluation.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GoalManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Location.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MainMenuController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" />
       </list>
     </option>
@@ -83,6 +88,8 @@
       <workItem from="1607093909663" duration="4312000" />
       <workItem from="1607139572045" duration="7824000" />
       <workItem from="1607154959493" duration="5579000" />
+      <workItem from="1607179674788" duration="898000" />
+      <workItem from="1607949676502" duration="305000" />
     </task>
     <servers />
   </component>
