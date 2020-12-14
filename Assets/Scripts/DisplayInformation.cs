@@ -71,7 +71,7 @@ public class DisplayInformation : MonoBehaviour
         healthUI.text = $"{GameManager.instance.Health}/100";
         happinessUI.text = $"{GameManager.instance.Happiness}/100";
         hungerUI.text = $"{GameManager.instance.Hunger}/10";
-        energyUI.text = $"{GameManager.instance.Energy}/100";
+
         profileIcon.sprite = GameManager.instance.currentProfile.profileIcon;
         profileName.text = GameManager.instance.currentProfile.profileName;
 
@@ -81,23 +81,17 @@ public class DisplayInformation : MonoBehaviour
             happinessIcon.sprite = happinessStates[1];
         else
             happinessIcon.sprite = happinessStates[0];
-
-        if (GameManager.instance.Energy <= 30)
-            energyIcon.sprite = energyStates[2];
-        else if (GameManager.instance.Energy >= 31 && GameManager.instance.Energy <= 70)
-            energyIcon.sprite = energyStates[1];
-        else
-            energyIcon.sprite = energyStates[0];
+        
     }
 
     public void ApplyChanges(Choices choice, bool isDecision)
     {
         var currentHunger = GameManager.instance.Hunger;
-        var currentEnergy = GameManager.instance.Energy;
+
         var time = GameManager.instance.gameTime;
         var currLocation = currentOpenLocation == null ? string.Empty : currentOpenLocation.locationName;
         if (!isDecision)
-            if (currentEnergy + choice.energy < 0 || currentHunger + choice.hunger < 0)
+            if (currentHunger + choice.hunger < 0)
             {
                 AlertDialog.instance.ShowAlert("You're too hungry or tired", AlertDialog.AlertLength.Length_Short,
                     AlertDialog.AlertType.CriticalError);
@@ -116,7 +110,6 @@ public class DisplayInformation : MonoBehaviour
         GameManager.instance.Money += choice.moneyToAdd;
         GameManager.instance.gameTime.AddTime(choice.timeTaken);
         GameManager.instance.Hunger += choice.hunger;
-        GameManager.instance.Energy += choice.energy;
 
         GameManager.instance.StatCheck();
     }
@@ -188,10 +181,9 @@ public class DisplayInformation : MonoBehaviour
             GameManager.instance.currentLocation = location;
 
             AlertDialog.instance.ShowAlert(
-                $"You travelled to {location.locationInformation.locationName}. 30mins Passed -2.5 Energy -0.5 Hunger",
+                $"You travelled to {location.locationInformation.locationName}. 30mins Passed  -0.5 Hunger",
                 AlertDialog.AlertLength.Length_Short, AlertDialog.AlertType.Warning);
             GameManager.instance.gameTime.AddTime(0.5f);
-            GameManager.instance.Energy -= 2.5f;
             GameManager.instance.Hunger -= 0.5f;
             GameManager.instance.StatCheck();
             var queryForLocationPopup = currentProfile.situationsForProfile.Where(x =>
@@ -345,19 +337,18 @@ public class DisplayInformation : MonoBehaviour
 
         if (percentComplete >= 80f)
         {
-            sb.AppendLine("You're really on task! +50 Energy +10 Happiness +5 Health");
-            GameManager.instance.Energy += 25;
+            sb.AppendLine("You're really on task! +10 Happiness +5 Health");
+
             GameManager.instance.Happiness += 10;
             GameManager.instance.Health += 5;
-            sb.AppendLine("Reward: +25 Energy +10 Happiness +5 Health");
+            sb.AppendLine("Reward: +10 Happiness +5 Health");
         }
         else if (percentComplete <= 79f && percentComplete >= 40f)
         {
             sb.AppendLine("You forgot a few tasks, but good try!");
-            GameManager.instance.Energy += 25;
             GameManager.instance.Happiness += 5;
             GameManager.instance.Health += 3;
-            sb.AppendLine("Reward: +25 Energy +5 Happiness");
+            sb.AppendLine("Reward: +5 Happiness +3 Health");
         }
         else
         {

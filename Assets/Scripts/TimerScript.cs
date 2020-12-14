@@ -39,9 +39,8 @@ public class TimerScript : MonoBehaviour
         }
         else
         {
-            AlertDialog.instance.ShowAlert("You decided to do nothing. 30mins passed -5 Energy -1 Hunger",
+            AlertDialog.instance.ShowAlert("You decided to do nothing. 30mins passed -1 Hunger",
                 AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
-            GameManager.instance.Energy -= 5;
             GameManager.instance.Hunger -= 1;
             GameManager.instance.gameTime.AddTime(0.5f);
             GameManager.instance.StatCheck();

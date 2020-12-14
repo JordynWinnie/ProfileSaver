@@ -22,7 +22,6 @@ public class SaveData
         statList = gameManager.statList;
         startMoneyOfMonth = gameManager.startMoneyOfMonth;
         money = gameManager.Money;
-        energy = gameManager.Energy;
         hunger = gameManager.Hunger;
         health = gameManager.Health;
         oldMoney = gameManager.oldMoney;

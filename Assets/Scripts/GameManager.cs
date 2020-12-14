@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public List<Location> locationsList;
 
     public List<Stat> statList;
-    private float _energy = 50f;
+
     private float _happiness = 50f;
 
     private float _health = 50f;
@@ -105,7 +105,6 @@ public class GameManager : MonoBehaviour
     {
         print("LocationSaved: "  + saveData.currentLocation);
         var profiles = Resources.LoadAll<Profile>("Profiles");
-        instance.Energy = saveData.energy;
         instance.Health = saveData.health;
         instance.Money = saveData.money;
         print(saveData.timeInHours);
@@ -123,7 +122,7 @@ public class GameManager : MonoBehaviour
 
     public void SetUpValues()
     {
-        instance.Energy = 75f;
+
         instance.Health = 75f;
         instance.Money = instance.currentProfile.income;
         instance.gameTime.SetTime(instance.currentProfile.timeToWake);
@@ -139,14 +138,6 @@ public class GameManager : MonoBehaviour
         if (instance.Hunger <= 1)
         {
             AlertDialog.instance.ShowAlert("You got really hungry. -5 Happiness -2 Health",
-                AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
-            instance.Happiness -= 5;
-            instance.Health -= 2;
-        }
-
-        if (instance.Energy <= 10)
-        {
-            AlertDialog.instance.ShowAlert("You got really tired. -5 Happiness -2 Health",
                 AlertDialog.AlertLength.Length_Normal, AlertDialog.AlertType.CriticalError);
             instance.Happiness -= 5;
             instance.Health -= 2;
@@ -295,18 +286,7 @@ public class GameManager : MonoBehaviour
     #region Variable Declaration
 
     public float Money { get; set; } = 500f;
-
-    public float Energy
-    {
-        get => _energy;
-        set
-        {
-            if (value >= 100) _energy = 100;
-            else if (value <= 0) _energy = 0;
-            else _energy = value;
-        }
-    }
-
+    
     public float Hunger
     {
         get => _hunger;
