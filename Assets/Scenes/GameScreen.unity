@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26002eff3fa204694a6f6361ffd549bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 30
+  maxTime: 60
   isPaused: 0
 --- !u!114 &190559527
 MonoBehaviour:

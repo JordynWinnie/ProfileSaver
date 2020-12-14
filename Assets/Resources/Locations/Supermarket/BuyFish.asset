@@ -19,6 +19,6 @@ MonoBehaviour:
   hunger: 0
   energy: 0
   timeTaken: 1
-  statType: 0
+  statType: 5
   progressionForStat: 1
   miscStatParams: Fish

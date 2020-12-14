@@ -20,12 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f7868401-f1cb-4b72-a5be-6d377eeddb45" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_Prototype/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/CloseButton.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/CloseButton.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Profiles/Student 2.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Profiles/Student 2.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MainMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MainMenuController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +29,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/TutorialScript.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -99,7 +91,8 @@
       <option name="presentableId" value="Default" />
       <updated>1607230478671</updated>
       <workItem from="1607230487575" duration="615000" />
-      <workItem from="1607237296860" duration="4295000" />
+      <workItem from="1607237296860" duration="4640000" />
+      <workItem from="1607312539043" duration="213000" />
     </task>
     <servers />
   </component>
@@ -118,6 +111,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
