@@ -139,6 +139,8 @@ public class GoalManager : MonoBehaviour
                     sb.AppendLine(
                         $"- {goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (NOT DONE)");
                 }
+
+                sb.AppendLine();
             }
 
             sb.AppendLine();
