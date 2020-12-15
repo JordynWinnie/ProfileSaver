@@ -11,10 +11,14 @@ public class Choices : ScriptableObject
     [FormerlySerializedAs("money")] public float moneyToAdd;
 
     public float hunger;
-
     public float timeTaken;
     public Stat.StatType statType;
     public float progressionForStat;
 
+    public int meatAmount;
+    public int vegetableAmount;
+    public int fishAmount;
+    public int fruitAmount;
+    
     public string miscStatParams;
 }

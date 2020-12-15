@@ -26,6 +26,11 @@ public class GameManager : MonoBehaviour
     private float _health = 50f;
     private float _hunger = 10f;
 
+    private int _meatAmount = 0;
+    private int _vegetableAmount = 0;
+    private int _fishAmount = 0;
+    private int _fruitAmount = 0;
+
     public GameTime gameTime = new GameTime();
 
     private void Awake()
@@ -118,6 +123,10 @@ public class GameManager : MonoBehaviour
         var location1 = locationsList.FirstOrDefault(x => x.locationInformation.locationName == saveData.currentLocation);
         print("LocationLoaded: " + location1.locationInformation.locationName);
         instance.currentLocation = location1;
+        instance.FruitsAmt = saveData.fruitAmount;
+        instance.FishAmt = saveData.fishAmount;
+        instance.MeatAmt = saveData.meatAmount;
+        instance.VegetableAmt = saveData.vegetableAmount;
     }
 
     public void SetUpValues()
@@ -285,6 +294,43 @@ public class GameManager : MonoBehaviour
 
     #region Variable Declaration
 
+    public int MeatAmt
+    {
+        get => _meatAmount;
+        set
+        {
+            if (value >= 999) _meatAmount = 999;
+            else _meatAmount = value;
+        }
+    }
+    public int FishAmt
+    {
+        get => _fishAmount;
+        set
+        {
+            if (value >= 999) _fishAmount = 999;
+            else _fishAmount = value;
+        }
+    }
+    public int FruitsAmt
+    {
+        get => _fruitAmount;
+        set
+        {
+            if (value >= 999) _fruitAmount = 999;
+            else _fruitAmount = value;
+        }
+    }
+    public int VegetableAmt
+    {
+        get => _vegetableAmount;
+        set
+        {
+            if (value >= 999) _vegetableAmount = 999;
+            else _vegetableAmount = value;
+        }
+    }
+    
     public float Money { get; set; } = 500f;
     
     public float Hunger

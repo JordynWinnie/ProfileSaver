@@ -51,6 +51,11 @@ public class DisplayInformation : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI statusBarText;
 
+    [SerializeField] private TextMeshProUGUI fruitsText;
+    [SerializeField] private TextMeshProUGUI meatText;
+    [SerializeField] private TextMeshProUGUI vegetableText;
+    [SerializeField] private TextMeshProUGUI fishesText;
+
     private void Awake()
     {
         if (infoDisplayHelper == null)
@@ -92,7 +97,7 @@ public class DisplayInformation : MonoBehaviour
         if (!isDecision)
             if (currentHunger + choice.hunger < 0)
             {
-                AlertDialog.instance.ShowAlert("You're too hungry or tired", AlertDialog.AlertLength.Length_Short,
+                AlertDialog.instance.ShowAlert("You're too hungry", AlertDialog.AlertLength.Length_Short,
                     AlertDialog.AlertType.CriticalError);
                 return;
             }
@@ -109,7 +114,11 @@ public class DisplayInformation : MonoBehaviour
         GameManager.instance.Money += choice.moneyToAdd;
         GameManager.instance.gameTime.AddTime(choice.timeTaken);
         GameManager.instance.Hunger += choice.hunger;
-
+        GameManager.instance.FruitsAmt += choice.fruitAmount;
+        GameManager.instance.FishAmt += choice.fishAmount;
+        GameManager.instance.VegetableAmt += choice.vegetableAmount;
+        GameManager.instance.MeatAmt += choice.meatAmount;
+        
         GameManager.instance.StatCheck();
     }
 
@@ -221,11 +230,52 @@ public class DisplayInformation : MonoBehaviour
         backgroundOfPlace.sprite = locationInformation.locationBackground;
         var layout = GetComponentInChildren<FlexibleLayoutGroup>();
         foreach (Transform previousChoice in layout.transform) Destroy(previousChoice.gameObject);
-        foreach (var choice in locationInformation.thingsToDo) GenerateButton(layout, choice);
+        foreach (var choice in locationInformation.thingsToDo)
+        {
+            if (choice.fishAmount != 0)
+            {
+                if (choice.fishAmount + GameManager.instance.FishAmt >= 0)
+                {
+                    GenerateButton(layout, choice);
+                }
+                continue;
+                
+            }
+            if (choice.meatAmount != 0)
+            {
+                if (choice.meatAmount + GameManager.instance.MeatAmt >= 0)
+                {
+                    GenerateButton(layout, choice);
+                }
+                continue;
+                
+            }
+            if (choice.vegetableAmount != 0)
+            {
+                if (choice.vegetableAmount + GameManager.instance.VegetableAmt >= 0)
+                {
+                    GenerateButton(layout, choice);
+                }
+                continue;
+            }
+            if (choice.fruitAmount != 0)
+            {
+                if (choice.fruitAmount + GameManager.instance.FruitsAmt >= 0)
+                {
+                    GenerateButton(layout, choice);
+                }
+                continue;
+                
+            }
+            GenerateButton(layout, choice);
+        }
 
         if (locationInformation.locationName.Equals("Home"))
         {
-            foreach (var choice in currentProfile.homeChoices) GenerateButton(layout, choice);
+            foreach (var choice in currentProfile.homeChoices)
+            {
+                //GenerateButton(layout, choice);
+            }
 
             var button = Instantiate(choiceButton, layout.transform);
             button.GetComponentInChildren<TextMeshProUGUI>().text = "End the day";
@@ -426,7 +476,34 @@ public class DisplayInformation : MonoBehaviour
         {
             sb.Append($"{HelperFunctions.ReturnSign(choices.moneyToAdd)}${Mathf.Abs(choices.moneyToAdd)} ");
         }
+        if (choices.fruitAmount != 0)
+        {
+            sb.Append($"{HelperFunctions.ReturnSign(choices.fruitAmount)}{Mathf.Abs(choices.fruitAmount)} fruit");
+        }
+        
+        if (choices.fishAmount != 0)
+        {
+            sb.Append($"{HelperFunctions.ReturnSign(choices.fishAmount)}{Mathf.Abs(choices.fishAmount)} fish");
+        }
+        
+        if (choices.vegetableAmount != 0)
+        {
+            sb.Append($"{HelperFunctions.ReturnSign(choices.vegetableAmount)}${Mathf.Abs(choices.vegetableAmount)} vegetable");
+        }
+        
+        if (choices.meatAmount != 0)
+        {
+            sb.Append($"{HelperFunctions.ReturnSign(choices.meatAmount)}{Mathf.Abs(choices.meatAmount)} meat");
+        }
 
         statusBarText.text = sb.ToString();
+    }
+
+    public void ShowBagInventory()
+    {
+        fishesText.text = $"{GameManager.instance.FishAmt} Fish";
+        meatText.text = $"{GameManager.instance.MeatAmt} Meat";
+        vegetableText.text = $"{GameManager.instance.VegetableAmt} Vegetables";
+        fruitsText.text = $"{GameManager.instance.FruitsAmt} Fruits";
     }
 }

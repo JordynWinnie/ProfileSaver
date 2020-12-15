@@ -17,8 +17,11 @@ MonoBehaviour:
   healthToAdd: 0
   moneyToAdd: -20
   hunger: 0
-  energy: 0
   timeTaken: 0
   statType: 5
   progressionForStat: 1
+  meatAmount: 0
+  vegetableAmount: 0
+  fishAmount: 0
+  fruitAmount: 1
   miscStatParams: Fruits

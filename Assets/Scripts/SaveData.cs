@@ -7,7 +7,6 @@ public class SaveData
     public List<Stat> statList;
     public float startMoneyOfMonth;
     public float money;
-    public float energy;
     public float hunger;
     public float health;
     public float oldMoney;
@@ -16,6 +15,10 @@ public class SaveData
     public float timePassedForDay;
     public float timeInHours;
     public string currentLocation;
+    public int meatAmount;
+    public int vegetableAmount;
+    public int fishAmount;
+    public int fruitAmount;
 
     public SaveData(GameManager gameManager)
     {
@@ -31,5 +34,9 @@ public class SaveData
         timeInHours = gameManager.gameTime.timeInHours;
         happiness = gameManager.Happiness;
         currentLocation = gameManager.currentLocation.locationInformation.locationName;
+        meatAmount = gameManager.MeatAmt;
+        vegetableAmount = gameManager.VegetableAmt;
+        fishAmount = gameManager.FishAmt;
+        fruitAmount = gameManager.FruitsAmt;
     }
 }
