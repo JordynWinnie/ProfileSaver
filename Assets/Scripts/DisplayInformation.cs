@@ -488,7 +488,7 @@ public class DisplayInformation : MonoBehaviour
         
         if (choices.vegetableAmount != 0)
         {
-            sb.Append($"{HelperFunctions.ReturnSign(choices.vegetableAmount)}${Mathf.Abs(choices.vegetableAmount)} vegetable");
+            sb.Append($"{HelperFunctions.ReturnSign(choices.vegetableAmount)}{Mathf.Abs(choices.vegetableAmount)} vegetable");
         }
         
         if (choices.meatAmount != 0)

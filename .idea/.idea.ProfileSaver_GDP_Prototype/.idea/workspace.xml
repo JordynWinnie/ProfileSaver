@@ -3,15 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="31601b70-32ec-4530-ad55-af824af1d9d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Locations/Supermarket/BuyFish.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Locations/Supermarket/BuyFish.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Locations/Supermarket/BuyFruits.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Locations/Supermarket/BuyFruits.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Locations/Supermarket/BuyMeat.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Locations/Supermarket/BuyMeat.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Locations/Supermarket/BuyVegetables.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Locations/Supermarket/BuyVegetables.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScreen.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScreen.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SciptableObjects/Choices.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SciptableObjects/Choices.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveData.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +94,8 @@
       <workItem from="1607154959493" duration="5579000" />
       <workItem from="1607179674788" duration="898000" />
       <workItem from="1607949676502" duration="4568000" />
-      <workItem from="1608043390334" duration="3206000" />
+      <workItem from="1608043390334" duration="3701000" />
+      <workItem from="1608050981430" duration="991000" />
     </task>
     <servers />
   </component>
