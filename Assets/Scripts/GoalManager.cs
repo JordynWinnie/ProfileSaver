@@ -126,7 +126,7 @@ public class GoalManager : MonoBehaviour
                     }
 
                     sb.AppendLine(
-                        $"- {goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (COMPLETE)");
+                        $"- {goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (DONE)");
                 }
                 else
                 {
@@ -137,7 +137,7 @@ public class GoalManager : MonoBehaviour
                     }
 
                     sb.AppendLine(
-                        $"- {goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (INCOMPLETE)");
+                        $"- {goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (NOT DONE)");
                 }
             }
 
