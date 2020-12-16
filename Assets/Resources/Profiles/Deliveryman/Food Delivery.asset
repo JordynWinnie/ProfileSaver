@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 987cf2eed6af13b41ba5e87b16121c44, type: 3}
+  m_Name: Food Delivery
+  m_EditorClassIdentifier: 
+  profileName: Food Delivery Driver
+  income: 2000
+  maxIncome: 0
+  age: 21
+  timeToWake: 9
+  timeToSleep: 23.9
+  profileIcon: {fileID: 21300000, guid: 63e0bff5d994bdd4dad2ad51a2b0f67b, type: 3}
+  description: Works full time as a food delivery driver, likes to game and eat a
+    lot
+  goals:
+  - {fileID: 11400000, guid: 901a48697256a084cb9e90392b973e4b, type: 2}
+  - {fileID: 11400000, guid: 62471fd8b9fedac47b86a0841981a389, type: 2}
+  - {fileID: 11400000, guid: a9951d7139d0cc34b8f03dc4af3aefbc, type: 2}
+  - {fileID: 11400000, guid: e170367be0ee9034895eeb1930e22391, type: 2}
+  - {fileID: 11400000, guid: ff5b3e94e4ebf6c46b2c09adb8f072cd, type: 2}
+  - {fileID: 11400000, guid: 8a7de0e207e0b914ea5fc94492cc6ae6, type: 2}
+  - {fileID: 11400000, guid: a6d9ceb0baadeb6408a8da855b2848de, type: 2}
+  - {fileID: 11400000, guid: 16244d3ecf3942346aa94b1843e9d690, type: 2}
+  schoolChoices: []
+  workplaceChoices: []
+  homeChoices:
+  - {fileID: 11400000, guid: 8dbcc69e10ac6994aacf13274dd42345, type: 2}
+  - {fileID: 11400000, guid: 0109f035c9a85f44a84d2c2900ef2af3, type: 2}
+  situationsForProfile: []

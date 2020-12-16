@@ -274,7 +274,7 @@ public class DisplayInformation : MonoBehaviour
         {
             foreach (var choice in currentProfile.homeChoices)
             {
-                //GenerateButton(layout, choice);
+                GenerateButton(layout, choice);
             }
 
             var button = Instantiate(choiceButton, layout.transform);
