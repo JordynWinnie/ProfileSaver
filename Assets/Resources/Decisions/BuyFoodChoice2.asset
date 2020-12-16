@@ -20,5 +20,5 @@ MonoBehaviour:
   energy: 7
   timeTaken: 0
   statType: 4
-  progressionForStat: 0
+  progressionForStat: 1
   miscStatParams: 
