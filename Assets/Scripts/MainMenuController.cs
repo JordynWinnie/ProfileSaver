@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,6 +33,10 @@ public class MainMenuController : MonoBehaviour
     public void ShuffleProfile()
     {
         profiles = Resources.LoadAll<Profile>("Profiles");
+        if (selectedProfile != null)
+        {
+            profiles = profiles.Where(x => x.profileName != selectedProfile.profileName).ToArray();
+        }
         selectedProfile = profiles[Random.Range(0, profiles.Length)];
         profileImage.sprite = selectedProfile.profileIcon;
         profileName.text = selectedProfile.profileName;
