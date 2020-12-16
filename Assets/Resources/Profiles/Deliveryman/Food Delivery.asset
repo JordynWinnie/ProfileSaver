@@ -19,8 +19,9 @@ MonoBehaviour:
   timeToWake: 9
   timeToSleep: 23.9
   profileIcon: {fileID: 21300000, guid: 63e0bff5d994bdd4dad2ad51a2b0f67b, type: 3}
-  description: Works full time as a food delivery driver, likes to game and eat a
-    lot
+  description: 'You are playing a 21 year old male who lives alone in a small apartment.
+    You are working as a full time food delivery driver. You also enjoy gaming and
+    especially love to eat. '
   goals:
   - {fileID: 11400000, guid: 901a48697256a084cb9e90392b973e4b, type: 2}
   - {fileID: 11400000, guid: 62471fd8b9fedac47b86a0841981a389, type: 2}
