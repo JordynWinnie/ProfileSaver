@@ -77,6 +77,8 @@ public class GameManager : MonoBehaviour
             profileToLoad = null;
             SetUpValues();
         }
+
+        DisplayInformation.infoDisplayHelper.DisplayGoal();
     }
 
 

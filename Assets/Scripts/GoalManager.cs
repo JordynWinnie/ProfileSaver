@@ -77,7 +77,7 @@ public class GoalManager : MonoBehaviour
         var currentGameTime = GameManager.instance.gameTime;
         var goalList = GameManager.instance.currentProfile.goals;
         var sb = new StringBuilder();
-
+        sb.AppendLine($"Goals for {GameManager.instance.currentProfile.profileName}: ");
         var goalGroup = from x in goalList
             orderby x.goalType
             group x by x.goalType
@@ -126,7 +126,7 @@ public class GoalManager : MonoBehaviour
                     }
 
                     sb.AppendLine(
-                        $"- {goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (DONE)");
+                        $" -{goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (DONE)");
                 }
                 else
                 {
@@ -137,7 +137,7 @@ public class GoalManager : MonoBehaviour
                     }
 
                     sb.AppendLine(
-                        $"- {goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (NOT DONE)");
+                        $" -{goal.goalName} ({Mathf.Clamp(amountCompleted, 0f, goal.totalCommitment)}/{goal.totalCommitment}) (NOT DONE)");
                 }
 
                 sb.AppendLine();

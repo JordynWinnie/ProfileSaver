@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="31601b70-32ec-4530-ad55-af824af1d9d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GoalManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GoalManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +30,12 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/TimerScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ChoiceButton.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AlertDialog.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GoalManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SaveData.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/SciptableObjects/Choices.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MainMenuController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GoalManager.cs" />
       </list>
     </option>
   </component>
@@ -96,6 +97,7 @@
       <workItem from="1608043390334" duration="3701000" />
       <workItem from="1608050981430" duration="1076000" />
       <workItem from="1608102854310" duration="2294000" />
+      <workItem from="1608127562475" duration="314000" />
     </task>
     <servers />
   </component>
