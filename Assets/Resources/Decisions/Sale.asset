@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisionTitle: Sale
   decisionString: 'Something very expensive you had your eye on is on sale '
-  decisionIcon: {fileID: 0}
+  decisionIcon: {fileID: 21300000, guid: 2aa7792a45f21c246be5798e1b8a0d0e, type: 3}
   availableChoices:
   - {fileID: 11400000, guid: 3cc8c99634797084d90526325ac40b89, type: 2}
   - {fileID: 11400000, guid: cf81e29d425a5ac46bbdbb024a93966b, type: 2}

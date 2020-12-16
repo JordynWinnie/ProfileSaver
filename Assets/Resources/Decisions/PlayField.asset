@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisionTitle: friends invite you to play on the field
   decisionString: Friends invite you to go play on the field,
-  decisionIcon: {fileID: 0}
+  decisionIcon: {fileID: 21300000, guid: 1e34c0a33d17bc544a9594029bdce39b, type: 3}
   availableChoices:
   - {fileID: 11400000, guid: df91eae9757129f4a8ae9206c2f4adac, type: 2}
   - {fileID: 11400000, guid: 98fc60772e1c8224982a331b74730a43, type: 2}

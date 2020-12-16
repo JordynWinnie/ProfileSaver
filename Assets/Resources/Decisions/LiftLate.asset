@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisionTitle: Lift is full
   decisionString: The lift is full you are going to be late
-  decisionIcon: {fileID: 0}
+  decisionIcon: {fileID: 21300000, guid: b7458d8d3e9782342a12b8b1e44a49a0, type: 3}
   availableChoices:
   - {fileID: 11400000, guid: 3648e3065721ea148a4a1943c645f263, type: 2}
   - {fileID: 11400000, guid: 29a29362463571b46a4daca05950102d, type: 2}
