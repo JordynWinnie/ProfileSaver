@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31601b70-32ec-4530-ad55-af824af1d9d0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProfileSaver_GDP_Prototype/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Profiles/Generic Goals/Dinner.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Profiles/Generic Goals/Dinner.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Profiles/Generic Goals/Lunch.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Profiles/Generic Goals/Lunch.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Profiles/Student 2.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Profiles/Student.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Profiles/Student.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DisplayInformation.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +95,7 @@
       <workItem from="1607949676502" duration="4568000" />
       <workItem from="1608043390334" duration="3701000" />
       <workItem from="1608050981430" duration="1076000" />
-      <workItem from="1608102854310" duration="1591000" />
+      <workItem from="1608102854310" duration="2294000" />
     </task>
     <servers />
   </component>
