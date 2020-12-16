@@ -13,6 +13,15 @@ MonoBehaviour:
   m_Name: WokeUpLateChoice2
   m_EditorClassIdentifier: 
   choiceName: No, take the bus
-  happiness: -10
-  health: 0
-  money: 0
+  happinessToAdd: -5
+  healthToAdd: 0
+  moneyToAdd: 0
+  hunger: 0
+  timeTaken: 1
+  statType: 0
+  progressionForStat: 0
+  meatAmount: 0
+  vegetableAmount: 0
+  fishAmount: 0
+  fruitAmount: 0
+  miscStatParams: 

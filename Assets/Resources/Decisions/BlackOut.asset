@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisionTitle: BlackOut
   decisionString: A blackout happens to your house
-  decisionIcon: {fileID: 0}
+  decisionIcon: {fileID: 21300000, guid: 7b382324a2066bb48a20cb718bca053d, type: 3}
   availableChoices:
   - {fileID: 11400000, guid: e2d5ba55886cace4e8be41ed9660e003, type: 2}
   - {fileID: 11400000, guid: 9460986288049834f8897dfdf7e63dbd, type: 2}
