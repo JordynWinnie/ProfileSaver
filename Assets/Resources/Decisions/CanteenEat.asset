@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisionTitle: Eat lunch in the canteen
   decisionString: 'Your friends invite you to go to the canteen to eat '
-  decisionIcon: {fileID: 0}
+  decisionIcon: {fileID: 21300000, guid: 38e419daa7019724e9ae07d5069d2754, type: 3}
   availableChoices:
   - {fileID: 11400000, guid: 324565c8291e74744b463ce90ef8d7bf, type: 2}
   - {fileID: 11400000, guid: 4fb81f57c18b12d48a5bc0c19bba6e15, type: 2}

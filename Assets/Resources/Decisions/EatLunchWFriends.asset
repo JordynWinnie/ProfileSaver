@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisionTitle: Friends invite you to lunch
   decisionString: Your friends invite you to eat lunch with them
-  decisionIcon: {fileID: 0}
+  decisionIcon: {fileID: 21300000, guid: 38e419daa7019724e9ae07d5069d2754, type: 3}
   availableChoices:
   - {fileID: 11400000, guid: 4796ff90110d8c44190a3f246ce925d8, type: 2}
   - {fileID: 11400000, guid: 919746a19923dd04092f85920c372d6b, type: 2}

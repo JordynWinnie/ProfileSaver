@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisionTitle: Overtime
   decisionString: 'Your boss asks you if you want to work overtime '
-  decisionIcon: {fileID: 0}
+  decisionIcon: {fileID: 21300000, guid: 053d709360c4386489ca255d89f199c3, type: 3}
   availableChoices:
   - {fileID: 11400000, guid: e2cc1b6aa95fce54a8975eebe568d676, type: 2}
   - {fileID: 11400000, guid: ea76cec3f85d53348926979d9317b61c, type: 2}
