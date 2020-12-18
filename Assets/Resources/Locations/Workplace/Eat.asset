@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ddfb2ae04e34c67953688a363ddb2b, type: 3}
   m_Name: Eat
   m_EditorClassIdentifier: 
-  choiceName: 
+  choiceName: Eat at work
   happinessToAdd: 0
   healthToAdd: 0
-  moneyToAdd: 0
-  hunger: 0
-  timeTaken: 0
-  statType: 0
-  progressionForStat: 0
+  moneyToAdd: -7
+  hunger: 2
+  timeTaken: 0.5
+  statType: 4
+  progressionForStat: 1
   meatAmount: 0
   vegetableAmount: 0
   fishAmount: 0
